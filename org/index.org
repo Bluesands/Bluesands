@@ -16,13 +16,13 @@
 
 
 *** emacs learn
-    .test1
-    .test2
+    + test1
+    + test2
 
 *** python
-    .numpy
-    .scrapy
-    .django
-    .pandas
+    + numpy
+    + scrapy
+    + django
+    + pandas
 
 *** Linus
