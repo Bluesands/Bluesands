@@ -16,7 +16,7 @@
     In this chapter, we will discuss the various array attributes of NumPy
     + ndarray.shape
       This array attribute returns a tuple consisting of array dimensions. It can also be used to resize the array.
-    #+BEGIN_SRC python -n -r
+    #+BEGIN_SRC python
       import numpy as np
 
       a = np.arange(10)

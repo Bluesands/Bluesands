@@ -1,12 +1,11 @@
 *** Python
-**** packages
      [[./numpy-learn.html][numpy-learn]]
-**** other
 *** Linux
 **** shell
 **** vsfptd
 **** nginx-https
 **** efficient tools
+     [[./linux-efficient-tools.html][linux-efficient-tools]]
 *** Emacs
 **** emacs-lisp
 **** spacemacs install and configuration
