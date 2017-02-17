@@ -1,20 +1,3 @@
-* Python
-** packages
-*** numpy
-    [[notes/python/packages/numpy/numpy-learn.org][numpy-learn]]
-*** pandas
-*** matplotlib
-*** scipy
-*** scrapy
-*** django
-*** flask
+#+TITLE: Bluesands notebook
 
-* Linux
-** command-tools
-** shell
-** vsftpd
-** nginx-https
-
-* Emacs
-** org-mode
-** elisp
+   + [[file:numpy-learn.org][numpy-learn]]
