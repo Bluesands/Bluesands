@@ -1,6 +1,6 @@
 #+OPTIONS: toc:3
 #+TOC: tables
-** post/Numpy Learn
+** Numpy Learn
 *** Data Types
     org-mode table test
 
@@ -27,3 +27,8 @@
 
     #+RESULTS:
     : None
+**** org-mode table
+| One | Two | Total |
+|-----+-----+-------|
+|   1 |   2 |     3 |
+|   3 |   4 |     7 |
