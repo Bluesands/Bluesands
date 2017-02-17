@@ -23,8 +23,6 @@
       a.shape
     #+END_SRC
 
-    #+RESULTS:
-    : None
 **** org-mode table
 | One | Two | Total |
 |-----+-----+-------|
