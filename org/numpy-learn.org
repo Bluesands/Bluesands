@@ -1,5 +1,7 @@
 ** Numpy Learn
 *** Data Types
+    org-mode table test
+
 | S.No | Data Types | Description                                                                   |
 |------+------------+-------------------------------------------------------------------------------|
 |    1 | bool       | Boolean (True or False) stored as a bytes                                     |
