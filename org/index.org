@@ -1,3 +1,14 @@
 #+TITLE: Bluesands Notebook
 
-   + [[file:numpy-learn.org][numpy-learn]]
+*** Python
+**** packages
+     [[./numpy-learn.html][numpy-learn]]
+**** other
+*** Linux
+**** shell
+**** vsfptd
+**** nginx-https
+*** Emacs
+**** emacs-lisp
+**** spacemacs install and configuration
+
