@@ -1,4 +1,8 @@
 #+TITLE: Bluesands Notebook
+#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="/style/worg.css" type="text/css" />
+#+HTML_HEAD_EXTRA: <link rel="alternate stylesheet" title="Zenburn" href="/style/worg-zenburn.css" type="text/css" />
+#+HTML_HEAD_EXTRA: <link rel="alternate stylesheet" title="Classic" href="/style/worg-classic.css" type="text/css" /> 
+
 
 *** Python
 **** packages
