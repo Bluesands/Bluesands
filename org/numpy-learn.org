@@ -1,5 +1,5 @@
-#+OPTIONS: toc:3
-#+TOC: tables
+# #+OPTIONS: toc:3
+# #+TOC: tables
 ** Numpy Learn
 *** Data Types
     org-mode table test
