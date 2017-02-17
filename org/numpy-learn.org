@@ -1,4 +1,3 @@
-#+LINK_UP: index.html
 ** Numpy Learn
 *** Data Types
     org-mode table test
