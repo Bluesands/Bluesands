@@ -24,6 +24,7 @@
     #+END_SRC
 
 **** org-mode table
+     org mode table useful
 | One | Two | Total |
 |-----+-----+-------|
 |   1 |   2 |     3 |
