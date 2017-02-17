@@ -1,4 +1,4 @@
-** Numpy Learn
+** post/Numpy Learn
 *** Data Types
     org-mode table test
 
