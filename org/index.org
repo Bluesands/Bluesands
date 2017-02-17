@@ -1,28 +1,20 @@
-# -*- mode: org; -*-
+* Python
+** packages
+*** numpy
+    [[notes/python/packages/numpy/numpy-learn.org][numpy-learn]]
+*** pandas
+*** matplotlib
+*** scipy
+*** scrapy
+*** django
+*** flask
 
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="styles/bigblow/css/htmlize.css"/>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="styles/bigblow/css/bigblow.css"/>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="styles/bigblow/css/hideshow.css"/>
+* Linux
+** command-tools
+** shell
+** vsftpd
+** nginx-https
 
-#+HTML_HEAD: <script type="text/javascript" src="styles/bigblow/js/jquery-1.11.0.min.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
-
-#+HTML_HEAD: <script type="text/javascript" src="styles/bigblow/js/jquery.localscroll-min.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="styles/bigblow/js/jquery.zclip.min.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="styles/bigblow/js/bigblow.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="styles/bigblow/js/hideshow.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="styles/lib/js/jquery.stickytableheaders.min.js"></script>
-
-
-*** emacs learn
-    + test1
-    + test2
-
-*** python
-    + numpy
-    + scrapy
-    + django
-    + pandas
-
-*** Linus
+* Emacs
+** org-mode
+** elisp

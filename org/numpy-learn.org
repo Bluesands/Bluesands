@@ -1,0 +1,25 @@
+** Numpy Learn
+*** Data Types
+| S.No | Data Types | Description                                                                   |
+|------+------------+-------------------------------------------------------------------------------|
+|    1 | bool       | Boolean (True or False) stored as a bytes                                     |
+|    2 | int        | Default integer type (same as C long; normally either int64 or int32)         |
+|    3 | intc       | Identical to C int (normally int32 or int64)                                  |
+|    4 | intp       | Integer used for indexing (same as C ssize_t; normally either int32 or int64) |
+|    5 | int8       | Byte (-128 to 127)                                                            |
+|    6 | int16      | Integer (-32768 to 32768)                                                     |
+|    7 | int32      | Integer (-2147483648 to 2147483647)                                           |
+
+*** Array Attributes
+    In this chapter, we will discuss the various array attributes of NumPy
+    + ndarray.shape
+      This array attribute returns a tuple consisting of array dimensions. It can also be used to resize the array.
+    #+BEGIN_SRC python -n -r
+      import numpy as np
+
+      a = np.arange(10)
+      a.shape
+    #+END_SRC
+
+    #+RESULTS:
+    : None
