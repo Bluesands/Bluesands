@@ -1,3 +1,5 @@
+#+OPTIONS: toc:3
+#+TOC: tables
 ** post/Numpy Learn
 *** Data Types
     org-mode table test
