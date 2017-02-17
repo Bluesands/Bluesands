@@ -1,6 +1,6 @@
 ** Numpy Learn
 *** Data Types
-    org-mode table test
+    show numpy data types.
 
 | S.No | Data Types | Description                                                                   |
 |------+------------+-------------------------------------------------------------------------------|
@@ -22,17 +22,3 @@
       a = np.arange(10)
       a.shape
     #+END_SRC
-
-**** org-mode table
-     org mode table useful
-| One | Two | Total |
-|-----+-----+-------|
-|   1 |   2 |     3 |
-|   3 |   4 |     7 |
-
-*** blog bulid
-    + one
-      + two
-      + three
-    + four
-      + five

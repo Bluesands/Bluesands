@@ -6,6 +6,7 @@
 **** shell
 **** vsfptd
 **** nginx-https
+**** efficient tools
 *** Emacs
 **** emacs-lisp
 **** spacemacs install and configuration
