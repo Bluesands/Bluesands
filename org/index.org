@@ -1,12 +1,14 @@
+#+TITLE: Bluesands Notebook
+
 *** Python
      [[./numpy-learn.html][numpy-learn]]
 *** Linux
 **** shell
 **** vsfptd
-**** nginx-https
+**** nginx
+     + https
 **** efficient tools
      [[./linux-efficient-tools.html][linux-efficient-tools]]
 *** Emacs
 **** emacs-lisp
 **** spacemacs install and configuration
-

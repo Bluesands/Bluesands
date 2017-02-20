@@ -11,6 +11,7 @@
 |    5 | int8       | Byte (-128 to 127)                                                            |
 |    6 | int16      | Integer (-32768 to 32768)                                                     |
 |    7 | int32      | Integer (-2147483648 to 2147483647)                                           |
+|    8 | int64      |                                                                               |
 
 *** Array Attributes
     In this chapter, we will discuss the various array attributes of NumPy
@@ -20,5 +21,8 @@
       import numpy as np
 
       a = np.arange(10)
-      a.shape
+      print(a.shape)
     #+END_SRC
+
+    #+RESULTS:
+    : None
