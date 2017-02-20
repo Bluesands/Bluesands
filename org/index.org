@@ -12,3 +12,5 @@
 *** Emacs
 **** emacs-lisp
 **** spacemacs install and configuration
+     + install emacs
+     + git clone spacemacs from github

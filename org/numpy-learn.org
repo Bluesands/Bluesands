@@ -19,7 +19,6 @@
       This array attribute returns a tuple consisting of array dimensions. It can also be used to resize the array.
     #+BEGIN_SRC python
       import numpy as np
-
       a = np.arange(10)
       print(a.shape)
     #+END_SRC
