@@ -6,7 +6,7 @@
 **** shell
 **** vsfptd
 **** nginx
-     + https
+     + website https with let's Encrypt
 **** efficient tools
      [[./linux-efficient-tools.html][linux-efficient-tools]]
 *** Emacs

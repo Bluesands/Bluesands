@@ -28,6 +28,7 @@
     + httpie
     + z
     + fpp
+    + tmux
 *** Terminal Command
     + fd - cd to selected directory
     + fda - including hidden directories
