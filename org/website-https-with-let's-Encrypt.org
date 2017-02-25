@@ -18,4 +18,9 @@
        authenticator=webroot
        webroot-path=/path/to/example.com-root-path
      #+END_SRC
+**** nginx configurate of example.com
+     #+BEGIN_SRC shell
+       vim /usr/local/nginx/conf/siteable/example.com
+     #+END_SRC
+     
      

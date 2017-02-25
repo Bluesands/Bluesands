@@ -1,4 +1,4 @@
-#+TITLE: Bluesands Notebook
+#+TITLE: Bluesands Notes
 
 *** Python
      [[./numpy-learn.html][numpy learn]]
