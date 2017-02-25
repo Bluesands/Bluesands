@@ -1,51 +1,15 @@
 ** Numpy Learn
+   
 *** Data Types
     show numpy data types.
 
-| S.No | Data Types | Description                                                                   |
-|------+------------+-------------------------------------------------------------------------------|
-|    1 | bool       | Boolean (True or False) stored as a bytes                                     |
-|    2 | int        | Default integer type (same as C long; normally either int64 or int32)         |
-|    3 | intc       | Identical to C int (normally int32 or int64)                                  |
-|    4 | intp       | Integer used for indexing (same as C ssize_t; normally either int32 or int64) |
-|    5 | int8       | Byte (-128 to 127)                                                            |
-|    6 | int16      | Integer (-32768 to 32768)                                                     |
-|    7 | int32      | Integer (-2147483648 to 2147483647)                                           |
-|    8 | int64dotspacemacs-fullscreen-at-startup t      |                                                                               |
-
-*** Array Attributes
-    In this chapter, we will discuss the various array attributes of NumPy
-    + ndarray.shape
-      This array attribute returns a tuple consisting of array dimensions. It can also be used to resize the array.
-    #+BEGIN_SRC python :exports results output
-      import numpy as np
-      a = np.arange(10)
-      print(a.shape)
-    #+END_SRC
-
-    #+RESULTS:
-    : (10,)
-   #+BEGIN_SRC python :exports results
-     import numpy as np
-     b = np.arange(40).reshape(4, 2, 5)
-     print(b)
-   #+END_SRC 
-
-   #+RESULTS:
-   #+begin_example
-   [[[ 0  1  2  3  4]
-     [ 5  6  7  8  9]]
-
-  [[10 11 12 13 14]
-    [15 16 17 18 19]]
-
-  [[20 21 22 23 24]
-    [25 26 27 28 29]]
-
-  [[30 31 32 33 34]
-    [35 36 37 38 39]]]
-  #+end_example
-  
-  #+BEGIN_SRC python :exports results
-    print("hello world!")
-  #+END_SRC
+| S.No | Data Types                                | Description                                                                   |
+|------+-------------------------------------------+-------------------------------------------------------------------------------|
+|    1 | bool                                      | Boolean (True or False) stored as a bytes                                     |
+|    2 | int                                       | Default integer type (same as C long; normally either int64 or int32)         |
+|    3 | intc                                      | Identical to C int (normally int32 or int64)                                  |
+|    4 | intp                                      | Integer used for indexing (same as C ssize_t; normally either int32 or int64) |
+|    5 | int8                                      | Byte (-128 to 127)                                                            |
+|    6 | int16                                     | Integer (-32768 to 32768)                                                     |
+|    7 | int32                                     | Integer (-2147483648 to 2147483647)                                           |
+|    8 | int64dotspacemacs-fullscreen-at-startup t |                                                                               |

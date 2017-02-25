@@ -2,6 +2,7 @@
 
 *** Python
      [[./numpy-learn.html][numpy learn]]
+
 *** Linux
 **** shell
 **** vsfptd
@@ -11,6 +12,7 @@
      [[./linux-efficient-tools.html][Arch-linux-efficient-tools]]
 *** Emacs
 **** emacs-lisp
+     + [[./hacking-emacs-lisp.html][hacking emacs lisp]]
 **** spacemacs install and configuration
      + install emacs
      + git clone spacemacs from github

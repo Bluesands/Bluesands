@@ -1,5 +1,4 @@
 *** Arch Linux Efficient Tools
-
    Embrace open source and enjoy the world!
 **** Software
     + firefox(plugins)
@@ -28,7 +27,7 @@
     + z
     + fpp
     + tmux
-**** Terminal Command
+**** Terminal Command useful
     + fd - cd to selected directory
     + fda - including hidden directories
     + fdr - cd to selected parent directory
