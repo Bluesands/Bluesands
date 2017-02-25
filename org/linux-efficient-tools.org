@@ -40,5 +40,6 @@
       + Ctrl-E or Enter key to open with the vimperator
     + vf - fuzzy open with vim from anywhere
     + fkill - kill process
+    + pk - ps -aux|fzf
 
 

@@ -1,0 +1,6 @@
+#+TITLE: Sitemap
+
+   + [[file:index.org][Bluesands Notes]]
+   + [[file:linux-efficient-tools.org][linux-efficient-tools]]
+   + [[file:numpy-learn.org][numpy-learn]]
+   + [[file:website-https-with-let's-Encrypt.org][website-https-with-let's-Encrypt]]
