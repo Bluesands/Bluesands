@@ -22,5 +22,7 @@
      #+BEGIN_SRC shell
        vim /usr/local/nginx/conf/siteable/example.com
      #+END_SRC
-     
-     
+**** certbot create the *.pem
+     #+BEGIN_SRC shell
+       certbot certonly -c /etc/letsencrypt/config/example.com.conf
+     #+END_SRC

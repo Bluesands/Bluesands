@@ -1,7 +1,6 @@
 *** Arch Linux Efficient Tools
 
    Embrace open source and enjoy the world!
-   
 **** Software
     + firefox(plugins)
       + vimperator
