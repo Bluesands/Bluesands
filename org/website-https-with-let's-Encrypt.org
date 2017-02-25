@@ -1,0 +1,21 @@
+*** Website https with Let's Encrypt
+**** Install certbot
+     my system is Arch Linux with KDE
+     #+BEGIN_SRC shell
+       sudo pacman -S letsencrypt
+     #+END_SRC
+**** Edit the configurate
+     #+BEGIN_SRC shell
+       mkdir /etc/letsencrypt/config
+       emacs /etc/letsencrypt/config/example.com.conf
+     #+END_SRC
+     the example.con.conf like this:
+     #+BEGIN_SRC shell
+       domians=example.com
+       rsa-key-size=2048
+       email=your-email@example.con
+
+       authenticator=webroot
+       webroot-path=/path/to/example.com-root-path
+     #+END_SRC
+     

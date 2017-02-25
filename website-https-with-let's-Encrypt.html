@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-02-25 六 14:49 -->
+<!-- 2017-02-25 六 15:05 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title></title>
@@ -234,109 +234,48 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org0378285">Numpy Learn</a>
+<li><a href="#org212c85d">Website https with Let's Encrypt</a>
 <ul>
-<li><a href="#org6535e05">Data Types</a></li>
-<li><a href="#org15535d6">Array Attributes</a></li>
+<li><a href="#org6a3bc63">Install certbot</a></li>
+<li><a href="#org7f0be85">Edit the configurate</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0378285" class="outline-2">
-<h2 id="org0378285">Numpy Learn</h2>
-<div class="outline-text-2" id="text-org0378285">
-</div><div id="outline-container-org6535e05" class="outline-3">
-<h3 id="org6535e05">Data Types</h3>
-<div class="outline-text-3" id="text-org6535e05">
+<div id="outline-container-org212c85d" class="outline-2">
+<h2 id="org212c85d">Website https with Let's Encrypt</h2>
+<div class="outline-text-2" id="text-org212c85d">
+</div><div id="outline-container-org6a3bc63" class="outline-3">
+<h3 id="org6a3bc63">Install certbot</h3>
+<div class="outline-text-3" id="text-org6a3bc63">
 <p>
-show numpy data types.
+my system is Arch Linux with KDE
 </p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-right">S.No</th>
-<th scope="col" class="org-left">Data Types</th>
-<th scope="col" class="org-left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-right">1</td>
-<td class="org-left">bool</td>
-<td class="org-left">Boolean (True or False) stored as a bytes</td>
-</tr>
-
-<tr>
-<td class="org-right">2</td>
-<td class="org-left">int</td>
-<td class="org-left">Default integer type (same as C long; normally either int64 or int32)</td>
-</tr>
-
-<tr>
-<td class="org-right">3</td>
-<td class="org-left">intc</td>
-<td class="org-left">Identical to C int (normally int32 or int64)</td>
-</tr>
-
-<tr>
-<td class="org-right">4</td>
-<td class="org-left">intp</td>
-<td class="org-left">Integer used for indexing (same as C ssize<sub>t</sub>; normally either int32 or int64)</td>
-</tr>
-
-<tr>
-<td class="org-right">5</td>
-<td class="org-left">int8</td>
-<td class="org-left">Byte (-128 to 127)</td>
-</tr>
-
-<tr>
-<td class="org-right">6</td>
-<td class="org-left">int16</td>
-<td class="org-left">Integer (-32768 to 32768)</td>
-</tr>
-
-<tr>
-<td class="org-right">7</td>
-<td class="org-left">int32</td>
-<td class="org-left">Integer (-2147483648 to 2147483647)</td>
-</tr>
-
-<tr>
-<td class="org-right">8</td>
-<td class="org-left">int64dotspacemacs-fullscreen-at-startup t</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-<div id="outline-container-org15535d6" class="outline-3">
-<h3 id="org15535d6">Array Attributes</h3>
-<div class="outline-text-3" id="text-org15535d6">
-<p>
-In this chapter, we will discuss the various array attributes of NumPy
-</p>
-<ul class="org-ul">
-<li>ndarray.shape
-This array attribute returns a tuple consisting of array dimensions. It can also be used to resize the array.</li>
-</ul>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> numpy <span style="color: #4f97d7; font-weight: bold;">as</span> np
-<span style="color: #7590db;">a</span> = np.arange<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">10</span><span style="color: #4f97d7;">)</span>
-<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>a.shape<span style="color: #4f97d7;">)</span>
+<pre class="src src-shell">sudo pacman -S letsencrypt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7f0be85" class="outline-3">
+<h3 id="org7f0be85">Edit the configurate</h3>
+<div class="outline-text-3" id="text-org7f0be85">
+<div class="org-src-container">
+<pre class="src src-shell">mkdir /etc/letsencrypt/config
+emacs /etc/letsencrypt/config/example.com.conf
+</pre>
+</div>
+<p>
+the example.con.conf like this:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #7590db;">domians</span>=example.com
+rsa-key-size=<span style="color: #a45bad;">2048</span>
+<span style="color: #7590db;">email</span>=your-email@example.con
+
+<span style="color: #7590db;">authenticator</span>=webroot
+webroot-path=/path/to/example.com-root-path
 </pre>
 </div>
 </div>

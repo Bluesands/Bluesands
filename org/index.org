@@ -1,12 +1,12 @@
 #+TITLE: Bluesands Notebook
 
 *** Python
-     [[./numpy-learn.html][numpy-learn]]
+     [[./numpy-learn.html][numpy learn]]
 *** Linux
 **** shell
 **** vsfptd
 **** nginx
-     + website https with let's Encrypt
+      + [[./website-https-with-let's-Encrypt.html][website https with Let's Encrypt]]
 **** efficient tools
      [[./linux-efficient-tools.html][linux-efficient-tools]]
 *** Emacs
