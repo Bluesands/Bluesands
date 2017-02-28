@@ -2,17 +2,16 @@
 
 *** Python
      [[./numpy-learn.html][numpy learn]]
-
 *** Linux
 **** shell
 **** vsfptd
 **** nginx
-      + [[./website-https-with-let's-Encrypt.html][website https with Let's Encrypt]]
+      [[./website-https-with-let's-Encrypt.html][website https with Let's Encrypt]]
 **** efficient tools
      [[./linux-efficient-tools.html][Arch-linux-efficient-tools]]
 *** Emacs
 **** emacs-lisp
-     + [[./hacking-emacs-lisp.html][hacking emacs lisp]]
+     [[./hacking-emacs-lisp.html][hacking emacs lisp]]
 **** spacemacs install and configuration
      + install emacs
      + git clone spacemacs from github

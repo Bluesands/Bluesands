@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-02-25 六 17:27 -->
+<!-- 2017-02-28 二 17:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title></title>
 <meta name="generator" content="Org mode" />
-<link rel="stylesheet" title="Standard" href="/style/worg.css" type="text/css" />
-<link rel="alternate stylesheet" title="Zenburn" href="/style/worg-zenburn.css" type="text/css" />
-<link rel="alternate stylesheet" title="Classic" href="/style/worg-classic.css" type="text/css" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
+<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
+<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -22,20 +22,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org0378285">Numpy Learn</a>
+<li><a href="#org941ac4d">Numpy Learn</a>
 <ul>
-<li><a href="#org6535e05">Data Types</a></li>
+<li><a href="#org7b77608">Data Types</a></li>
+<li><a href="#org9c97137">Python block code in org mode</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0378285" class="outline-2">
-<h2 id="org0378285">Numpy Learn</h2>
-<div class="outline-text-2" id="text-org0378285">
-</div><div id="outline-container-org6535e05" class="outline-3">
-<h3 id="org6535e05">Data Types</h3>
-<div class="outline-text-3" id="text-org6535e05">
+<div id="outline-container-org941ac4d" class="outline-2">
+<h2 id="org941ac4d">Numpy Learn</h2>
+<div class="outline-text-2" id="text-org941ac4d">
+</div><div id="outline-container-org7b77608" class="outline-3">
+<h3 id="org7b77608">Data Types</h3>
+<div class="outline-text-3" id="text-org7b77608">
 <p>
 show numpy data types.
 </p>
@@ -99,14 +100,20 @@ show numpy data types.
 <td class="org-left">int32</td>
 <td class="org-left">Integer (-2147483648 to 2147483647)</td>
 </tr>
-
-<tr>
-<td class="org-right">8</td>
-<td class="org-left">int64dotspacemacs-fullscreen-at-startup t</td>
-<td class="org-left">&#xa0;</td>
-</tr>
 </tbody>
 </table>
+</div>
+</div>
+<div id="outline-container-org9c97137" class="outline-3">
+<h3 id="org9c97137">Python block code in org mode</h3>
+<div class="outline-text-3" id="text-org9c97137">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> numpy <span style="color: #4f97d7; font-weight: bold;">as</span> np
+
+<span style="color: #7590db;">test</span> = np.arange<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">50</span><span style="color: #4f97d7;">)</span>.reshape<span style="color: #4f97d7;">(</span><span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">5</span>, <span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">5</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>test<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
 </div>
 </div>
 </div>

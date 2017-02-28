@@ -1,3 +1,0 @@
-*** Hacking Emacs Lisp
-
-    + Emacs lisp
