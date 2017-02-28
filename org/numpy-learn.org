@@ -13,7 +13,7 @@
 |    6 | int16                                     | Integer (-32768 to 32768)                                                     |
 |    7 | int32                                     | Integer (-2147483648 to 2147483647)                                           |
 *** Python block code in org mode
-    #+BEGIN_SRC python :results output html
+    #+BEGIN_SRC python :results output html 
       import numpy as np
 
       test = np.arange(50).reshape((5, 2, 5))
