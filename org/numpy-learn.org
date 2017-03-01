@@ -10,7 +10,7 @@
 |    3 | intc                                      | Identical to C int (normally int32 or int64)                                  |
 |    4 | intp                                      | Integer used for indexing (same as C ssize_t; normally either int32 or int64) |
 |    5 | int8                                      | Byte (-128 to 127)                                                            |
-|    6 | int16                                     | Integer (-32768 to 32768)                                                     |
+|    6 | int16                                     | Integer (-32768 to 32768)                                    goods/                 |
 |    7 | int32                                     | Integer (-2147483648 to 2147483647)                                           |
 *** Python block code in org mode
     #+BEGIN_SRC python :results output
@@ -37,3 +37,17 @@
      [[40 41 42 43 44]
       [45 46 47 48 49]]]
 #+end_example
+
+#+BEGIN_SRC python :results output
+  import numpy as np
+
+  test = np.arange(8).reshape((2, 2, 2))
+  print(test)
+#+END_SRC
+
+#+RESULTS:
+: [[[0 1]
+:   [2 3]]
+: 
+:  [[4 5]
+:   [6 7]]]
