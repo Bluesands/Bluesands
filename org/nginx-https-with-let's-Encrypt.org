@@ -1,4 +1,4 @@
-#+TITLE nginx https with let's Encrypt
+#+TITLE: nginx https with let's Encrypt
 
 		Note: this article just work on Centos 7 system.
 
@@ -22,3 +22,39 @@
     if not has "--with-http_ssl_module", you should install nginx from EPEL.
     
     Note: For more installation information please see [[https://www.nginx.com/resources/admin-guide/installing-nginx-open-source][installing-nginx-open-source]] .
+
+*** Install the Cerbot Let's Encrypt Client
+    The second step to using Let's Encrypt to obtain an SSL certificate is to install the cerbot
+    software on you server.
+    The CentOS 7 system can install cerbot package from EPEL.
+    #+BEGIN_SRC shell
+      sudo yum install cerbot
+    #+END_SRC
+
+*** Create your configuration
+    1. create a folder to store you configuration
+       #+BEGIN_SRC shell
+         sudo mkdir /etc/letsencrypt/configs
+       #+END_SRC
+    2. edit configurate
+       #+BEGIN_SRC shell
+         sudo vim /etc/letsencrypt/configs/example.com.conf
+       #+END_SRC
+    3. Configuration file contents
+       #+BEGIN_SRC shell
+         # write your domain an email
+         domains = example.com
+         rsa-key-size = 2084
+         email = your-email@example.com
+         text = True
+
+
+         # webroot-path is the root path of example.com
+         authenticator = webroot
+         webroot-path = /root/path/of/example.com
+       #+END_SRC
+    Note: The above configuration file uses the webroot validation method, which is applicable to situations
+    			where there is already a Web Server running. Certbot will automatically create a hidden file under 
+    			/root/path/of/example.com .well-known/acme-challenge, by asking this file to verify that example.com dose
+    			belong to you. The external network server accesses http://www.example.com/.well-known/acme-challenge and
+    			verifies OK if the access is successful.

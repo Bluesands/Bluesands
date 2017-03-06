@@ -1,5 +1,5 @@
 #+TITLE: Sitemap
 
    + [[file:index.org][Bluesands Notes]]
-   + [[file:nginx-https-with-let's-Encrypt.org][nginx-https-with-let's-Encrypt]]
+   + [[file:nginx-https-with-let's-Encrypt.org][nginx https with let's Encrypt]]
    + [[file:numpy-learn.org][numpy-learn]]

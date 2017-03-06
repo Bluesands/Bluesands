@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-03-06 一 15:06 -->
+<!-- 2017-03-06 一 16:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title></title>
+<title>nginx https with let's Encrypt</title>
 <meta name="generator" content="Org mode" />
 <link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
 <link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
@@ -18,18 +18,17 @@
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
+<h1 class="title">nginx https with let's Encrypt</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orge65b12c">nginx install or check</a></li>
+<li><a href="#org0d36025">Install the Cerbot Let's Encrypt Client</a></li>
+<li><a href="#org3e1499b">Create your configuration</a></li>
 </ul>
 </div>
 </div>
-<p>
-#+TITLE nginx https with let's Encrypt
-</p>
-
 <p>
 Note: this article just work on Centos 7 system.
 </p>
@@ -72,6 +71,66 @@ if not has "&#x2013;with-http<sub>ssl</sub><sub>module</sub>", you should instal
 
 <p>
 Note: For more installation information please see <a href="https://www.nginx.com/resources/admin-guide/installing-nginx-open-source">installing-nginx-open-source</a> .
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0d36025" class="outline-2">
+<h2 id="org0d36025">Install the Cerbot Let's Encrypt Client</h2>
+<div class="outline-text-2" id="text-org0d36025">
+<p>
+The second step to using Let's Encrypt to obtain an SSL certificate is to install the cerbot
+software on you server.
+The CentOS 7 system can install cerbot package from EPEL.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo yum install cerbot
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3e1499b" class="outline-2">
+<h2 id="org3e1499b">Create your configuration</h2>
+<div class="outline-text-2" id="text-org3e1499b">
+<ol class="org-ol">
+<li><p>
+create a folder to store you configuration
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo mkdir /etc/letsencrypt/configs
+</pre>
+</div></li>
+<li><p>
+edit configurate
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo vim /etc/letsencrypt/configs/example.com.conf
+</pre>
+</div></li>
+<li><p>
+Configuration file contents
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">write your domain an email</span>
+<span style="color: #7590db;">domains</span> = example.com
+rsa-key-size = <span style="color: #a45bad;">2084</span>
+<span style="color: #7590db;">email</span> = your-email@example.com
+<span style="color: #7590db;">text</span> = True
+
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">webroot-path is the root path of example.com</span>
+<span style="color: #7590db;">authenticator</span> = webroot
+webroot-path = /root/path/of/example.com
+</pre>
+</div></li>
+</ol>
+<p>
+Note: The above configuration file uses the webroot validation method, which is applicable to situations
+      where there is already a Web Server running. Certbot will automatically create a hidden file under 
+      <i>root/path/of/example.com .well-known/acme-challenge, by asking this file to verify that example.com dose
+      belong to you. The external network server accesses <a href="http://www.example.com">http://www.example.com</a></i>.well-known/acme-challenge and
+      verifies OK if the access is successful.
 </p>
 </div>
 </div>
