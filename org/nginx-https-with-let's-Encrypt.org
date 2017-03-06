@@ -19,7 +19,7 @@
 
       --with-http_ssl_module
     #+END_SRC
-    if not has "--with-http\_ssl\_module", you should install nginx from EPEL.
+    if not has "--with-http ssl module", you should install nginx from EPEL.
     
     Note: For more installation information please see [[https://www.nginx.com/resources/admin-guide/installing-nginx-open-source][installing-nginx-open-source]] .
 
@@ -56,5 +56,5 @@
     Note: The above configuration file uses the webroot validation method, which is applicable to situations
     			where there is already a Web Server running. Certbot will automatically create a hidden file under 
     			/root/path/of/example.com .well-known/acme-challenge, by asking this file to verify that example.com dose
-    			belong to you. The external network server accesses http://www.example.com/.well-known/acme-challenge and
-    			verifies OK if the access is successful.
+    			belong to you. The external network server accesses http://www.example.com/\.well-known/acme-challenge and
+    verifies OK if the access is successful.
