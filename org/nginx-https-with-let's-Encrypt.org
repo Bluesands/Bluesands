@@ -19,7 +19,7 @@
 
       --with-http_ssl_module
     #+END_SRC
-    if not has "--with-http_ssl_module", you should install nginx from EPEL.
+    if not has "--with-http\_ssl\_module", you should install nginx from EPEL.
     
     Note: For more installation information please see [[https://www.nginx.com/resources/admin-guide/installing-nginx-open-source][installing-nginx-open-source]] .
 
