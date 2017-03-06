@@ -1,0 +1,24 @@
+#+TITLE nginx https with let's Encrypt
+
+		Note: this article just work on Centos 7 system.
+
+*** nginx install or check
+    if your system has not installed nginx, you should install it first.
+    Centos 7 system can install nginx package from Centos repository.
+    1. Install the EPEL repository:
+       #+BEGIN_SRC shell
+         sudo yum install epel-release
+       #+END_SRC
+    2. Install nginx
+       #+BEGIN_SRC shell
+         sudo yum install nginx
+       #+END_SRC
+    if your system had installed nginx, you should check whether it supports http_ssl_module.
+    #+BEGIN_SRC shell
+      nginx -V | grep ssl
+
+      --with-http_ssl_module
+    #+END_SRC
+    if not has "--with-http_ssl_module", you should install nginx from EPEL.
+    
+    Note: For more installation information please see [[https://www.nginx.com/resources/admin-guide/installing-nginx-open-source][installing-nginx-open-source]] .
