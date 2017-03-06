@@ -1,14 +1,14 @@
 #+TITLE: Bluesands Notes
 
 **** Python
-     [[./numpy-learn.html][numpy learn]]
+     + [[./numpy-learn.html][numpy learn]]
 **** Linux
 ***** shell
 ***** vsfptd
 ***** nginx
       + [[./nginx-https-with-let's-Encrypt.html][nginx-https-with-let's-Encrypt]]
 ***** efficient tools
-     [[./linux-efficient-tools.html][Arch-linux-efficient-tools]]
+      + [[./linux-efficient-tools.html][Arch-linux-efficient-tools]]
 **** Emacs
 ***** emacs-lisp
-     [[./hacking-emacs-lisp.html][hacking emacs lisp]]
+      + [[./hacking-emacs-lisp.html][hacking emacs lisp]]
