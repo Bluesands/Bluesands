@@ -10,3 +10,6 @@
 ***** vsfptd
 ***** nginx
       + [[./nginx-https-with-let's-Encrypt.html][nginx-https-with-let's-Encrypt]]
+**** Emacs
+***** emacs-lisp
+      + [[./hacking-emacs-lisp.html][hacking emacs lisp]]

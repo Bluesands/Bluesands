@@ -2,7 +2,8 @@
 
 		Note: this article just work on Centos 7 system.
 
-*** nginx install or check
+*** nginx install or checko
+
     if your system has not installed nginx, you should install it first.
     Centos 7 system can install nginx package from Centos repository.
     1. Install the EPEL repository:
