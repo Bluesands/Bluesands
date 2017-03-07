@@ -943,6 +943,7 @@ content: "*** "
 	border: 1px solid gray;
 	background-color: #ffffff;
 	z-index: -1000;
+  text-align: center;
     }
 
 
