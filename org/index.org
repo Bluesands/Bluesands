@@ -6,10 +6,6 @@
      + [[./numpy-learn.html][numpy learn]]
 ***** Matplotlab
 **** Linux
-***** shell
 ***** vsfptd
 ***** nginx
       + [[./nginx-https-with-let's-Encrypt.html][nginx-https-with-let's-Encrypt]]
-**** Emacs
-***** emacs-lisp
-      + [[./hacking-emacs-lisp.html][hacking emacs lisp]]
