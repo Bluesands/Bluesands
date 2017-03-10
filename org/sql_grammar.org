@@ -1,4 +1,4 @@
-#+OPTIONS:^:{}
+#+OPTIONS: ^:{}
 #+OPTIONS: toc:6
 #+TOC: headlines 6
 #+TITLE: SQL 必知必会
