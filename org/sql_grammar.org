@@ -1,4 +1,6 @@
 #+OPTIONS:^:{}
+#+OPTIONS: toc: 4
+#+TOC: headlines 4
 ** SQL 必知必会
 
 *** 检索数据
