@@ -3,4 +3,4 @@
    + [[file:index.org][Bluesands Notes]]
    + [[file:nginx-https-with-let's-Encrypt.org][nginx https with let's Encrypt]]
    + [[file:numpy-learn.org][numpy-learn]]
-   + [[file:sql_grammar.org][sql_grammar]]
+   + [[file:sql_grammar.org][SQL 必知必会]]

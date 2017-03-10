@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-03-10 五 17:34 -->
+<!-- 2017-03-10 五 17:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title></title>
+<title>SQL 必知必会</title>
 <meta name="generator" content="Org mode" />
 <link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
 <link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
@@ -18,11 +18,10 @@
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
+<h1 class="title">SQL 必知必会</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
-<ul>
-<li><a href="#org4eca2b4">SQL 必知必会</a>
 <ul>
 <li><a href="#orgd8150db">检索数据</a>
 <ul>
@@ -43,15 +42,11 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 </div>
 </div>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
-<ul>
-<li><a href="#org4eca2b4">SQL 必知必会</a>
 <ul>
 <li><a href="#orgd8150db">检索数据</a>
 <ul>
@@ -72,19 +67,15 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 </div>
 </div>
-<div id="outline-container-org4eca2b4" class="outline-2">
-<h2 id="org4eca2b4">SQL 必知必会</h2>
-<div class="outline-text-2" id="text-org4eca2b4">
-</div><div id="outline-container-orgd8150db" class="outline-3">
-<h3 id="orgd8150db">检索数据</h3>
-<div class="outline-text-3" id="text-orgd8150db">
-</div><div id="outline-container-orgb44266f" class="outline-4">
-<h4 id="orgb44266f">检索单个列</h4>
-<div class="outline-text-4" id="text-orgb44266f">
+
+<div id="outline-container-orgd8150db" class="outline-2">
+<h2 id="orgd8150db">检索数据</h2>
+<div class="outline-text-2" id="text-orgd8150db">
+</div><div id="outline-container-orgb44266f" class="outline-3">
+<h3 id="orgb44266f">检索单个列</h3>
+<div class="outline-text-3" id="text-orgb44266f">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
@@ -143,9 +134,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgc1078ee" class="outline-4">
-<h4 id="orgc1078ee">检索多个列</h4>
-<div class="outline-text-4" id="text-orgc1078ee">
+<div id="outline-container-orgc1078ee" class="outline-3">
+<h3 id="orgc1078ee">检索多个列</h3>
+<div class="outline-text-3" id="text-orgc1078ee">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_name, prod_price
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
@@ -154,9 +145,9 @@
 </div>
 </div>
 
-<div id="outline-container-org88dccfe" class="outline-4">
-<h4 id="org88dccfe">检索所有列</h4>
-<div class="outline-text-4" id="text-org88dccfe">
+<div id="outline-container-org88dccfe" class="outline-3">
+<h3 id="org88dccfe">检索所有列</h3>
+<div class="outline-text-3" id="text-org88dccfe">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> *
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
@@ -165,9 +156,9 @@
 </div>
 </div>
 
-<div id="outline-container-org1bc712f" class="outline-4">
-<h4 id="org1bc712f">检索不同的值</h4>
-<div class="outline-text-4" id="text-org1bc712f">
+<div id="outline-container-org1bc712f" class="outline-3">
+<h3 id="org1bc712f">检索不同的值</h3>
+<div class="outline-text-3" id="text-org1bc712f">
 <p>
 DINSTINCT 关键字作用于所有的列
 </p>
@@ -179,9 +170,9 @@ DINSTINCT 关键字作用于所有的列
 </div>
 </div>
 
-<div id="outline-container-orgf57ab9a" class="outline-4">
-<h4 id="orgf57ab9a">限制结果</h4>
-<div class="outline-text-4" id="text-orgf57ab9a">
+<div id="outline-container-orgf57ab9a" class="outline-3">
+<h3 id="orgf57ab9a">限制结果</h3>
+<div class="outline-text-3" id="text-orgf57ab9a">
 <p>
 显示指定行数据
 </p>
@@ -232,9 +223,9 @@ LIMIT 5 OFFSET 5 指示 MySQL 从第５行起的５行数据；
 </div>
 </div>
 
-<div id="outline-container-org1423b54" class="outline-4">
-<h4 id="org1423b54">使用注释</h4>
-<div class="outline-text-4" id="text-org1423b54">
+<div id="outline-container-org1423b54" class="outline-3">
+<h3 id="org1423b54">使用注释</h3>
+<div class="outline-text-3" id="text-org1423b54">
 <ol class="org-ol">
 <li><p>
 行内注释
@@ -267,13 +258,12 @@ FORM Products;
 </div>
 </div>
 </div>
-
-<div id="outline-container-org7ce3a96" class="outline-3">
-<h3 id="org7ce3a96">排序检索数据</h3>
-<div class="outline-text-3" id="text-org7ce3a96">
-</div><div id="outline-container-org08bb6c0" class="outline-4">
-<h4 id="org08bb6c0">排序数据</h4>
-<div class="outline-text-4" id="text-org08bb6c0">
+<div id="outline-container-org7ce3a96" class="outline-2">
+<h2 id="org7ce3a96">排序检索数据</h2>
+<div class="outline-text-2" id="text-org7ce3a96">
+</div><div id="outline-container-org08bb6c0" class="outline-3">
+<h3 id="org08bb6c0">排序数据</h3>
+<div class="outline-text-3" id="text-org08bb6c0">
 <p>
 ORDER BY 子句取一个或多个列的名字，据此对输出进行排序：
 </p>
@@ -289,9 +279,9 @@ ORDER BY 子句取一个或多个列的名字，据此对输出进行排序：
 </div>
 </div>
 
-<div id="outline-container-org118a520" class="outline-4">
-<h4 id="org118a520">按多个列排序</h4>
-<div class="outline-text-4" id="text-org118a520">
+<div id="outline-container-org118a520" class="outline-3">
+<h3 id="org118a520">按多个列排序</h3>
+<div class="outline-text-3" id="text-org118a520">
 <p>
 要按多个列排序，简单指定列名，列名之间用逗号分开即可。
 </p>
@@ -304,9 +294,9 @@ ORDER BY 子句取一个或多个列的名字，据此对输出进行排序：
 </div>
 </div>
 
-<div id="outline-container-orgdf9751b" class="outline-4">
-<h4 id="orgdf9751b">按列位置排序</h4>
-<div class="outline-text-4" id="text-orgdf9751b">
+<div id="outline-container-orgdf9751b" class="outline-3">
+<h3 id="orgdf9751b">按列位置排序</h3>
+<div class="outline-text-3" id="text-orgdf9751b">
 <p>
 ORDER BY 还支持按相对列位置进行排序。
 </p>
@@ -322,9 +312,9 @@ ORDER BY 还支持按相对列位置进行排序。
 </div>
 </div>
 
-<div id="outline-container-org9775d31" class="outline-4">
-<h4 id="org9775d31">指定排序方向</h4>
-<div class="outline-text-4" id="text-org9775d31">
+<div id="outline-container-org9775d31" class="outline-3">
+<h3 id="org9775d31">指定排序方向</h3>
+<div class="outline-text-3" id="text-org9775d31">
 <p>
 默认排序是升序。
 </p>
@@ -411,7 +401,6 @@ ORDER BY 还支持按相对列位置进行排序。
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 </div>
