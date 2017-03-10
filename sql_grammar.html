@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-03-10 五 17:00 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
+<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
+<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4eca2b4">SQL 必知必会</a>
+<ul>
+<li><a href="#orgd8150db">检索数据</a></li>
+<li><a href="#org7ce3a96">排序检索数据</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4eca2b4" class="outline-2">
+<h2 id="org4eca2b4">SQL 必知必会</h2>
+<div class="outline-text-2" id="text-org4eca2b4">
+</div><div id="outline-container-orgd8150db" class="outline-3">
+<h3 id="orgd8150db">检索数据</h3>
+<div class="outline-text-3" id="text-orgd8150db">
+</div><ul class="org-ul"><li><a id="orgb44266f"></a>检索单个列<br /><div class="outline-text-4" id="text-orgb44266f">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">prod<sub>name</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Fish bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">Bird bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">Rabbit bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">8 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">12 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">18 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">Raggedy Ann</td>
+</tr>
+
+<tr>
+<td class="org-left">King doll</td>
+</tr>
+
+<tr>
+<td class="org-left">Queen doll</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+
+<li><a id="orgc1078ee"></a>检索多个列<br /><div class="outline-text-4" id="text-orgc1078ee">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div>
+</div></li>
+
+<li><a id="org88dccfe"></a>检索所有列<br /><div class="outline-text-4" id="text-org88dccfe">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> *
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div>
+</div></li>
+
+<li><a id="org1bc712f"></a>检索不同的值<br /><div class="outline-text-4" id="text-org1bc712f">
+<p>
+DINSTINCT 关键字作用于所有的列
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">DISTINCT</span> vend_id
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div>
+</div></li>
+
+<li><a id="orgf57ab9a"></a>限制结果<br /><div class="outline-text-4" id="text-orgf57ab9a">
+<p>
+显示指定行数据
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">LIMIT</span> <span style="color: #a45bad;">5</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">LIMIT</span> <span style="color: #a45bad;">5</span> OFFSET <span style="color: #a45bad;">5</span>;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">prod<sub>name</sub></td>
+</tr>
+
+<tr>
+<td class="org-left">18 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">Raggedy Ann</td>
+</tr>
+
+<tr>
+<td class="org-left">King doll</td>
+</tr>
+
+<tr>
+<td class="org-left">Queen doll</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+LIMIT 5 指示 MySQL 返回不超过５行的数据;
+LIMIT 5 OFFSET 5 指示 MySQL 从第５行起的５行数据；
+</p>
+</div></li>
+
+<li><a id="org1423b54"></a>使用注释<br /><div class="outline-text-4" id="text-org1423b54">
+<ol class="org-ol">
+<li><p>
+行内注释
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name <span style="color: #2aa1ae; background-color: #292e34;">-- &#36825;&#26159;&#19968;&#26465;&#27880;&#37322;</span>
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div></li>
+<li><p>
+整行注释
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"># &#36825;&#26159;&#19968;&#26465;&#27880;&#37322;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+FORM Products;
+</pre>
+</div></li>
+<li><p>
+多行注释
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #2aa1ae; background-color: #292e34;">/* &#36825;&#26159;&#22810;&#34892;</span>
+<span style="color: #2aa1ae; background-color: #292e34;">&#27880;&#37322;*/</span>
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div></li>
+</ol>
+</div></li></ul>
+</div>
+
+<div id="outline-container-org7ce3a96" class="outline-3">
+<h3 id="org7ce3a96">排序检索数据</h3>
+<div class="outline-text-3" id="text-org7ce3a96">
+</div><ul class="org-ul"><li><a id="org08bb6c0"></a>排序数据<br /><div class="outline-text-4" id="text-org08bb6c0">
+<p>
+ORDER BY 子句取一个或多个列的名字，据此对输出进行排序：
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_name;
+</pre>
+</div>
+<p>
+对 prod<sub>name</sub> 列以字母顺序排序数据注意：在指定 ORDER BY 子句时，应该保证它是 SELECT 语句中最后一条子句，如果它不是最后的子句，将会出现错误信息。通常，ORDER BY 子句中使用的列僵尸为显示而选择的列。但是，实际上并不一定要这样，用非检索的列排序数据是完全合法的。
+</p>
+</div></li>
+
+<li><a id="org118a520"></a>按多个列排序<br /><div class="outline-text-4" id="text-org118a520">
+<p>
+要按多个列排序，简单指定列名，列名之间用逗号分开即可。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_price, prod_name;
+</pre>
+</div>
+</div></li>
+
+<li><a id="orgdf9751b"></a>按列位置排序<br /><div class="outline-text-4" id="text-orgdf9751b">
+<p>
+ORDER BY 还支持按相对列位置进行排序。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span>;
+</pre>
+</div>
+<p>
+这里用列的相对位置编号取代列名进行排序。
+</p>
+</div></li>
+
+<li><a id="org9775d31"></a>指定排序方向<br /><div class="outline-text-4" id="text-org9775d31">
+<p>
+默认排序是升序。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_price <span style="color: #4f97d7; font-weight: bold;">DESC</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_price <span style="color: #4f97d7; font-weight: bold;">DESC</span>, prod_name;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">prod<sub>id</sub></td>
+<td class="org-right">prod<sub>price</sub></td>
+<td class="org-left">prod<sub>name</sub></td>
+</tr>
+
+<tr>
+<td class="org-left">BR03</td>
+<td class="org-right">11.99</td>
+<td class="org-left">18 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">RYL01</td>
+<td class="org-right">9.49</td>
+<td class="org-left">King doll</td>
+</tr>
+
+<tr>
+<td class="org-left">RYL02</td>
+<td class="org-right">9.49</td>
+<td class="org-left">Queen doll</td>
+</tr>
+
+<tr>
+<td class="org-left">BR02</td>
+<td class="org-right">8.99</td>
+<td class="org-left">12 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">BR01</td>
+<td class="org-right">5.99</td>
+<td class="org-left">8 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">RGAN01</td>
+<td class="org-right">4.99</td>
+<td class="org-left">Raggedy Ann</td>
+</tr>
+
+<tr>
+<td class="org-left">BNBG02</td>
+<td class="org-right">3.49</td>
+<td class="org-left">Bird bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">BNBG01</td>
+<td class="org-right">3.49</td>
+<td class="org-left">Fish bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">BNBG03</td>
+<td class="org-right">3.49</td>
+<td class="org-left">Rabbit bean bag toy</td>
+</tr>
+</tbody>
+</table>
+</div></li></ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id='disqus_thread'></div>
+                <script type='text/javascript'>
+                    /* * * CONFIGURATION VARIABLES * * */
+                    var disqus_shortname = 'callmesanye';
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href='https://disqus.com/?ref_noscript' rel='nofollow'>comments powered by Disqus.</a></noscript>
+                <p> Created by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0.5) </p>
+                <a href='#' class='back-to-top' id='fixed-back-to-top' style='display: inline;'></a>
+</div>
+</body>
+</html>
