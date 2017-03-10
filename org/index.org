@@ -1,17 +1,10 @@
 #+TITLE: Bluesands Notes
 
 **** Python
-***** Pandas
-***** Numpy
      + [[./numpy-learn.html][numpy learn]]
-***** Matplotlab
-**** Linux
-***** shell
-***** vsfptd
-***** nginx
-      + [[./nginx-https-with-let's-Encrypt.html][nginx-https-with-let's-Encrypt]]
+**** Linux 
+     + [[./nginx-https-with-let's-Encrypt.html][nginx-https-with-let's-Encrypt]]
 **** Emacs
-***** emacs-lisp
-      + [[./hacking-emacs-lisp.html][hacking emacs lisp]]
+     [[./hacking-emacs-lisp.html][hacking emacs lisp]]
 **** SQL
      + [[../sql_grammar.html][sql grammar]]
