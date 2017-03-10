@@ -14,4 +14,4 @@
 ***** emacs-lisp
       + [[./hacking-emacs-lisp.html][hacking emacs lisp]]
 **** SQL
-     + [[./sql_grammar.html][sql grammar]]
+     + [[../sql_grammar.html][sql grammar]]
