@@ -1,6 +1,6 @@
 #+TITLE: Sitemap
 
    + [[file:index.org][Bluesands Notes]]
+   + [[file:sql_grammar.org][SQL 必知必会]]
    + [[file:nginx-https-with-let's-Encrypt.org][nginx https with let's Encrypt]]
    + [[file:numpy-learn.org][numpy-learn]]
-   + [[file:sql_grammar.org][SQL 必知必会]]
