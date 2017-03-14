@@ -1,4 +1,5 @@
 #+TITLE: Bluesands Notes
+#+OPTIONS: toc:nil
 
 **** Python
      + [[./numpy-learn.html][numpy learn]]
