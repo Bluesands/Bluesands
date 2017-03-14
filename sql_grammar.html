@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-03-14 二 15:29 -->
+<!-- 2017-03-14 二 15:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SQL 必知必会</title>
@@ -45,38 +45,17 @@
 <li><a href="#org3f51558">3. 过滤数据</a>
 <ul>
 <li><a href="#org784d8d9">3.1. 使用 where 子句</a></li>
-<li><a href="#org5cf0ae9">3.2. WHERE 子句操作符</a>
-<ul>
-<li><a href="#org1b5cc5b">3.2.1. 检查单个值</a></li>
-<li><a href="#org1e61a12">3.2.2. 不匹配查询</a></li>
-<li><a href="#org8963294">3.2.3. 范围值检查</a></li>
-<li><a href="#org43a7df2">3.2.4. 空值检查</a></li>
-</ul>
-</li>
+<li><a href="#org5cf0ae9">3.2. WHERE 子句操作符</a></li>
 </ul>
 </li>
 <li><a href="#orgfbf10e5">4. 高级数据过滤</a>
 <ul>
-<li><a href="#org2712175">4.1. 组合 WHERE 子句</a>
-<ul>
-<li><a href="#orga8f7ad5">4.1.1. AND 操作符</a></li>
-<li><a href="#org29b1eae">4.1.2. OR 操作符</a></li>
-<li><a href="#orgf37cccf">4.1.3. 求值顺序</a></li>
-<li><a href="#org20ce177">4.1.4. IN 操作符</a></li>
-<li><a href="#org1621db8">4.1.5. NOT 操作符</a></li>
-</ul>
-</li>
+<li><a href="#org2712175">4.1. 组合 WHERE 子句</a></li>
 </ul>
 </li>
 <li><a href="#orgdddadab">5. 用通配符进行过滤</a>
 <ul>
-<li><a href="#org517d477">5.1. LIKE 操作符</a>
-<ul>
-<li><a href="#org9f89113">5.1.1. 百分号（%）通配符</a></li>
-<li><a href="#orgedfca6f">5.1.2. 下划线（_）通配符</a></li>
-<li><a href="#orgc77d966">5.1.3. 方括号（[]）通配符</a></li>
-</ul>
-</li>
+<li><a href="#org517d477">5.1. LIKE 操作符</a></li>
 </ul>
 </li>
 <li><a href="#orgf61041a">6. 创建计算字段</a>
@@ -129,9 +108,9 @@
 <li><a href="#orgd540dc4">12.4. 使用联结和联结条件</a></li>
 </ul>
 </li>
-<li><a href="#orgca9a990">13. 组合查询</a>
+<li><a href="#org472ec38">13. 组合查询</a>
 <ul>
-<li><a href="#org88d9ba0">13.1. 组合查询</a></li>
+<li><a href="#orgca9a990">13.1. 组合查询</a></li>
 <li><a href="#org6637e23">13.2. 创建组合查询</a></li>
 </ul>
 </li>
@@ -176,10 +155,10 @@
 <li><a href="#orgde3d903">19.2. 控制事务处理</a></li>
 </ul>
 </li>
-<li><a href="#org9c27332">20. 使用游标</a>
+<li><a href="#orgff53175">20. 使用游标</a>
 <ul>
 <li><a href="#orgabe083f">20.1. 游标</a></li>
-<li><a href="#orgbb9bf8b">20.2. 使用游标</a></li>
+<li><a href="#org9c27332">20.2. 使用游标</a></li>
 </ul>
 </li>
 <li><a href="#orgc62fb80">21. 高级 SQL 特性</a>
@@ -628,33 +607,25 @@ Tips:
 </table>
 </div>
 
-<div id="outline-container-org1b5cc5b" class="outline-4">
-<h4 id="org1b5cc5b"><span class="section-number-4">3.2.1</span> 检查单个值</h4>
-<div class="outline-text-4" id="text-3-2-1">
+<ol class="org-ol"><li><a id="org1b5cc5b"></a>检查单个值<br /><div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price &lt; <span style="color: #a45bad;">10</span>;
 </pre>
 </div>
-</div>
-</div>
+</div></li>
 
-<div id="outline-container-org1e61a12" class="outline-4">
-<h4 id="org1e61a12"><span class="section-number-4">3.2.2</span> 不匹配查询</h4>
-<div class="outline-text-4" id="text-3-2-2">
+<li><a id="org1e61a12"></a>不匹配查询<br /><div class="outline-text-4" id="text-3-2-2">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> vend_id, prod_name
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id &lt;&gt; <span style="color: #2d9574;">'DLL01'</span>;
 </pre>
 </div>
-</div>
-</div>
+</div></li>
 
-<div id="outline-container-org8963294" class="outline-4">
-<h4 id="org8963294"><span class="section-number-4">3.2.3</span> 范围值检查</h4>
-<div class="outline-text-4" id="text-3-2-3">
+<li><a id="org8963294"></a>范围值检查<br /><div class="outline-text-4" id="text-3-2-3">
 <p>
 使用 BETWEEN 操作符检查某个范围值
 </p>
@@ -664,12 +635,9 @@ Tips:
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price <span style="color: #4f97d7; font-weight: bold;">BETWEEN</span> <span style="color: #a45bad;">5</span> <span style="color: #4f97d7; font-weight: bold;">AND</span> <span style="color: #a45bad;">10</span>;
 </pre>
 </div>
-</div>
-</div>
+</div></li>
 
-<div id="outline-container-org43a7df2" class="outline-4">
-<h4 id="org43a7df2"><span class="section-number-4">3.2.4</span> 空值检查</h4>
-<div class="outline-text-4" id="text-3-2-4">
+<li><a id="org43a7df2"></a>空值检查<br /><div class="outline-text-4" id="text-3-2-4">
 <p>
 NULL 无值（no value），它与字段包含０、空字符串或仅仅包含空格不同。
 </p>
@@ -679,8 +647,7 @@ NULL 无值（no value），它与字段包含０、空字符串或仅仅包含�
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> cust_email <span style="color: #4f97d7; font-weight: bold;">IS</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>;
 </pre>
 </div>
-</div>
-</div>
+</div></li></ol>
 </div>
 </div>
 <div id="outline-container-orgfbf10e5" class="outline-2">
@@ -693,20 +660,15 @@ NULL 无值（no value），它与字段包含０、空字符串或仅仅包含�
 多个 WHERE 子句进行数据过滤；有 AND 子句或 OR 子句
 </p>
 </div>
-<div id="outline-container-orga8f7ad5" class="outline-4">
-<h4 id="orga8f7ad5"><span class="section-number-4">4.1.1</span> AND 操作符</h4>
-<div class="outline-text-4" id="text-4-1-1">
+<ol class="org-ol"><li><a id="orga8f7ad5"></a>AND 操作符<br /><div class="outline-text-4" id="text-4-1-1">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">AND</span> prod_price &lt;=<span style="color: #a45bad;">4</span>;
 </pre>
 </div>
-</div>
-</div>
-<div id="outline-container-org29b1eae" class="outline-4">
-<h4 id="org29b1eae"><span class="section-number-4">4.1.2</span> OR 操作符</h4>
-<div class="outline-text-4" id="text-4-1-2">
+</div></li>
+<li><a id="org29b1eae"></a>OR 操作符<br /><div class="outline-text-4" id="text-4-1-2">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
@@ -714,11 +676,8 @@ NULL 无值（no value），它与字段包含０、空字符串或仅仅包含�
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">OR</span> vend_id = <span style="color: #2d9574;">'BRS01'</span>;
 </pre>
 </div>
-</div>
-</div>
-<div id="outline-container-orgf37cccf" class="outline-4">
-<h4 id="orgf37cccf"><span class="section-number-4">4.1.3</span> 求值顺序</h4>
-<div class="outline-text-4" id="text-4-1-3">
+</div></li>
+<li><a id="orgf37cccf"></a>求值顺序<br /><div class="outline-text-4" id="text-4-1-3">
 <p>
 SQL 在处理 OR 操作符，优先处理 AND 操作符。
 </p>
@@ -759,11 +718,8 @@ SQL 在处理 OR 操作符，优先处理 AND 操作符。
 Tips:
     任何时候使用具有 AND 和 OR 操作符的 WHERE 子句，都应该使用圆括号明确地分组操作符。
 </p>
-</div>
-</div>
-<div id="outline-container-org20ce177" class="outline-4">
-<h4 id="org20ce177"><span class="section-number-4">4.1.4</span> IN 操作符</h4>
-<div class="outline-text-4" id="text-4-1-4">
+</div></li>
+<li><a id="org20ce177"></a>IN 操作符<br /><div class="outline-text-4" id="text-4-1-4">
 <p>
 IN 操作符用来指定条件范围
 </p>
@@ -784,11 +740,8 @@ Tips:
 <li>IN 操作符一般比一组 OR 操作符执行的更快；</li>
 <li>IN 的最大有点是包含其他 SELECT 语句，能够更动态地建立 WHERE 子句；</li>
 </ul>
-</div>
-</div>
-<div id="outline-container-org1621db8" class="outline-4">
-<h4 id="org1621db8"><span class="section-number-4">4.1.5</span> NOT 操作符</h4>
-<div class="outline-text-4" id="text-4-1-5">
+</div></li>
+<li><a id="org1621db8"></a>NOT 操作符<br /><div class="outline-text-4" id="text-4-1-5">
 <p>
 WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后所跟的任何条件。
 </p>
@@ -799,8 +752,7 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_name;
 </pre>
 </div>
-</div>
-</div>
+</div></li></ol>
 </div>
 </div>
 <div id="outline-container-orgdddadab" class="outline-2">
@@ -816,9 +768,7 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 由字面值、通配符或两者组合构成的搜索条件。
 </p>
 </div>
-<div id="outline-container-org9f89113" class="outline-4">
-<h4 id="org9f89113"><span class="section-number-4">5.1.1</span> 百分号（%）通配符</h4>
-<div class="outline-text-4" id="text-5-1-1">
+<ol class="org-ol"><li><a id="org9f89113"></a>百分号（%）通配符<br /><div class="outline-text-4" id="text-5-1-1">
 <p>
 最常使用的通配符是百分号（%）。在搜索串中，%表示任何字符出现任意次数。
 </p>
@@ -868,11 +818,8 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <b>Tips:</b>
     <i>%代表搜索模式中给定位置的０个、１个或多个字符。但不会匹配 NULL</i>
 </p>
-</div>
-</div>
-<div id="outline-container-orgedfca6f" class="outline-4">
-<h4 id="orgedfca6f"><span class="section-number-4">5.1.2</span> 下划线（_）通配符</h4>
-<div class="outline-text-4" id="text-5-1-2">
+</div></li>
+<li><a id="orgedfca6f"></a>下划线（_）通配符<br /><div class="outline-text-4" id="text-5-1-2">
 <p>
 下划线只匹配单个字符。
 </p>
@@ -882,11 +829,8 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_name <span style="color: #4f97d7; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'__ inch teddy bear'</span>;
 </pre>
 </div>
-</div>
-</div>
-<div id="outline-container-orgc77d966" class="outline-4">
-<h4 id="orgc77d966"><span class="section-number-4">5.1.3</span> 方括号（[]）通配符</h4>
-<div class="outline-text-4" id="text-5-1-3">
+</div></li>
+<li><a id="orgc77d966"></a>方括号（[]）通配符<br /><div class="outline-text-4" id="text-5-1-3">
 <p>
 方括号（）通配符用来指定一个字符集，它必须匹配指定位置（通配符的位置）的一个字符。
 </p>
@@ -901,8 +845,7 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <b>Tips:</b>
       <i>只有微软的 Access 和 SQL Server 支持集合</i>
 </p>
-</div>
-</div>
+</div></li></ol>
 </div>
 </div>
 <div id="outline-container-orgf61041a" class="outline-2">
@@ -999,11 +942,11 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <h3 id="orgd540dc4"><span class="section-number-3">12.4</span> 使用联结和联结条件</h3>
 </div>
 </div>
-<div id="outline-container-orgca9a990" class="outline-2">
-<h2 id="orgca9a990"><span class="section-number-2">13</span> 组合查询</h2>
+<div id="outline-container-org472ec38" class="outline-2">
+<h2 id="org472ec38"><span class="section-number-2">13</span> 组合查询</h2>
 <div class="outline-text-2" id="text-13">
-</div><div id="outline-container-org88d9ba0" class="outline-3">
-<h3 id="org88d9ba0"><span class="section-number-3">13.1</span> 组合查询</h3>
+</div><div id="outline-container-orgca9a990" class="outline-3">
+<h3 id="orgca9a990"><span class="section-number-3">13.1</span> 组合查询</h3>
 </div>
 <div id="outline-container-org6637e23" class="outline-3">
 <h3 id="org6637e23"><span class="section-number-3">13.2</span> 创建组合查询</h3>
@@ -1084,14 +1027,14 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <h3 id="orgde3d903"><span class="section-number-3">19.2</span> 控制事务处理</h3>
 </div>
 </div>
-<div id="outline-container-org9c27332" class="outline-2">
-<h2 id="org9c27332"><span class="section-number-2">20</span> 使用游标</h2>
+<div id="outline-container-orgff53175" class="outline-2">
+<h2 id="orgff53175"><span class="section-number-2">20</span> 使用游标</h2>
 <div class="outline-text-2" id="text-20">
 </div><div id="outline-container-orgabe083f" class="outline-3">
 <h3 id="orgabe083f"><span class="section-number-3">20.1</span> 游标</h3>
 </div>
-<div id="outline-container-orgbb9bf8b" class="outline-3">
-<h3 id="orgbb9bf8b"><span class="section-number-3">20.2</span> 使用游标</h3>
+<div id="outline-container-org9c27332" class="outline-3">
+<h3 id="org9c27332"><span class="section-number-3">20.2</span> 使用游标</h3>
 </div>
 </div>
 <div id="outline-container-orgc62fb80" class="outline-2">
