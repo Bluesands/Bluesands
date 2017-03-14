@@ -2,5 +2,5 @@
 
    + [[file:index.org][Bluesands Notes]]
    + [[file:numpy-learn.org][Numpy Learn]]
-   + [[file:sql_grammar.org][sql_grammar]]
    + [[file:nginx-https-with-let's-Encrypt.org][nginx https with let's Encrypt]]
+   + [[file:sql_grammar.org][SQL 必知必会]]
