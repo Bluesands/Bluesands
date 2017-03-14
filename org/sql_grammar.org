@@ -1,5 +1,5 @@
 #+TITLE: SQL 必知必会
-#+OPTIONS: H:2 num:t toc:t \n:nil @:t ::t |:t ^:{} f:t
+#+OPTIONS: H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} f:t
 #+KEYWORDS: SQL Grammar
 
 *** 检索数据
@@ -454,4 +454,4 @@
       | prod_name           | prod_price |
       | 18 inch teddy bear  |      11.99 |
       Tips:
-      		任何时候使用具有 AND 和 OR 操作符的 WHERE 子句，都应该使用圆括号明确地分组操作符。
+      		*任何时候使用具有 AND 和 OR 操作符的 WHERE 子句，都应该使用圆括号明确地分组操作符。*
