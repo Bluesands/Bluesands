@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-03-10 五 17:49 -->
+<!-- 2017-03-14 二 12:08 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SQL 必知必会</title>
+<title></title>
 <meta name="generator" content="Org mode" />
 <link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
 <link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
@@ -18,10 +18,11 @@
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
-<h1 class="title">SQL 必知必会</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
+<ul>
+<li><a href="#orgbd4a1ce">SQL 必知必会</a>
 <ul>
 <li><a href="#orgd8150db">检索数据</a>
 <ul>
@@ -41,41 +42,44 @@
 <li><a href="#org9775d31">指定排序方向</a></li>
 </ul>
 </li>
-</ul>
-</div>
-</div>
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<li><a href="#org3f51558">过滤数据</a>
 <ul>
-<li><a href="#orgd8150db">检索数据</a>
+<li><a href="#org784d8d9">使用 where 子句</a></li>
+<li><a href="#org5cf0ae9">WHERE 子句操作符</a>
 <ul>
-<li><a href="#orgb44266f">检索单个列</a></li>
-<li><a href="#orgc1078ee">检索多个列</a></li>
-<li><a href="#org88dccfe">检索所有列</a></li>
-<li><a href="#org1bc712f">检索不同的值</a></li>
-<li><a href="#orgf57ab9a">限制结果</a></li>
-<li><a href="#org1423b54">使用注释</a></li>
-</ul>
-</li>
-<li><a href="#org7ce3a96">排序检索数据</a>
-<ul>
-<li><a href="#org08bb6c0">排序数据</a></li>
-<li><a href="#org118a520">按多个列排序</a></li>
-<li><a href="#orgdf9751b">按列位置排序</a></li>
-<li><a href="#org9775d31">指定排序方向</a></li>
+<li><a href="#org1b5cc5b">检查单个值</a></li>
+<li><a href="#org1e61a12">不匹配查询</a></li>
+<li><a href="#org8963294">范围值检查</a></li>
+<li><a href="#org43a7df2">空值检查</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li><a href="#orgfbf10e5">高级数据过滤</a>
+<ul>
+<li><a href="#org2712175">组合 WHERE 子句</a>
+<ul>
+<li><a href="#orga8f7ad5">AND 操作符</a></li>
+<li><a href="#org29b1eae">OR 操作符</a></li>
+<li><a href="#orgf37cccf">求值顺序</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
-
-<div id="outline-container-orgd8150db" class="outline-2">
-<h2 id="orgd8150db">检索数据</h2>
-<div class="outline-text-2" id="text-orgd8150db">
-</div><div id="outline-container-orgb44266f" class="outline-3">
-<h3 id="orgb44266f">检索单个列</h3>
-<div class="outline-text-3" id="text-orgb44266f">
+<div id="outline-container-orgbd4a1ce" class="outline-2">
+<h2 id="orgbd4a1ce">SQL 必知必会</h2>
+<div class="outline-text-2" id="text-orgbd4a1ce">
+</div><div id="outline-container-orgd8150db" class="outline-3">
+<h3 id="orgd8150db">检索数据</h3>
+<div class="outline-text-3" id="text-orgd8150db">
+</div><div id="outline-container-orgb44266f" class="outline-4">
+<h4 id="orgb44266f">检索单个列</h4>
+<div class="outline-text-4" id="text-orgb44266f">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
@@ -90,7 +94,7 @@
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">prod_name</th>
+<th scope="col" class="org-left">prod<sub>name</sub></th>
 </tr>
 </thead>
 <tbody>
@@ -134,9 +138,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgc1078ee" class="outline-3">
-<h3 id="orgc1078ee">检索多个列</h3>
-<div class="outline-text-3" id="text-orgc1078ee">
+<div id="outline-container-orgc1078ee" class="outline-4">
+<h4 id="orgc1078ee">检索多个列</h4>
+<div class="outline-text-4" id="text-orgc1078ee">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_name, prod_price
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
@@ -145,9 +149,9 @@
 </div>
 </div>
 
-<div id="outline-container-org88dccfe" class="outline-3">
-<h3 id="org88dccfe">检索所有列</h3>
-<div class="outline-text-3" id="text-org88dccfe">
+<div id="outline-container-org88dccfe" class="outline-4">
+<h4 id="org88dccfe">检索所有列</h4>
+<div class="outline-text-4" id="text-org88dccfe">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> *
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
@@ -156,9 +160,9 @@
 </div>
 </div>
 
-<div id="outline-container-org1bc712f" class="outline-3">
-<h3 id="org1bc712f">检索不同的值</h3>
-<div class="outline-text-3" id="text-org1bc712f">
+<div id="outline-container-org1bc712f" class="outline-4">
+<h4 id="org1bc712f">检索不同的值</h4>
+<div class="outline-text-4" id="text-org1bc712f">
 <p>
 DINSTINCT 关键字作用于所有的列
 </p>
@@ -170,9 +174,9 @@ DINSTINCT 关键字作用于所有的列
 </div>
 </div>
 
-<div id="outline-container-orgf57ab9a" class="outline-3">
-<h3 id="orgf57ab9a">限制结果</h3>
-<div class="outline-text-3" id="text-orgf57ab9a">
+<div id="outline-container-orgf57ab9a" class="outline-4">
+<h4 id="orgf57ab9a">限制结果</h4>
+<div class="outline-text-4" id="text-orgf57ab9a">
 <p>
 显示指定行数据
 </p>
@@ -195,7 +199,7 @@ DINSTINCT 关键字作用于所有的列
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">prod_name</td>
+<td class="org-left">prod<sub>name</sub></td>
 </tr>
 
 <tr>
@@ -223,9 +227,9 @@ LIMIT 5 OFFSET 5 指示 MySQL 从第５行起的５行数据；
 </div>
 </div>
 
-<div id="outline-container-org1423b54" class="outline-3">
-<h3 id="org1423b54">使用注释</h3>
-<div class="outline-text-3" id="text-org1423b54">
+<div id="outline-container-org1423b54" class="outline-4">
+<h4 id="org1423b54">使用注释</h4>
+<div class="outline-text-4" id="text-org1423b54">
 <ol class="org-ol">
 <li><p>
 行内注释
@@ -258,12 +262,13 @@ FORM Products;
 </div>
 </div>
 </div>
-<div id="outline-container-org7ce3a96" class="outline-2">
-<h2 id="org7ce3a96">排序检索数据</h2>
-<div class="outline-text-2" id="text-org7ce3a96">
-</div><div id="outline-container-org08bb6c0" class="outline-3">
-<h3 id="org08bb6c0">排序数据</h3>
-<div class="outline-text-3" id="text-org08bb6c0">
+
+<div id="outline-container-org7ce3a96" class="outline-3">
+<h3 id="org7ce3a96">排序检索数据</h3>
+<div class="outline-text-3" id="text-org7ce3a96">
+</div><div id="outline-container-org08bb6c0" class="outline-4">
+<h4 id="org08bb6c0">排序数据</h4>
+<div class="outline-text-4" id="text-org08bb6c0">
 <p>
 ORDER BY 子句取一个或多个列的名字，据此对输出进行排序：
 </p>
@@ -274,14 +279,14 @@ ORDER BY 子句取一个或多个列的名字，据此对输出进行排序：
 </pre>
 </div>
 <p>
-对 prod_name 列以字母顺序排序数据注意：在指定 ORDER BY 子句时，应该保证它是 SELECT 语句中最后一条子句，如果它不是最后的子句，将会出现错误信息。通常，ORDER BY 子句中使用的列僵尸为显示而选择的列。但是，实际上并不一定要这样，用非检索的列排序数据是完全合法的。
+对 prod<sub>name</sub> 列以字母顺序排序数据注意：在指定 ORDER BY 子句时，应该保证它是 SELECT 语句中最后一条子句，如果它不是最后的子句，将会出现错误信息。通常，ORDER BY 子句中使用的列僵尸为显示而选择的列。但是，实际上并不一定要这样，用非检索的列排序数据是完全合法的。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org118a520" class="outline-3">
-<h3 id="org118a520">按多个列排序</h3>
-<div class="outline-text-3" id="text-org118a520">
+<div id="outline-container-org118a520" class="outline-4">
+<h4 id="org118a520">按多个列排序</h4>
+<div class="outline-text-4" id="text-org118a520">
 <p>
 要按多个列排序，简单指定列名，列名之间用逗号分开即可。
 </p>
@@ -294,9 +299,9 @@ ORDER BY 子句取一个或多个列的名字，据此对输出进行排序：
 </div>
 </div>
 
-<div id="outline-container-orgdf9751b" class="outline-3">
-<h3 id="orgdf9751b">按列位置排序</h3>
-<div class="outline-text-3" id="text-orgdf9751b">
+<div id="outline-container-orgdf9751b" class="outline-4">
+<h4 id="orgdf9751b">按列位置排序</h4>
+<div class="outline-text-4" id="text-orgdf9751b">
 <p>
 ORDER BY 还支持按相对列位置进行排序。
 </p>
@@ -312,9 +317,9 @@ ORDER BY 还支持按相对列位置进行排序。
 </div>
 </div>
 
-<div id="outline-container-org9775d31" class="outline-3">
-<h3 id="org9775d31">指定排序方向</h3>
-<div class="outline-text-3" id="text-org9775d31">
+<div id="outline-container-org9775d31" class="outline-4">
+<h4 id="org9775d31">指定排序方向</h4>
+<div class="outline-text-4" id="text-org9775d31">
 <p>
 默认排序是升序。
 </p>
@@ -341,9 +346,9 @@ ORDER BY 还支持按相对列位置进行排序。
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">prod_id</td>
-<td class="org-right">prod_price</td>
-<td class="org-left">prod_name</td>
+<td class="org-left">prod<sub>id</sub></td>
+<td class="org-right">prod<sub>price</sub></td>
+<td class="org-left">prod<sub>name</sub></td>
 </tr>
 
 <tr>
@@ -401,6 +406,241 @@ ORDER BY 还支持按相对列位置进行排序。
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3f51558" class="outline-3">
+<h3 id="org3f51558">过滤数据</h3>
+<div class="outline-text-3" id="text-org3f51558">
+</div><div id="outline-container-org784d8d9" class="outline-4">
+<h4 id="org784d8d9">使用 where 子句</h4>
+<div class="outline-text-4" id="text-org784d8d9">
+<p>
+在 SELECT 语句中，数据根据 WHERE 子句中指定的搜索条件进行过滤。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price = <span style="color: #a45bad;">3</span>.<span style="color: #a45bad;">49</span>;
+</pre>
+</div>
+<p>
+Tips:
+      在同时使用 ORDER BY 和 WHERE 子句时，应该让 ORDER BY 位于 WHERE 之后。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5cf0ae9" class="outline-4">
+<h4 id="org5cf0ae9">WHERE 子句操作符</h4>
+<div class="outline-text-4" id="text-org5cf0ae9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">操作符</th>
+<th scope="col" class="org-left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">=</td>
+<td class="org-left">等于</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt;&gt;</td>
+<td class="org-left">不等于</td>
+</tr>
+
+<tr>
+<td class="org-left">!=</td>
+<td class="org-left">不等于</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt;</td>
+<td class="org-left">小于</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt;=</td>
+<td class="org-left">小于等于</td>
+</tr>
+
+<tr>
+<td class="org-left">!&lt;</td>
+<td class="org-left">不小于</td>
+</tr>
+
+<tr>
+<td class="org-left">&gt;</td>
+<td class="org-left">大于</td>
+</tr>
+
+<tr>
+<td class="org-left">&gt;=</td>
+<td class="org-left">大于等于</td>
+</tr>
+
+<tr>
+<td class="org-left">!&gt;</td>
+<td class="org-left">不大于</td>
+</tr>
+
+<tr>
+<td class="org-left">BETWEEN</td>
+<td class="org-left">在指定的两个值之间</td>
+</tr>
+
+<tr>
+<td class="org-left">IS NULL</td>
+<td class="org-left">为 NULL 值</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-org1b5cc5b" class="outline-5">
+<h5 id="org1b5cc5b">检查单个值</h5>
+<div class="outline-text-5" id="text-org1b5cc5b">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price &lt; <span style="color: #a45bad;">10</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1e61a12" class="outline-5">
+<h5 id="org1e61a12">不匹配查询</h5>
+<div class="outline-text-5" id="text-org1e61a12">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> vend_id, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id &lt;&gt; <span style="color: #2d9574;">'DLL01'</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8963294" class="outline-5">
+<h5 id="org8963294">范围值检查</h5>
+<div class="outline-text-5" id="text-org8963294">
+<p>
+使用 BETWEEN 操作符检查某个范围值
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price <span style="color: #4f97d7; font-weight: bold;">BETWEEN</span> <span style="color: #a45bad;">5</span> <span style="color: #4f97d7; font-weight: bold;">AND</span> <span style="color: #a45bad;">10</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org43a7df2" class="outline-5">
+<h5 id="org43a7df2">空值检查</h5>
+<div class="outline-text-5" id="text-org43a7df2">
+<p>
+NULL 无值（no value），它与字段包含０、空字符串或仅仅包含空格不同。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> cust_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Customers
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> cust_email <span style="color: #4f97d7; font-weight: bold;">IS</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfbf10e5" class="outline-3">
+<h3 id="orgfbf10e5">高级数据过滤</h3>
+<div class="outline-text-3" id="text-orgfbf10e5">
+</div><div id="outline-container-org2712175" class="outline-4">
+<h4 id="org2712175">组合 WHERE 子句</h4>
+<div class="outline-text-4" id="text-org2712175">
+<p>
+多个 WHERE 子句进行数据过滤；有 AND 子句或 OR 子句
+</p>
+</div>
+<div id="outline-container-orga8f7ad5" class="outline-5">
+<h5 id="orga8f7ad5">AND 操作符</h5>
+<div class="outline-text-5" id="text-orga8f7ad5">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">AND</span> prod_price &lt;=<span style="color: #a45bad;">4</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org29b1eae" class="outline-5">
+<h5 id="org29b1eae">OR 操作符</h5>
+<div class="outline-text-5" id="text-org29b1eae">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">OR</span> vend_id = <span style="color: #2d9574;">'BRS01'</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf37cccf" class="outline-5">
+<h5 id="orgf37cccf">求值顺序</h5>
+<div class="outline-text-5" id="text-orgf37cccf">
+<p>
+SQL 在处理 OR 操作符，优先处理 AND 操作符。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">OR</span> vend_id = <span style="color: #2d9574;">'BRS01'</span>
+<span style="color: #4f97d7; font-weight: bold;">AND</span> prod_price &gt;= <span style="color: #a45bad;">10</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> <span style="color: #4f97d7;">(</span>vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">OR</span> vend_id = <span style="color: #2d9574;">'BRS01'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">AND</span> prod_price &gt;= <span style="color: #a45bad;">10</span>;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">prod<sub>name</sub></td>
+<td class="org-right">prod<sub>price</sub></td>
+</tr>
+
+<tr>
+<td class="org-left">18 inch teddy bear</td>
+<td class="org-right">11.99</td>
+</tr>
+</tbody>
+</table>
+<p>
+Tips:
+    任何时候使用具有 AND 和 OR 操作符的 WHERE 子句，都应该使用圆括号明确地分组操作符。
+</p>
+</div>
+</div>
 </div>
 </div>
 </div>
