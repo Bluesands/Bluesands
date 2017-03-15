@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-03-14 二 15:32 -->
+<!-- 2017-03-15 三 16:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SQL 必知必会</title>
@@ -56,6 +56,7 @@
 <li><a href="#orgdddadab">5. 用通配符进行过滤</a>
 <ul>
 <li><a href="#org517d477">5.1. LIKE 操作符</a></li>
+<li><a href="#org42a6942">5.2. 使用通配符的技巧</a></li>
 </ul>
 </li>
 <li><a href="#orgf61041a">6. 创建计算字段</a>
@@ -108,9 +109,9 @@
 <li><a href="#orgd540dc4">12.4. 使用联结和联结条件</a></li>
 </ul>
 </li>
-<li><a href="#org472ec38">13. 组合查询</a>
+<li><a href="#org2849aa8">13. 组合查询</a>
 <ul>
-<li><a href="#orgca9a990">13.1. 组合查询</a></li>
+<li><a href="#org472ec38">13.1. 组合查询</a></li>
 <li><a href="#org6637e23">13.2. 创建组合查询</a></li>
 </ul>
 </li>
@@ -155,10 +156,10 @@
 <li><a href="#orgde3d903">19.2. 控制事务处理</a></li>
 </ul>
 </li>
-<li><a href="#orgff53175">20. 使用游标</a>
+<li><a href="#org471b40c">20. 使用游标</a>
 <ul>
 <li><a href="#orgabe083f">20.1. 游标</a></li>
-<li><a href="#org9c27332">20.2. 使用游标</a></li>
+<li><a href="#orgff53175">20.2. 使用游标</a></li>
 </ul>
 </li>
 <li><a href="#orgc62fb80">21. 高级 SQL 特性</a>
@@ -847,30 +848,173 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 </p>
 </div></li></ol>
 </div>
+<div id="outline-container-org42a6942" class="outline-3">
+<h3 id="org42a6942"><span class="section-number-3">5.2</span> 使用通配符的技巧</h3>
+<div class="outline-text-3" id="text-5-2">
+<ul class="org-ul">
+<li>不要过度使用通配符。如果其他操作符能够达到相同的目的，应该使用其他操作符。</li>
+<li>在确定需要使用通配符时，也尽量不要把它们用在搜索模式的开始处。把通配符置于开始处，搜索起来是最慢的。</li>
+<li>仔细注意通配符的位置。如果放错了地方，可能不会返回想要的数据</li>
+</ul>
+</div>
+</div>
 </div>
 <div id="outline-container-orgf61041a" class="outline-2">
 <h2 id="orgf61041a"><span class="section-number-2">6</span> 创建计算字段</h2>
 <div class="outline-text-2" id="text-6">
 </div><div id="outline-container-org9687bf5" class="outline-3">
 <h3 id="org9687bf5"><span class="section-number-3">6.1</span> 计算字段</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+需要特别注意，只有数据库知道 SELECT 语句中哪些列是实际的表列，哪些列是计算字段在 SQL 语句内可完成的许多转换和格式化工作都可以直接在客户端应用程序内完成。但一般来说，在数据库服务器上完成这些操作比在客户端中完成要快得多。
+</p>
+</div>
 </div>
 <div id="outline-container-org5e0d5e9" class="outline-3">
 <h3 id="org5e0d5e9"><span class="section-number-3">6.2</span> 拼接字段</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<b>拼接（concatenate）</b>
+将值联结到一起构成单个值。
+<b>注意</b>
+      Access 和 SQL Server 使用+号。DB@、Oracle、PostgreSQL、SQLite 和 Open Office Base 使用||。MySQL 和 MariaDB 使用 concat。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> CONCAT<span style="color: #4f97d7;">(</span>vend_name, <span style="color: #2d9574;">'('</span>, vend_country, <span style="color: #2d9574;">')'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Vendors
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> vend_name;
+</pre>
+</div>
+
+<p>
+大多数 DBMS 都支持 RTRIM()（去掉字符串右边的空格）、LTRIM()（去掉字符串左边的空格）、以及 TRIM()（去掉字符串左右两边的空格）。
+<b>使用别名</b>
+别名(alias)是一个字段或值的替换名。别名用 AS 关键字赋予。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> CONCAT<span style="color: #4f97d7;">(</span>vend_name, <span style="color: #2d9574;">'('</span>, vend_country, <span style="color: #2d9574;">')'</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">as</span> vend_title
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Vendors
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> vend_name;
+</pre>
+</div>
+
+<p>
+Tips:
+    在很多 DBMS 中，AS 关键字是可选的，不过最好使用它，这被视为一条最佳实践。
+</p>
+</div>
 </div>
 <div id="outline-container-org7ee14b1" class="outline-3">
 <h3 id="org7ee14b1"><span class="section-number-3">6.3</span> 执行算数计算</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+计算字段的另一个常见用途是对检索出的数据进行算术计算。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, quantity, item_price, quantity*item_price <span style="color: #4f97d7; font-weight: bold;">AS</span> expanded_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> OrderItems
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> order_num = <span style="color: #a45bad;">20008</span>;
+</pre>
 </div>
 </div>
+</div>
+</div>
+
 <div id="outline-container-orgcdbcd92" class="outline-2">
 <h2 id="orgcdbcd92"><span class="section-number-2">7</span> 使用数据处理函数</h2>
 <div class="outline-text-2" id="text-7">
 </div><div id="outline-container-org091da5d" class="outline-3">
 <h3 id="org091da5d"><span class="section-number-3">7.1</span> 函数</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+<b>DBMS 函数的差异</b>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">函数</th>
+<th scope="col" class="org-left">Access</th>
+<th scope="col" class="org-left">DB2</th>
+<th scope="col" class="org-left">Oracle</th>
+<th scope="col" class="org-left">PostgreSQL</th>
+<th scope="col" class="org-left">SQLite</th>
+<th scope="col" class="org-left">MySQL/MariaDB</th>
+<th scope="col" class="org-left">SQL Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">提取字符串的组成部分</td>
+<td class="org-left">MID()</td>
+<td class="org-left">SUBSTR()</td>
+<td class="org-left">SUBSTR()</td>
+<td class="org-left">SUBSTR()</td>
+<td class="org-left">SUBSTR()</td>
+<td class="org-left">SUBSTRING()</td>
+<td class="org-left">SUBSTRING()</td>
+</tr>
+
+<tr>
+<td class="org-left">数据类型转换</td>
+<td class="org-left">多个函数</td>
+<td class="org-left">CAST()</td>
+<td class="org-left">多个函数</td>
+<td class="org-left">CAST()</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">CONVERT()</td>
+<td class="org-left">CONVERT()</td>
+</tr>
+
+<tr>
+<td class="org-left">取当前日期</td>
+<td class="org-left">NOW()</td>
+<td class="org-left">CURRENT_DATE()</td>
+<td class="org-left">SYSDATE()</td>
+<td class="org-left">CURRENT_DATE()</td>
+<td class="org-left">DATE()</td>
+<td class="org-left">CURDATE()</td>
+<td class="org-left">GETDATE()</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="outline-container-org7332224" class="outline-3">
 <h3 id="org7332224"><span class="section-number-3">7.2</span> 使用函数</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+大多说 SQL 实现支持一下类型的函数：
+</p>
+<ul class="org-ul">
+<li>用于处理文本字符串（如删除或填充值，转换值为大写或小写）的文本函数；</li>
+<li>用于在数值数据上进行算术操作（如返回绝对值，进行代数运算）的数值函数；</li>
+<li>用于处理日期和时间值并从这些值中提取特定成分（如返回两个日期之差，检查日期有效性）的日期和时间函数；</li>
+<li>返回 DBMS 正使用的特殊信息（如返回用户登录信息）的系统函数；</li>
+</ul>
+</div>
+<ol class="org-ol"><li><a id="org1120ca0"></a>文本处理函数<br /></li></ol>
 </div>
 </div>
+
 <div id="outline-container-org288ff07" class="outline-2">
 <h2 id="org288ff07"><span class="section-number-2">8</span> 汇总数据</h2>
 <div class="outline-text-2" id="text-8">
@@ -942,11 +1086,11 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <h3 id="orgd540dc4"><span class="section-number-3">12.4</span> 使用联结和联结条件</h3>
 </div>
 </div>
-<div id="outline-container-org472ec38" class="outline-2">
-<h2 id="org472ec38"><span class="section-number-2">13</span> 组合查询</h2>
+<div id="outline-container-org2849aa8" class="outline-2">
+<h2 id="org2849aa8"><span class="section-number-2">13</span> 组合查询</h2>
 <div class="outline-text-2" id="text-13">
-</div><div id="outline-container-orgca9a990" class="outline-3">
-<h3 id="orgca9a990"><span class="section-number-3">13.1</span> 组合查询</h3>
+</div><div id="outline-container-org472ec38" class="outline-3">
+<h3 id="org472ec38"><span class="section-number-3">13.1</span> 组合查询</h3>
 </div>
 <div id="outline-container-org6637e23" class="outline-3">
 <h3 id="org6637e23"><span class="section-number-3">13.2</span> 创建组合查询</h3>
@@ -1027,14 +1171,14 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <h3 id="orgde3d903"><span class="section-number-3">19.2</span> 控制事务处理</h3>
 </div>
 </div>
-<div id="outline-container-orgff53175" class="outline-2">
-<h2 id="orgff53175"><span class="section-number-2">20</span> 使用游标</h2>
+<div id="outline-container-org471b40c" class="outline-2">
+<h2 id="org471b40c"><span class="section-number-2">20</span> 使用游标</h2>
 <div class="outline-text-2" id="text-20">
 </div><div id="outline-container-orgabe083f" class="outline-3">
 <h3 id="orgabe083f"><span class="section-number-3">20.1</span> 游标</h3>
 </div>
-<div id="outline-container-org9c27332" class="outline-3">
-<h3 id="org9c27332"><span class="section-number-3">20.2</span> 使用游标</h3>
+<div id="outline-container-orgff53175" class="outline-3">
+<h3 id="orgff53175"><span class="section-number-3">20.2</span> 使用游标</h3>
 </div>
 </div>
 <div id="outline-container-orgc62fb80" class="outline-2">
