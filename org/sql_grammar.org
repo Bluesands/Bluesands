@@ -662,7 +662,7 @@
 *** 使用数据处理函数
 **** 函数
      *DBMS 函数的差异*
-     #+ATTR_HTML: :border 1px solid #000 :rules all :frame border
+     #+ATTR_HTML: :border 2 :rules all :frame border :style 1px solid #000
 		 | 函数                 | Access   | DB2            | Oracle    | PostgreSQL     | SQLite   | MySQL/MariaDB | SQL Server  |
 		 |----------------------+----------+----------------+-----------+----------------+----------+---------------+-------------|
 		 | 提取字符串的组成部分 | MID()    | SUBSTR()       | SUBSTR()  | SUBSTR()       | SUBSTR() | SUBSTRING()   | SUBSTRING() |
