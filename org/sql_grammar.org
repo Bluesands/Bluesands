@@ -664,7 +664,7 @@
      *DBMS 函数的差异*
 		 | 函数                 | Access   | DB2            | Oracle    | PostgreSQL     | SQLite   | MySQL/MariaDB | SQL Server  |
 		 |----------------------+----------+----------------+-----------+----------------+----------+---------------+-------------|
-		 | //                   | <        | >              | <         | >              | <        | >             | <           |
+		 | /                    | <        | >              | <         | >              | <        | >             | <           |
 		 | 提取字符串的组成部分 | MID()    | SUBSTR()       | SUBSTR()  | SUBSTR()       | SUBSTR() | SUBSTRING()   | SUBSTRING() |
 		 | 数据类型转换         | 多个函数 | CAST()         | 多个函数  | CAST()         |          | CONVERT()     | CONVERT()   |
 		 | 取当前日期           | NOW()    | CURRENT_DATE() | SYSDATE() | CURRENT_DATE() | DATE()   | CURDATE()     | GETDATE()   |
