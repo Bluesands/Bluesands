@@ -34,6 +34,7 @@
     }
 
     #org-div-home-and-up{
+  margin-right:30px;
 	position: fixed;
 	right: 0;
 	top: 4em;
