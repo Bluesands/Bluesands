@@ -233,6 +233,7 @@ content: "*** "
 	padding: 1.2em;
 	border: 2px solid #dddddd;
 	overflow: auto;
+  border-radius: 10px;
     }
 
     .org-info-box {
