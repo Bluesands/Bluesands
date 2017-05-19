@@ -942,7 +942,7 @@ content: "*** "
 	margin-left: 50px;
 	margin-top: 10px;
 	padding: .2em;
-	border: 1px solid gray;
+	border: 0;
 	background-color: #ffffff;
 	z-index: -1000;
   text-align: center;
@@ -958,7 +958,7 @@ content: "*** "
     #table-of-contents {
 	float: right;
 	border: 1px solid #CCC;
-	max-width: 50%;
+	max-width: 20%;
 	overflow: auto;
     }
 } /* END OF @media screen */
