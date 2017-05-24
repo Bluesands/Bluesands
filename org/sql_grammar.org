@@ -1,6 +1,7 @@
 #+TITLE: SQL 必知必会
 #+OPTIONS: H:2 num:t toc:t \n:nil @:t ::t |:t ^:{} f:t
 #+KEYWORDS: SQL Grammar
+#+ATTR_HTML::border 2 :rules :frame border
 
 *** 检索数据
 **** 检索单个列

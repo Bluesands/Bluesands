@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-03-10 五 17:49 -->
+<!-- 2017-05-24 三 09:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>nginx https with let's Encrypt</title>
@@ -23,21 +23,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge65b12c">nginx install or check</a></li>
-<li><a href="#org0d36025">Install the Cerbot Let's Encrypt Client</a></li>
-<li><a href="#org3e1499b">Create your configuration</a></li>
-<li><a href="#org481075d">Automatically generate certificates</a></li>
-<li><a href="#org62be170">Add certificates to conf of nginx</a></li>
-<li><a href="#org319de09">Reload nginx</a></li>
+<li><a href="#orgfeda73e">nginx install or check</a></li>
+<li><a href="#org2fcb81e">Install the Cerbot Let's Encrypt Client</a></li>
+<li><a href="#org36683ba">Create your configuration</a></li>
+<li><a href="#orgd162f1e">Automatically generate certificates</a></li>
+<li><a href="#orgb60b9c6">Add certificates to conf of nginx</a></li>
+<li><a href="#orgc3b8deb">Reload nginx</a></li>
 </ul>
 </div>
 </div>
 <p>
 Note: this article just work on Centos 7 system.
 </p>
-<div id="outline-container-orge65b12c" class="outline-2">
-<h2 id="orge65b12c">nginx install or check</h2>
-<div class="outline-text-2" id="text-orge65b12c">
+<div id="outline-container-orgfeda73e" class="outline-2">
+<h2 id="orgfeda73e">nginx install or check</h2>
+<div class="outline-text-2" id="text-orgfeda73e">
 <p>
 if your system has not installed nginx, you should install it first.
 Centos 7 system can install nginx package from Centos repository.
@@ -59,7 +59,7 @@ Install nginx
 </div></li>
 <li><p>
 check your nginx
-if your system had installed nginx, you should check whether it supports http<sub>ssl</sub><sub>module</sub>.
+if your system had installed nginx, you should check whether it supports http_ssl_module.
 </p>
 <div class="org-src-container">
 <pre class="src src-shell">nginx -V | grep ssl
@@ -78,9 +78,9 @@ Note: For more installation information please see <a href="https://www.nginx.co
 </div>
 </div>
 
-<div id="outline-container-org0d36025" class="outline-2">
-<h2 id="org0d36025">Install the Cerbot Let's Encrypt Client</h2>
-<div class="outline-text-2" id="text-org0d36025">
+<div id="outline-container-org2fcb81e" class="outline-2">
+<h2 id="org2fcb81e">Install the Cerbot Let's Encrypt Client</h2>
+<div class="outline-text-2" id="text-org2fcb81e">
 <p>
 The second step to using Let's Encrypt to obtain an SSL certificate is to install the cerbot
 software on you server.
@@ -93,9 +93,9 @@ The CentOS 7 system can install cerbot package from EPEL.
 </div>
 </div>
 
-<div id="outline-container-org3e1499b" class="outline-2">
-<h2 id="org3e1499b">Create your configuration</h2>
-<div class="outline-text-2" id="text-org3e1499b">
+<div id="outline-container-org36683ba" class="outline-2">
+<h2 id="org36683ba">Create your configuration</h2>
+<div class="outline-text-2" id="text-org36683ba">
 <ol class="org-ol">
 <li><p>
 create a folder to store you configuration
@@ -138,9 +138,9 @@ verifies OK if the access is successful.
 </div>
 </div>
 
-<div id="outline-container-org481075d" class="outline-2">
-<h2 id="org481075d">Automatically generate certificates</h2>
-<div class="outline-text-2" id="text-org481075d">
+<div id="outline-container-orgd162f1e" class="outline-2">
+<h2 id="orgd162f1e">Automatically generate certificates</h2>
+<div class="outline-text-2" id="text-orgd162f1e">
 <div class="org-src-container">
 <pre class="src src-shell">sudo certbot certonly -c /etc/letsencrypt/configs/example.com.conf
 </pre>
@@ -156,9 +156,9 @@ At the terminal you will see the following:
 </div>
 </div>
 
-<div id="outline-container-org62be170" class="outline-2">
-<h2 id="org62be170">Add certificates to conf of nginx</h2>
-<div class="outline-text-2" id="text-org62be170">
+<div id="outline-container-orgb60b9c6" class="outline-2">
+<h2 id="orgb60b9c6">Add certificates to conf of nginx</h2>
+<div class="outline-text-2" id="text-orgb60b9c6">
 <div class="org-src-container">
 <pre class="src src-shell">server <span style="color: #4f97d7;">{</span>
     listen <span style="color: #a45bad;">443</span> ssl;
@@ -200,9 +200,9 @@ Note: More ssl configuration of nginx, you can see <a href="https://mozilla.gith
 </div>
 </div>
 
-<div id="outline-container-org319de09" class="outline-2">
-<h2 id="org319de09">Reload nginx</h2>
-<div class="outline-text-2" id="text-org319de09">
+<div id="outline-container-orgc3b8deb" class="outline-2">
+<h2 id="orgc3b8deb">Reload nginx</h2>
+<div class="outline-text-2" id="text-orgc3b8deb">
 <div class="org-src-container">
 <pre class="src src-shell">sudo nginx -s reload
 </pre>
@@ -223,7 +223,7 @@ Note: More ssl configuration of nginx, you can see <a href="https://mozilla.gith
                     })();
                 </script>
                 <noscript>Please enable JavaScript to view the <a href='https://disqus.com/?ref_noscript' rel='nofollow'>comments powered by Disqus.</a></noscript>
-                <p> Created by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0.5) </p>
+                <p> Created by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 9.0.6) </p>
                 <a href='#' class='back-to-top' id='fixed-back-to-top' style='display: inline;'></a>
 </div>
 </body>
