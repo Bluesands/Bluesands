@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-05-24 三 09:45 -->
+<!-- 2017-07-14 五 14:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>nginx https with let's Encrypt</title>
@@ -11,6 +11,78 @@
 <link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
 <link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
 <link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+
+<script type="text/javascript" src="https://raw.github.com/wd/org-info-js/master/org-info.js">
+/**
+ *
+ * @source: https://raw.github.com/wd/org-info-js/master/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in https://raw.github.com/wd/org-info-js/master/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in https://raw.github.com/wd/org-info-js/master/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "6");
+org_html_manager.set("LINK_HOME", "index.html");
+org_html_manager.set("LINK_UP", "index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -23,21 +95,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgfeda73e">nginx install or check</a></li>
-<li><a href="#org2fcb81e">Install the Cerbot Let's Encrypt Client</a></li>
-<li><a href="#org36683ba">Create your configuration</a></li>
-<li><a href="#orgd162f1e">Automatically generate certificates</a></li>
-<li><a href="#orgb60b9c6">Add certificates to conf of nginx</a></li>
-<li><a href="#orgc3b8deb">Reload nginx</a></li>
+<li><a href="#org122a80f">nginx install or check</a></li>
+<li><a href="#org8de9546">Install the Cerbot Let's Encrypt Client</a></li>
+<li><a href="#orgf0399f4">Create your configuration</a></li>
+<li><a href="#org7167605">Automatically generate certificates</a></li>
+<li><a href="#org8e65cb4">Add certificates to conf of nginx</a></li>
+<li><a href="#org0cccb03">Reload nginx</a></li>
 </ul>
 </div>
 </div>
 <p>
 Note: this article just work on Centos 7 system.
 </p>
-<div id="outline-container-orgfeda73e" class="outline-2">
-<h2 id="orgfeda73e">nginx install or check</h2>
-<div class="outline-text-2" id="text-orgfeda73e">
+<div id="outline-container-org122a80f" class="outline-2">
+<h2 id="org122a80f">nginx install or check</h2>
+<div class="outline-text-2" id="text-org122a80f">
 <p>
 if your system has not installed nginx, you should install it first.
 Centos 7 system can install nginx package from Centos repository.
@@ -78,9 +150,9 @@ Note: For more installation information please see <a href="https://www.nginx.co
 </div>
 </div>
 
-<div id="outline-container-org2fcb81e" class="outline-2">
-<h2 id="org2fcb81e">Install the Cerbot Let's Encrypt Client</h2>
-<div class="outline-text-2" id="text-org2fcb81e">
+<div id="outline-container-org8de9546" class="outline-2">
+<h2 id="org8de9546">Install the Cerbot Let's Encrypt Client</h2>
+<div class="outline-text-2" id="text-org8de9546">
 <p>
 The second step to using Let's Encrypt to obtain an SSL certificate is to install the cerbot
 software on you server.
@@ -93,9 +165,9 @@ The CentOS 7 system can install cerbot package from EPEL.
 </div>
 </div>
 
-<div id="outline-container-org36683ba" class="outline-2">
-<h2 id="org36683ba">Create your configuration</h2>
-<div class="outline-text-2" id="text-org36683ba">
+<div id="outline-container-orgf0399f4" class="outline-2">
+<h2 id="orgf0399f4">Create your configuration</h2>
+<div class="outline-text-2" id="text-orgf0399f4">
 <ol class="org-ol">
 <li><p>
 create a folder to store you configuration
@@ -138,9 +210,9 @@ verifies OK if the access is successful.
 </div>
 </div>
 
-<div id="outline-container-orgd162f1e" class="outline-2">
-<h2 id="orgd162f1e">Automatically generate certificates</h2>
-<div class="outline-text-2" id="text-orgd162f1e">
+<div id="outline-container-org7167605" class="outline-2">
+<h2 id="org7167605">Automatically generate certificates</h2>
+<div class="outline-text-2" id="text-org7167605">
 <div class="org-src-container">
 <pre class="src src-shell">sudo certbot certonly -c /etc/letsencrypt/configs/example.com.conf
 </pre>
@@ -156,9 +228,9 @@ At the terminal you will see the following:
 </div>
 </div>
 
-<div id="outline-container-orgb60b9c6" class="outline-2">
-<h2 id="orgb60b9c6">Add certificates to conf of nginx</h2>
-<div class="outline-text-2" id="text-orgb60b9c6">
+<div id="outline-container-org8e65cb4" class="outline-2">
+<h2 id="org8e65cb4">Add certificates to conf of nginx</h2>
+<div class="outline-text-2" id="text-org8e65cb4">
 <div class="org-src-container">
 <pre class="src src-shell">server <span style="color: #4f97d7;">{</span>
     listen <span style="color: #a45bad;">443</span> ssl;
@@ -200,9 +272,9 @@ Note: More ssl configuration of nginx, you can see <a href="https://mozilla.gith
 </div>
 </div>
 
-<div id="outline-container-orgc3b8deb" class="outline-2">
-<h2 id="orgc3b8deb">Reload nginx</h2>
-<div class="outline-text-2" id="text-orgc3b8deb">
+<div id="outline-container-org0cccb03" class="outline-2">
+<h2 id="org0cccb03">Reload nginx</h2>
+<div class="outline-text-2" id="text-org0cccb03">
 <div class="org-src-container">
 <pre class="src src-shell">sudo nginx -s reload
 </pre>
@@ -223,7 +295,7 @@ Note: More ssl configuration of nginx, you can see <a href="https://mozilla.gith
                     })();
                 </script>
                 <noscript>Please enable JavaScript to view the <a href='https://disqus.com/?ref_noscript' rel='nofollow'>comments powered by Disqus.</a></noscript>
-                <p> Created by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 9.0.6) </p>
+                <p> Created by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 9.0.9) </p>
                 <a href='#' class='back-to-top' id='fixed-back-to-top' style='display: inline;'></a>
 </div>
 </body>
