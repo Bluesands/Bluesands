@@ -1,6 +1,5 @@
 #+TITLE: Bluesands Notes
 #+OPTIONS: toc:nil
-#+AUTHOR: Bluesands
 
 **** Python
      + [[./numpy-learn.html][numpy learn]]
@@ -8,6 +7,6 @@
 **** Linux 
      + [[./nginx-https-with-let's-Encrypt.html][nginx-https-with-let's-Encrypt]]
 **** Emacs
-     [[./hacking-emacs-lisp.html][hacking emacs lisp]]
+     + [[./hacking-emacs-lisp.html][hacking emacs lisp]]
 **** SQL
      + [[../sql_grammar.html][sql grammar]]
