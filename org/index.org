@@ -10,3 +10,5 @@
      + [[./hacking-emacs-lisp.html][hacking emacs lisp]]
 **** SQL
      + [[../sql_grammar.html][sql grammar]]
+**** other
+     + [[../时刻淘上线部署手册.html][时刻淘上线部署手册]]

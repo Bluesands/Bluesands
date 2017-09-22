@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-09-22 五 15:09 -->
+<!-- 2017-09-22 五 15:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title></title>
+<title>时刻淘上线部署手册</title>
 <meta name="generator" content="Org mode" />
 <link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
 <link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
@@ -18,11 +18,10 @@
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
+<h1 class="title">时刻淘上线部署手册</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
-<ul>
-<li><a href="#org4eb4044">时刻淘上线部署手册</a>
 <ul>
 <li><a href="#org7c3ccda">系统环境构建</a>
 <ul>
@@ -44,30 +43,24 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 </div>
 </div>
-<div id="outline-container-org4eb4044" class="outline-2">
-<h2 id="org4eb4044">时刻淘上线部署手册</h2>
-<div class="outline-text-2" id="text-org4eb4044">
 <p>
 时刻淘上线部署手册共分为两大部分，系统环境构建与项目部署。 
 </p>
-</div>
-<div id="outline-container-org7c3ccda" class="outline-3">
-<h3 id="org7c3ccda">系统环境构建</h3>
-<div class="outline-text-3" id="text-org7c3ccda">
+<div id="outline-container-org7c3ccda" class="outline-2">
+<h2 id="org7c3ccda">系统环境构建</h2>
+<div class="outline-text-2" id="text-org7c3ccda">
 <p>
 购买阿里云服务器并搭建 Centos7 最小安装镜像，假设 ip 地址为 120.89.67.90。针对初始化系统的构建，可以分为一下四个部分：1、Centos7 环境搭建，2、软件安装，3、监控系统，4、域名解析。下面针对每一部分进行详细讲解。
 </p>
 </div>
-<div id="outline-container-orga026e16" class="outline-4">
-<h4 id="orga026e16">Centos7 环境搭建</h4>
-<div class="outline-text-4" id="text-orga026e16">
-</div><div id="outline-container-orgec2c98f" class="outline-5">
-<h5 id="orgec2c98f">基础软件安装</h5>
-<div class="outline-text-5" id="text-orgec2c98f">
+<div id="outline-container-orga026e16" class="outline-3">
+<h3 id="orga026e16">Centos7 环境搭建</h3>
+<div class="outline-text-3" id="text-orga026e16">
+</div><div id="outline-container-orgec2c98f" class="outline-4">
+<h4 id="orgec2c98f">基础软件安装</h4>
+<div class="outline-text-4" id="text-orgec2c98f">
 <div class="org-src-container">
 <pre class="src src-shell">yum remove firewall -y
 yum install gcc* make vim iptables-service policycoreutils-python -y
@@ -75,16 +68,16 @@ yum install gcc* make vim iptables-service policycoreutils-python -y
 </div>
 </div>
 </div>
-<div id="outline-container-org71f8720" class="outline-5">
-<h5 id="org71f8720">用户设置</h5>
-<div class="outline-text-5" id="text-org71f8720">
+<div id="outline-container-org71f8720" class="outline-4">
+<h4 id="org71f8720">用户设置</h4>
+<div class="outline-text-4" id="text-org71f8720">
 <p>
 分别创建管理员用户、ssh 登录用户、web 执行用户，并设定随机密码
 </p>
 </div>
-<div id="outline-container-org1f94ae6" class="outline-6">
-<h6 id="org1f94ae6">修改 root 用户密码</h6>
-<div class="outline-text-6" id="text-org1f94ae6">
+<div id="outline-container-org1f94ae6" class="outline-5">
+<h5 id="org1f94ae6">修改 root 用户密码</h5>
+<div class="outline-text-5" id="text-org1f94ae6">
 <div class="org-src-container">
 <pre class="src src-shell">yum -y install expect
 mkpasswd -l <span style="color: #a45bad;">16</span> -d <span style="color: #a45bad;">2</span> -C <span style="color: #a45bad;">2</span> -s <span style="color: #a45bad;">2</span> -v root
@@ -95,9 +88,9 @@ mkpasswd -l <span style="color: #a45bad;">16</span> -d <span style="color: #a45b
 </p>
 </div>
 </div>
-<div id="outline-container-orgf7399f0" class="outline-6">
-<h6 id="orgf7399f0">管理员用户</h6>
-<div class="outline-text-6" id="text-orgf7399f0">
+<div id="outline-container-orgf7399f0" class="outline-5">
+<h5 id="orgf7399f0">管理员用户</h5>
+<div class="outline-text-5" id="text-orgf7399f0">
 <div class="org-src-container">
 <pre class="src src-shell">useradd babyfunlab -M -U
 mkpasswd -l <span style="color: #a45bad;">16</span> -d <span style="color: #a45bad;">2</span> -C <span style="color: #a45bad;">2</span> -s <span style="color: #a45bad;">2</span> -v babyfunlab
@@ -113,9 +106,9 @@ babyfunlab    <span style="color: #7590db;">ALL</span>=<span style="color: #4f97
 </div>
 </div>
 </div>
-<div id="outline-container-org3e4827a" class="outline-6">
-<h6 id="org3e4827a">ssh 登录用户</h6>
-<div class="outline-text-6" id="text-org3e4827a">
+<div id="outline-container-org3e4827a" class="outline-5">
+<h5 id="org3e4827a">ssh 登录用户</h5>
+<div class="outline-text-5" id="text-org3e4827a">
 <div class="org-src-container">
 <pre class="src src-shell">useradd bfl -M -U
 mkpasswd -l <span style="color: #a45bad;">16</span> -d <span style="color: #a45bad;">2</span> -C <span style="color: #a45bad;">2</span> -s <span style="color: #a45bad;">2</span> -v bfl
@@ -123,9 +116,9 @@ mkpasswd -l <span style="color: #a45bad;">16</span> -d <span style="color: #a45b
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb10b01" class="outline-6">
-<h6 id="orgfb10b01">web 用户</h6>
-<div class="outline-text-6" id="text-orgfb10b01">
+<div id="outline-container-orgfb10b01" class="outline-5">
+<h5 id="orgfb10b01">web 用户</h5>
+<div class="outline-text-5" id="text-orgfb10b01">
 <div class="org-src-container">
 <pre class="src src-shell">useradd www -M -U
 </pre>
@@ -141,9 +134,9 @@ chown -R www:www /home/www/
 </div>
 </div>
 </div>
-<div id="outline-container-org5ca8757" class="outline-5">
-<h5 id="org5ca8757">ssh 安全设置</h5>
-<div class="outline-text-5" id="text-org5ca8757">
+<div id="outline-container-org5ca8757" class="outline-4">
+<h4 id="org5ca8757">ssh 安全设置</h4>
+<div class="outline-text-4" id="text-org5ca8757">
 <p>
 ssh 默认 22 端口，修改大于 20000 以上端口，假设为 22907。默认情况下，Centos7 的 SELinux 是 enforcing 模式，可以通过 sestatus -v 查看，如果不是该模式通过一下方式修改：
 </p>
@@ -191,9 +184,9 @@ systemctl enable sshd.service
 </div>
 </div>
 </div>
-<div id="outline-container-org0c20d46" class="outline-5">
-<h5 id="org0c20d46">防火墙设置</h5>
-<div class="outline-text-5" id="text-org0c20d46">
+<div id="outline-container-org0c20d46" class="outline-4">
+<h4 id="org0c20d46">防火墙设置</h4>
+<div class="outline-text-4" id="text-org0c20d46">
 <p>
 只开放 80、443、22907(ssh 端口)端口
 </p>
@@ -206,7 +199,6 @@ systemctl enable sshd.service
 systemctl restart iptables.service
 systemctl enable iptables.service
 </pre>
-</div>
 </div>
 </div>
 </div>
