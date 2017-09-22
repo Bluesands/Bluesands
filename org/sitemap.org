@@ -4,3 +4,4 @@
    + [[file:numpy-learn.org][Numpy Learn]]
    + [[file:sql_grammar.org][SQL 必知必会]]
    + [[file:nginx-https-with-let's-Encrypt.org][nginx https with let's Encrypt]]
+   + [[file:时刻淘上线部署手册.org][时刻淘上线部署手册]]
