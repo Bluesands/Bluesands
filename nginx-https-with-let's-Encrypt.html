@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-07-31 一 15:52 -->
+<!-- 2017-10-16 一 11:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>nginx https with let's Encrypt</title>
@@ -47,25 +47,25 @@ Centos 7 system can install nginx package from Centos repository.
 Install the EPEL repository:
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">sudo yum install epel-release
-</pre>
+<pre><code class="src src-shell">sudo yum install epel-release
+</code></pre>
 </div></li>
 <li><p>
 Install nginx
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">sudo yum install nginx
-</pre>
+<pre><code class="src src-shell">sudo yum install nginx
+</code></pre>
 </div></li>
 <li><p>
 check your nginx
 if your system had installed nginx, you should check whether it supports http_ssl_module.
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">nginx -V | grep ssl
+<pre><code class="src src-shell">nginx -V | grep ssl
 
 --with-http_ssl_module
-</pre>
+</code></pre>
 </div>
 <p>
 if not has "&#x2013;with-http ssl module", you should install nginx from EPEL.
@@ -87,8 +87,9 @@ software on you server.
 The CentOS 7 system can install cerbot package from EPEL.
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">sudo yum install cerbot
-</pre>
+<pre><code class="src src-shell">sudo yum install cerbot
+sudo pip install cerbot
+</code></pre>
 </div>
 </div>
 </div>
@@ -101,23 +102,23 @@ The CentOS 7 system can install cerbot package from EPEL.
 create a folder to store you configuration
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">sudo mkdir /etc/letsencrypt/configs
-</pre>
+<pre><code class="src src-shell">sudo mkdir /etc/letsencrypt/configs
+</code></pre>
 </div></li>
 <li><p>
 edit configurate
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">sudo vim /etc/letsencrypt/configs/example.com.conf
-</pre>
+<pre><code class="src src-shell">sudo vim /etc/letsencrypt/configs/example.com.conf
+</code></pre>
 </div></li>
 <li><p>
 Configuration file contents
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">write your domain an email</span>
+<pre><code class="src src-shell"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">write your domain an email</span>
 <span style="color: #7590db;">domains</span> = example.com
-rsa-key-size = <span style="color: #a45bad;">2084</span>
+rsa-key-size = <span style="color: #a45bad;">2048</span>
 <span style="color: #7590db;">email</span> = your-email@example.com
 <span style="color: #7590db;">text</span> = True
 
@@ -125,7 +126,7 @@ rsa-key-size = <span style="color: #a45bad;">2084</span>
 <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">webroot-path is the root path of example.com</span>
 <span style="color: #7590db;">authenticator</span> = webroot
 webroot-path = /root/path/of/example.com
-</pre>
+</code></pre>
 </div></li>
 </ol>
 <p>
@@ -142,16 +143,16 @@ verifies OK if the access is successful.
 <h2 id="org7167605">Automatically generate certificates</h2>
 <div class="outline-text-2" id="text-org7167605">
 <div class="org-src-container">
-<pre class="src src-shell">sudo certbot certonly -c /etc/letsencrypt/configs/example.com.conf
-</pre>
+<pre><code class="src src-shell">sudo certbot certonly -c /etc/letsencrypt/configs/example.com.conf
+</code></pre>
 </div>
 <p>
 At the terminal you will see the following:
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">IMPORTANT NOTES:
+<pre><code class="src src-shell">IMPORTANT NOTES:
 - Congratulations! Your certificate and chain have been saved at /etc/letsencrypt/live/example.com/fullchain.pem.
-</pre>
+</code></pre>
 </div>
 </div>
 </div>
@@ -160,7 +161,7 @@ At the terminal you will see the following:
 <h2 id="org8e65cb4">Add certificates to conf of nginx</h2>
 <div class="outline-text-2" id="text-org8e65cb4">
 <div class="org-src-container">
-<pre class="src src-shell">server <span style="color: #4f97d7;">{</span>
+<pre><code class="src src-shell">server <span style="color: #4f97d7;">{</span>
     listen <span style="color: #a45bad;">443</span> ssl;
     server_name example.com;
 
@@ -192,7 +193,7 @@ server <span style="color: #4f97d7;">{</span>
     server_name example.com;
     <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #a45bad;">301</span> https://$<span style="color: #7590db;">server_name</span>$<span style="color: #7590db;">request_uri</span>;
 <span style="color: #4f97d7;">}</span>
-</pre>
+</code></pre>
 </div>
 <p>
 Note: More ssl configuration of nginx, you can see <a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/">Mozilla SSl Configuraion Generator</a>
@@ -204,8 +205,8 @@ Note: More ssl configuration of nginx, you can see <a href="https://mozilla.gith
 <h2 id="org0cccb03">Reload nginx</h2>
 <div class="outline-text-2" id="text-org0cccb03">
 <div class="org-src-container">
-<pre class="src src-shell">sudo nginx -s reload
-</pre>
+<pre><code class="src src-shell">sudo nginx -s reload
+</code></pre>
 </div>
 </div>
 </div>
@@ -223,7 +224,7 @@ Note: More ssl configuration of nginx, you can see <a href="https://mozilla.gith
                     })();
                 </script>
                 <noscript>Please enable JavaScript to view the <a href='https://disqus.com/?ref_noscript' rel='nofollow'>comments powered by Disqus.</a></noscript>
-                <p> Created by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 9.0.9) </p>
+                <p> Created by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 9.1.1) </p>
                 <a href='#' class='back-to-top' id='fixed-back-to-top' style='display: inline;'></a>
 </div>
 </body>
