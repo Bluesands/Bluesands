@@ -30,6 +30,7 @@
     The CentOS 7 system can install cerbot package from EPEL.
     #+BEGIN_SRC shell
       sudo yum install cerbot
+      sudo pip install cerbot
     #+END_SRC
 
 *** Create your configuration
@@ -45,7 +46,7 @@
        #+BEGIN_SRC shell
          # write your domain an email
          domains = example.com
-         rsa-key-size = 2084
+         rsa-key-size = 2048
          email = your-email@example.com
          text = True
 
