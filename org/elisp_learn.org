@@ -288,7 +288,7 @@
     : "012x567890123456789"
     : "01234567890123456789"
 
-*** COMMENT cons cell 和列表
+*** cons cell 和列表
     从概念上讲 cons cell 其实非常简单，就是两个有顺序的元素，第一个叫 CAR，第二个叫 CDR。CAR 和 CDR 名字来自与 Lisp。它最初在 IMB704 机器上的实现。在这种机器有一种取址模式，使人可以访问一个存储地址中的“地址（address）”部分和“减量（decrement）”部分。CAR 指令用与取出地址部分，表示（Contents of Address part of Register），CDR 指令用于取出地址的减量部分（Contents of the Decrement part of Register）。cons cell 也就是 construction of cell。car 函数用于取得 cons cell 的 CAR 部分，cdr 取出 cons cell 的 CDR 部分。cons cell 如此简单，但是它能衍生出许多高级的数据结构，比如链表，树，关联表等等。
     #+BEGIN_SRC emacs-lisp :results output
       (prin1 '(1 . 2))
