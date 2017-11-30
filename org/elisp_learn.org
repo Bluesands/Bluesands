@@ -173,7 +173,7 @@
 
 逻辑运算
 条件的逻辑运算和其他语言都是很类似的，使用 and、or、not。and 和 or 同样具有短路性质。很多人喜欢在表达式短时，用 and 代替 when，or 代替 unless。当然这时一般不关心它们的返回值，而是在于表达式其它子句的副作用。比如 or 经常用于设置函数的缺省值，而 and 常用与参数检查：
-#+BEGIN_SRC emacs-lisp :export results output append
+#+BEGIN_SRC emacs-lisp :export results output :exports results append
   (defun hello-world (&optional name)
     (or name (setq name "Emacser"))
     (message "Hello, %s" name))
@@ -188,7 +188,7 @@
 ** 基本数据类型
 *** 数字
     emacs 的数字分为整数和浮点数（没有 c 的双精度数 double），其中 integer 可以使用 most-positive-fixnum 和 most-negative-fixnum 两个变量得到范围；float 可以使用 most-positive-float 和 most-negative-float 得到范围。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (princ (format "This machine integer max is %d and min is %d.\n" most-positive-fixnum most-negative-fixnum))
       (princ (format "This machine float max is %s and min is %s." most-positive-float most-negative-float))
     #+END_SRC
@@ -199,7 +199,7 @@
     
     测试函数
     整数类型测试函数是 integerp，浮点数类型测试函数是 floatp。数字类型测试用 numberp。你可以分别运行这几个例子来试验一下：
-    #+BEGIN_SRC emacs-lisp :results output :exports results
+    #+BEGIN_SRC emacs-lisp :results output :exports results :exports results
       (princ (integerp 1.))
       (print (integerp 1.0))
       (princ (floatp 1.))
@@ -217,7 +217,7 @@
     elisp 测试函数一般都是用 p 结尾，p 是 predicate 的第一个字母，如果函数名是一个单词，通常只是在这个单词后加一个 p，如果是多个单词，一般是加-p。
 *** 字符和字符串
     大小写转换使用的是 downcase 和 upcase 两个函数。这两个函数的参数既可以字符串，也可以是字符。capitalize 可以使字符串中单词的地一个字符大写，其他字符消协。upcase-initials 只使第一个单词的第一个字符大写，其他字符小写。这两个函数的参数如果是一个字符，那么只让这个字符大写。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (downcase "The cat is the hat"))
       (print (downcase ?X))
       (prin1 (upcase "The cat in the hat"))
@@ -238,7 +238,7 @@
     format 类似与 c 语言里的 printf 可以实现对象的字符串化。数字的格式化和 printf 的参数差不多，值得一提的是"%s"这个格式化形式，它可以把对象的输出形式转化成字符串，这在调试时很有用。
     查找和替换
     字符串查找的核心函数是 string-match。这个函数可以从指定的位置对字符串进行正则表达式匹配，如果匹配成功，则返回匹配的起点：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (string-match "34" "01234567890123456789"))
       (print (string-match "34" "01234567890123456789" 10))
     #+END_SRC
@@ -247,7 +247,7 @@
     : 3
     : 13
     注意 string-match 的采纳书是一个 regexp。emacs 好像没有内建的查找子串的函数。如果你想把 string-match 作为一个查找子串的函数，可以先用 regexp-quote 函数处理一下子串。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (string-match "2*" "232*=696"))
       (print (string-match (regexp-quote "2*") "232*=696"))
     #+END_SRC
@@ -266,7 +266,7 @@
     #+RESULTS:
     | 3 | 5 | 4 | 5 |
 
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (let ((start 0))
         (while (string-match "34" "01234567890123456789" start)
           (princ (format "find at %d\n" (match-beginning 0)))
@@ -277,7 +277,7 @@
     : find at 3
     : find at 13
     替换函数是 replace-match，可以用于字符串的替换，也可以用于缓冲区的文本替换，对于字符串的替换，replace-match 只是按给定的序号把字符串的那一部分用提供的字符串替换。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (let ((str "01234567890123456789"))
         (string-match "34" str)
         (prin1 (replace-match "x" nil nil str 0))
@@ -290,7 +290,7 @@
 
 *** cons cell 和列表
     从概念上讲 cons cell 其实非常简单，就是两个有顺序的元素，第一个叫 CAR，第二个叫 CDR。CAR 和 CDR 名字来自与 Lisp。它最初在 IMB704 机器上的实现。在这种机器有一种取址模式，使人可以访问一个存储地址中的“地址（address）”部分和“减量（decrement）”部分。CAR 指令用与取出地址部分，表示（Contents of Address part of Register），CDR 指令用于取出地址的减量部分（Contents of the Decrement part of Register）。cons cell 也就是 construction of cell。car 函数用于取得 cons cell 的 CAR 部分，cdr 取出 cons cell 的 CDR 部分。cons cell 如此简单，但是它能衍生出许多高级的数据结构，比如链表，树，关联表等等。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 '(1 . 2))
       (print '(?a . 1))
       (prin1 '(1 . "a"))
@@ -306,7 +306,7 @@
     : (nil)
     
     注意到前面的表达式中都有一个'号，这是什么意思？其实理解了 eval-last-sexp 的作用就明白了。eval-last-sexp 其实包含了两个步骤，一是读入前一个 S-表达式，二是对读入的 S-表达式求值。这样如果读入一个 cons cell 的话，求值时会把这个 cons cell 的第一个元素作为一个函数来调用。而事实上，前面的这些例子的地一个元素都不是一个函数，这样就会产生一个错误 invalid-function。之所以前面没有遇到这个问题，那是因为前面数字和字符串是一类特殊的 S-表达式，它们求值后和求值前是不变，称为自求值表达式（self-evaluating-form）。'号其实是一个特殊的函数 quote，它的作用就是将它的参数返回而不是作求值。'(1 . 2)等价与(quote (1 . 2)).
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 '(+ 2 3))
       (print (quote (1 . 2)))
       (prin1 (+ 2 3))
@@ -319,7 +319,7 @@
     : 5
     : (1 . 2)
     列表包括了 cons cell。但是列表中有一个特殊的元素-空表 nil。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 nil)
       (print '())
     #+END_SRC
@@ -328,7 +328,7 @@
     : nil
     : nil
     空表不是一个 cons cell，因为它没有 CAR 和 CDR 两个部分，事实上空表里没有任何内容。但是为了编程的方便，可以认为 nil 的 CAR 和 CDR 都是 nil：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (car nil))
       (print (cdr nil))
     #+END_SRC
@@ -337,7 +337,7 @@
     : nil
     : nil
     按列表最后一个 cons cell 的 CDR 部分的类型分，可以把列表分为三类。如果是 nil，则称为“真列表”(true-list)。如果即不是 nil 也不是一个 cons cell，则这个列表称为“点列表”(dotted list)。还有一种可能，它指向列表中的一个 cons cell，则称为环形列表(circual list)。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 '(1 2 3))
       (print '(1 2 . 3))
       (prin1 '(1 . #1=(2 3 . #1#)))
@@ -358,7 +358,7 @@
 
     测试函数
     测试一个对象是否是 cons cell 用 consp，是否是列表用 listp
-    #+BEGIN_SRC emacs-lisp :results output 
+    #+BEGIN_SRC emacs-lisp :results output :exports results 
       (prin1 (consp '(1 . 2)))
       (print (consp '(1 . (2 . nil))))
       (prin1 (consp nil))
@@ -378,7 +378,7 @@
     测试一个对象是否是 nil 用 null 函数。只有当对象是空表时，null 才返回空值。
     构造函数
     生成一个 cons cell 可以用 cons 函数。比如：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (cons 1 2))
       (print (cons 1 '()))
     #+END_SRC
@@ -387,7 +387,7 @@
     : (1 . 2)
     : (1)
     也是在列表前面增加元素的方法。比如：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (setq foo '(a b)))
       (print (cons 'x foo))
     #+END_SRC
@@ -396,7 +396,7 @@
     : (a b)
     : (x a b)
     值得注意的是前面这个例子的 foo 值并没有改变。事实上有一个宏 push 可以加入元素的同时改变列表的值：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (push 'x foo))
       (print foo)
     #+END_SRC
@@ -405,14 +405,14 @@
     : (x a b)
     : (x a b)
     生成一个列表的函数是 list。比如：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (list 1 2 3))
     #+END_SRC
 
     #+RESULTS:
     : (1 2 3)
     quote（也就是'符号）和 cons 以及 list 的区别：quote 是把参数直接返回不进行求值，而 list 和 cons 是对参数求职后再生成一个列表或者 cons cell。例如：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 '((+ 1 2) 3))
       (print (list (+ 1 2) 3))
     #+END_SRC
@@ -423,21 +423,21 @@
     前一个列表的 CAR 部分是（+ 1 2）这个列表，而后一个是先对（+ 1 2）求值得到 3 后在生成的列表。
     
     前面提到在列表前端增加元素的方法是 cons，在列表后端增加元素的函数是用 append。比如：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (append '(a b) '(c)))
     #+END_SRC
 
     #+RESULTS:
     : (a b c)
     append 的功能可以认为它把第一个参数最后一个列表的 nil 换成第二个参数，比如前面这个例子，第一个参数写成 cons cell 表示方法是(a . (b . nil))，把这个 nil 替换成(c)
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (append '(a b) '(c) '(d)))
     #+END_SRC
 
     #+RESULTS:
     : (a b c d)
     一般说来 append 的参数都要是列表，但是最后一个参数可以不是一个列表，这也不违背前面说的，因为 cons 的 CDR 部分本来就可以是任何对象：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (append '(a b) 'c))
     #+END_SRC
 
@@ -447,7 +447,7 @@
     如果写过 c 的链表类型，可能就知道如果链表只保留一个指针，那么链表只能在一端增加元素。elisp 的列表类型也是类似的，用
 cons 在列表前增加元素比用 append 要快的多。
 		append 的参数不限于列表，还可以是字符串或者向量。前面字符串里已经提到可以把一个字符串转换成字符列表，同样可能把响亮转换成一个列表：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (append [a b] "cd" nil))
       (print (append [a b] "cd"))
     #+END_SRC
@@ -459,7 +459,7 @@ cons 在列表前增加元素比用 append 要快的多。
     
     把列表当数组用
     要得到列表或者 cons cell 里元素，唯一的方法是用 car 和 cdr 函数。很容易明白，car 就是去得 cons cell 的 CAR 部分，cdr 函数就是取得 CDR 部分，通过这两个函数，我们就能访问 cons cell 和列表中的任何元素。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (defun get-list-element (num tlist)
         (if (> num (length tlist))
             (message "The num %d out range of list %s" num tlist)
@@ -491,7 +491,7 @@ cons 在列表前增加元素比用 append 要快的多。
     : "The num 6 out range of list (9 20 3 49)"
     上面函数实现了从列表中取出第 n 个元素的功能，并在超出列表长度是输出提示。
     通过使用 elisp 提供的函数，我们事实上是可以把列表当数组来用。依惯例，我们用 car 来访问列表的第一个元素，cdr 来访问第二个元素，再往后就没有这样的函数了，可以用 nth 函数来访问：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (nth 3 '(0 1 2 3 4 5)))
     #+END_SRC
 
@@ -500,7 +500,7 @@ cons 在列表前增加元素比用 append 要快的多。
     获得列表一个区间的函数有 nthcdr、last 和 butlast。nthcdr 和 last 比较类似，它们都是返回列表后端的列表。nthcdr 函数返回第 n 个元素后的列表。
     last 函数返回倒数 n 个长度的列表。
     butlast 和前两个函数不同，返回除了倒数 n 个元素的列表：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (nthcdr 2 '(0 1 2 3 4 5)))
       (print (last '(0 1 2 3 4 5) 2))
       (prin1 (butlast '(0 1 2 3 4 5) 2))
@@ -512,7 +512,7 @@ cons 在列表前增加元素比用 append 要快的多。
     : (0 1 2 3)
     
     编写一个得到某个区间的列表函数：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (defun my-subseq (start end seq)
         (butlast (nthcdr start seq)
                  (- (length seq) end)))
@@ -528,7 +528,7 @@ cons 在列表前增加元素比用 append 要快的多。
     使用前面这个函数访问列表是没有问题了。但是你也可以想象，链表这种数据结构是不适合随机访问的，代价比较高，如果你的代码中频繁使用这样的函数或者对一个很长列表使用这样的函数，就应该考虑是不是用数组来实现。
     到目前为止，我们用到的函数都不会修改一个已有的变量。这是函数式编程的一个特点。只用这些函数编写的代码是很容易调试的，因为你不用去考虑一个变量在执行一个代码后就改变了，不用考虑变量的引用情况等等。
     首先学习怎样修改一个 cons cell 的内容。setcar 和 setcdr 可以修改一个 cons cell 的 CAR 部分和 CDR 部分。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (setq foo '(a b c))
       (setcar foo 'x)
       (prin1 foo)
@@ -540,7 +540,7 @@ cons 在列表前增加元素比用 append 要快的多。
     : (x b c)
     : (x y z)
     思考题
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (setq foo '(a b c))
       (prin1 (setcdr foo foo))
     #+END_SRC
@@ -548,7 +548,7 @@ cons 在列表前增加元素比用 append 要快的多。
     #+RESULTS:
     : (a . #0)
     如何像数组那样修改列表。使用 setcar 和 nthcdr 的组合就可以实现：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (setq foo '(1 2 3)))
       (print (setcar foo 'a))
       (prin1 (setcar (cdr foo) 'b))
@@ -564,7 +564,7 @@ cons 在列表前增加元素比用 append 要快的多。
     : (a b c)
     用列表当堆栈用
     前面提到过可以用 push 向列表头端增加元素，在结合 pop 函数，列表就可以做一个堆栈了。
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (setq foo nil))
       (print (push 'a foo))
       (prin1 (push 'b foo))
@@ -580,7 +580,7 @@ cons 在列表前增加元素比用 append 要快的多。
     : (a)
     重排列表
     如果一直用 push 往列表里添加元素有一个问题是这样得到的列表和加入的顺序是相反的。通常我们需要得到一个反向的列表。reverse 函数可以做到这一点：
-    #+BEGIN_SRC emacs-lisp :results output
+    #+BEGIN_SRC emacs-lisp :results output :exports results
       (prin1 (setq foo '(a b c)))
       (print (reverse foo))
     #+END_SRC
