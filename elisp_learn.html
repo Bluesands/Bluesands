@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-11-30 四 09:37 -->
+<!-- 2017-11-30 四 09:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -252,9 +252,14 @@ else<span style="color: #4f97d7;">)</span>
         <span style="color: #2d9574;">(</span><span style="color: #67b11d;">(</span>= n <span style="color: #a45bad;">1</span><span style="color: #67b11d;">)</span> <span style="color: #a45bad;">1</span><span style="color: #2d9574;">)</span>
         <span style="color: #2d9574;">(</span>t <span style="color: #67b11d;">(</span>+ <span style="color: #b1951d;">(</span>fib <span style="color: #4f97d7;">(</span>- n <span style="color: #a45bad;">1</span><span style="color: #4f97d7;">)</span><span style="color: #b1951d;">)</span>
               <span style="color: #b1951d;">(</span>fib <span style="color: #4f97d7;">(</span>- n <span style="color: #a45bad;">2</span><span style="color: #4f97d7;">)</span><span style="color: #b1951d;">)</span><span style="color: #67b11d;">)</span><span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
-<span style="color: #4f97d7;">(</span>fib <span style="color: #a45bad;">10</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7;">(</span>prin1 <span style="color: #bc6ec5;">(</span>fib <span style="color: #a45bad;">10</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
 </pre>
 </div>
+
+<pre class="example">
+55
+
+</pre>
 <p>
 还有两个宏 when 和 unless，从它们的名字就知道它们是什么用的。使用这两个宏的好处是使代码可读性提高，when 能省去 if 里的 progn 结构，unless 省去条件为真子句需要的 nil 表达式。
 </p>
@@ -277,9 +282,14 @@ else<span style="color: #4f97d7;">)</span>
       <span style="color: #67b11d;">(</span><span style="color: #4f97d7; font-weight: bold;">setq</span> res <span style="color: #b1951d;">(</span>* res n<span style="color: #b1951d;">)</span>
             n <span style="color: #b1951d;">(</span>- n <span style="color: #a45bad;">1</span><span style="color: #b1951d;">)</span><span style="color: #67b11d;">)</span><span style="color: #2d9574;">)</span>
     res<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
-<span style="color: #4f97d7;">(</span>factorial <span style="color: #a45bad;">10</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7;">(</span>prin1 <span style="color: #bc6ec5;">(</span>factorial <span style="color: #a45bad;">10</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
 </pre>
 </div>
+
+<pre class="example">
+3628800
+
+</pre>
 
 <p>
 逻辑运算条件的逻辑运算和其他语言都是很类似的，使用 and、or、not。and 和 or 同样具有短路性质。很多人喜欢在表达式短时，用 and 代替 when，or 代替 unless。当然这时一般不关心它们的返回值，而是在于表达式其它子句的副作用。比如 or 经常用于设置函数的缺省值，而 and 常用与参数检查：
@@ -289,13 +299,14 @@ else<span style="color: #4f97d7;">)</span>
   <span style="color: #bc6ec5;">(</span><span style="color: #4f97d7; font-weight: bold;">or</span> name <span style="color: #2d9574;">(</span><span style="color: #4f97d7; font-weight: bold;">setq</span> name <span style="color: #2d9574;">"Emacser"</span><span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span>
   <span style="color: #bc6ec5;">(</span>message <span style="color: #2d9574;">"Hello, %s"</span> name<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
 
-<span style="color: #4f97d7;">(</span>hello-world<span style="color: #4f97d7;">)</span>
-<span style="color: #4f97d7;">(</span>hello-world <span style="color: #2d9574;">"Ye"</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7;">(</span>prin1 <span style="color: #bc6ec5;">(</span>hello-world<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7;">(</span>print <span style="color: #bc6ec5;">(</span>hello-world <span style="color: #2d9574;">"Ye"</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
 </pre>
 </div>
 
 <pre class="example">
-Hello, Ye
+"Hello, Emacser"
+"Hello, Ye"
 
 </pre>
 </div>
@@ -439,6 +450,12 @@ find at 13
   <span style="color: #bc6ec5;">(</span>print str<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
 </pre>
 </div>
+
+<pre class="example">
+"012x567890123456789"
+"01234567890123456789"
+
+</pre>
 
 <pre class="example">
 "012x567890123456789"
