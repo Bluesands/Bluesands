@@ -4,6 +4,7 @@
 **** Python
      + [[./numpy-learn.html][numpy learn]]
      + [[../pandas_io.html][pandas io]]
+     + [[../python3_cookbook.html][cookbook]]
 **** Linux 
      + [[./nginx-https-with-let's-Encrypt.html][nginx-https-with-let's-Encrypt]]
 **** Emacs
