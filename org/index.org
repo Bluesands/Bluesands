@@ -12,5 +12,3 @@
      + [[../elisp_learn.html][elisp learn]]
 **** SQL
      + [[../sql_grammar.html][sql grammar]]
-**** other
-     + [[../时刻淘上线部署手册.html][时刻淘上线部署手册]]
