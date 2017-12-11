@@ -2,7 +2,7 @@
 
 *** 数据结构和算法
     Python 提供了大量的内置数据结构，包括列表、集合和字典。这里将讨论使用这些数据结构遇到的查询、排序和过滤等问题，并在集合模块 collections 当中操作菏泽写数据结构的方法。
-    
+
 **** 解压序列赋值给多个变量
      如何将一个包含 N 个元素的元组或序列解压赋值给 N 个变量？
      #+BEGIN_SRC python :exports both :results output
@@ -22,7 +22,237 @@
      : 4 5
      : ACEM 50 91.1 (2012, 12, 21)
      : ACEM 50 91.1 2012 12 21
+    这种解压赋值可以用在任何可迭代对象上面，而不仅仅是列表或元组。包括字符串，文件对象，迭代器和生成器。
+    #+BEGIN_SRC python :exports both :results output
+      a, b, c, d, e = 'Hello'
+      print(a, b, c, d, e)
+      a, b, c, d = range(4)
+      print(a, b, c, d)
+    #+END_SRC
 
+    #+RESULTS:
+    : H e l l o
+    : 0 1 2 3
+    如果只需要部分值，可用任意不被用到的变量名去占位。
+
+**** 解压可迭代对象赋值给多个变量
+     如果一个可迭代对象的元素个数超过变量个数，会抛出一个 ValueError。则如何从这个可迭代对象中解压出 N 个元素呢？
+     python 的星号表达式可以解决这个问题。
+     #+BEGIN_SRC python :exports both :results output
+       a, b, *c = [1, 2, 3, 4, 5]
+       print(a, b, c)
+
+       a, b, *c = range(10)
+       print(a, b, c)
+
+       a, *b, c = range(10)
+       print(a, b, c)
+
+       ,*a, b, c = range(10)
+       print(a, b, c)
+
+     #+END_SRC
+
+     #+RESULTS:
+     : 1 2 [3, 4, 5]
+     : 0 1 [2, 3, 4, 5, 6, 7, 8, 9]
+     : 0 [1, 2, 3, 4, 5, 6, 7, 8] 9
+     : [0, 1, 2, 3, 4, 5, 6, 7] 8 9
+     注意：星号对应的变量永远是列表类型。
+     扩展的迭代解压语法是专门为解压不确定个数或任意个数元素的可迭代对象而设计的。通常这些可迭代对象的元素结构有确定的规则，特别是，星号表达式在迭代元素为可变长元组的序列时是很有用的。
+     #+BEGIN_SRC python :exports both :results output
+       records = [('foo', 1, 2), ('bar', 'hello'), ('foo', 3, 4)]
+
+
+       def do_foo(x, y):
+           print('foo', x, y)
+
+
+       def do_bar(s):
+           print('bar', s)
+
+
+       for tag, *args in records:
+           if tag == 'foo':
+               do_foo(*args)
+           elif tag == 'bar':
+               do_bar(*args)
+     #+END_SRC
+
+     #+RESULTS:
+     : foo 1 2
+     : bar hello
+     : foo 3 4
+     
+     星号解压语法在字符串操作的时候也会很有用，比如分割字符串：
+     #+BEGIN_SRC python :exports both :results output
+       line = 'nobody:*:-2:-2:Unprivileged User:/var/empty:/usr/bin/false'
+       uname, *fields, homedir, sh = line.split(':')
+       print(uname, fields, homedir, sh)
+     #+END_SRC
+
+     #+RESULTS:
+     : nobody ['*', '-2', '-2', 'Unprivileged User'] /var/empty /usr/bin/false
+
+**** 保留组后 N 个元素
+     在迭代操作或者其他操作时，怎样只保留最后有限几个元素的历史记录？
+     保留有限历史记录正是 collections.deque 大显身手的时候。
+     #+BEGIN_SRC python :exports both :results output
+       from collections import deque
+
+
+       file_lines = '''Python is powerful... and fast;
+       plays well with others;
+       runs everywhere;
+       is friendly & easy to learn;
+       is Open.
+       These are some of the reasons people who use Python would rather not use anything else.
+
+       Python can be easy to pick up whether you're a first time programmer
+       or you're experienced with other languages.
+       The following pages are a useful first step to get on your way
+       writing programs with Python!
+
+       The community hosts conferences and meetups, collaborates on code,
+       and much more. Python's documentation will help you along the way,
+       and the mailing lists will keep you in touch.
+
+       Conferences and Workshops
+       Python Documentation
+       Mailing Lists and IRC channels'''
+
+
+       def search(lines, pattern, history=5):
+           previous_lines = deque(maxlen=history)
+           for line in lines:
+               if pattern in line:
+                   yield line, previous_lines
+               previous_lines.append(line)
+
+
+       for line, prevlines in search(file_lines.split('\n'), 'Python', 5):
+           for pline in prevlines:
+               print(pline)
+           print(line)
+           print('-' * 15)
+     #+END_SRC
+
+     #+RESULTS:
+     #+begin_example
+     Python is powerful... and fast;
+     ---------------
+     Python is powerful... and fast;
+     plays well with others;
+     runs everywhere;
+     is friendly & easy to learn;
+     is Open.
+     These are some of the reasons people who use Python would rather not use anything else.
+     ---------------
+     runs everywhere;
+     is friendly & easy to learn;
+     is Open.
+     These are some of the reasons people who use Python would rather not use anything else.
+
+     Python can be easy to pick up whether you're a first time programmer
+     ---------------
+     These are some of the reasons people who use Python would rather not use anything else.
+
+     Python can be easy to pick up whether you're a first time programmer
+     or you're experienced with other languages.
+     The following pages are a useful first step to get on your way
+     writing programs with Python!
+     ---------------
+     or you're experienced with other languages.
+     The following pages are a useful first step to get on your way
+     writing programs with Python!
+
+     The community hosts conferences and meetups, collaborates on code,
+     and much more. Python's documentation will help you along the way,
+     ---------------
+     The community hosts conferences and meetups, collaborates on code,
+     and much more. Python's documentation will help you along the way,
+     and the mailing lists will keep you in touch.
+
+     Conferences and Workshops
+     Python Documentation
+     ---------------
+     #+end_example
+
+     其中 collections.deque 是一个双端队列.
+     我们在写查询元素的代码时，通常会使用包含 yield 表达式的生成器函数，也就是我们上面代码示例。这样可以将搜索过程和使用搜索代码解耦。
+     使用 deque(maxlen=N)构造函数会新建一个固定大小的队列，当新的元素加入并且这个队列已满的时候，最老的元素会自动被移除。
+     #+BEGIN_SRC python :exports both :results output
+       from collections import deque
+       q = deque(maxlen=3)
+       q.append(1)
+       q.append(2)
+       q.append(3)
+       print(q)
+       q.append(4)
+       print(q)
+       q.append(5)
+       print(q)
+     #+END_SRC
+
+     #+RESULTS:
+     : deque([1, 2, 3], maxlen=3)
+     : deque([2, 3, 4], maxlen=3)
+     : deque([3, 4, 5], maxlen=3)
+     使用 deque 队列方案会更优雅且运行更快。一般 deque 类可以被用在任何你只需要一个简单队列数据结构的场合。如果你不设置最大队列大小，那么就会得到一个无线大小队列，你可以在队列的两端执行添加和弹出元素的操作，其具体包含那么方法如下：
+     #+BEGIN_SRC python :exports both :results output
+       from collections import deque
+
+       q = deque(maxlen=20)
+       # 尾部添加数据
+       q.append(1)
+       q.append(2)
+       print(q)
+       # 头部添加数据
+       q.appendleft(3)
+       print(q)
+       # 尾部扩展可迭代对象
+       q.extend([4, 5])
+       print(q)
+       q.extend(range(3))
+       print(q)
+       # 头部扩展可迭代对象
+       q.extendleft([6, 7])
+       print(q)
+       # 尾部移除
+       q.pop()
+       print(q)
+       # 头部移除
+       q.popleft()
+       print(q)
+       # 统计元素出现的个数
+       print(q.count(1))
+       # index 检索
+       print(q.index(2))
+       # 指定位置插入
+       q.insert(13, 56)
+       print(q)
+       # clear 清空队列
+       # copy 复制队列
+       # remove 移除队列中指定值
+       # reverse 翻转队列
+       # rotate 旋转队列
+     #+END_SRC
+
+     #+RESULTS:
+     #+begin_example
+     deque([1, 2], maxlen=20)
+     deque([3, 1, 2], maxlen=20)
+     deque([3, 1, 2, 4, 5], maxlen=20)
+     deque([3, 1, 2, 4, 5, 0, 1, 2], maxlen=20)
+     deque([7, 6, 3, 1, 2, 4, 5, 0, 1, 2], maxlen=20)
+     deque([7, 6, 3, 1, 2, 4, 5, 0, 1], maxlen=20)
+     deque([6, 3, 1, 2, 4, 5, 0, 1], maxlen=20)
+     2
+     3
+     deque([6, 3, 1, 2, 4, 5, 0, 1, 56], maxlen=20)
+     #+end_example
+    
+**** 查找最大或最小的 N 个元素
 *** 字符串和文本 
 
 *** 数字日期和时间
