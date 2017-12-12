@@ -3,14 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-10-16 一 11:44 -->
+<!-- 2017-12-12 二 11:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>nginx https with let's Encrypt</title>
 <meta name="generator" content="Org mode" />
-<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
-<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
-<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" /> <link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" /> <link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -47,25 +45,25 @@ Centos 7 system can install nginx package from Centos repository.
 Install the EPEL repository:
 </p>
 <div class="org-src-container">
-<pre><code class="src src-shell">sudo yum install epel-release
-</code></pre>
+<pre class="src src-shell">sudo yum install epel-release
+</pre>
 </div></li>
 <li><p>
 Install nginx
 </p>
 <div class="org-src-container">
-<pre><code class="src src-shell">sudo yum install nginx
-</code></pre>
+<pre class="src src-shell">sudo yum install nginx
+</pre>
 </div></li>
 <li><p>
 check your nginx
 if your system had installed nginx, you should check whether it supports http_ssl_module.
 </p>
 <div class="org-src-container">
-<pre><code class="src src-shell">nginx -V | grep ssl
+<pre class="src src-shell">nginx -V | grep ssl
 
 --with-http_ssl_module
-</code></pre>
+</pre>
 </div>
 <p>
 if not has "&#x2013;with-http ssl module", you should install nginx from EPEL.
@@ -87,9 +85,9 @@ software on you server.
 The CentOS 7 system can install cerbot package from EPEL.
 </p>
 <div class="org-src-container">
-<pre><code class="src src-shell">sudo yum install cerbot
+<pre class="src src-shell">sudo yum install cerbot
 sudo pip install cerbot
-</code></pre>
+</pre>
 </div>
 </div>
 </div>
@@ -102,21 +100,21 @@ sudo pip install cerbot
 create a folder to store you configuration
 </p>
 <div class="org-src-container">
-<pre><code class="src src-shell">sudo mkdir /etc/letsencrypt/configs
-</code></pre>
+<pre class="src src-shell">sudo mkdir /etc/letsencrypt/configs
+</pre>
 </div></li>
 <li><p>
 edit configurate
 </p>
 <div class="org-src-container">
-<pre><code class="src src-shell">sudo vim /etc/letsencrypt/configs/example.com.conf
-</code></pre>
+<pre class="src src-shell">sudo vim /etc/letsencrypt/configs/example.com.conf
+</pre>
 </div></li>
 <li><p>
 Configuration file contents
 </p>
 <div class="org-src-container">
-<pre><code class="src src-shell"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">write your domain an email</span>
+<pre class="src src-shell"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">write your domain an email</span>
 <span style="color: #7590db;">domains</span> = example.com
 rsa-key-size = <span style="color: #a45bad;">2048</span>
 <span style="color: #7590db;">email</span> = your-email@example.com
@@ -126,7 +124,7 @@ rsa-key-size = <span style="color: #a45bad;">2048</span>
 <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">webroot-path is the root path of example.com</span>
 <span style="color: #7590db;">authenticator</span> = webroot
 webroot-path = /root/path/of/example.com
-</code></pre>
+</pre>
 </div></li>
 </ol>
 <p>
@@ -143,16 +141,16 @@ verifies OK if the access is successful.
 <h2 id="org7167605">Automatically generate certificates</h2>
 <div class="outline-text-2" id="text-org7167605">
 <div class="org-src-container">
-<pre><code class="src src-shell">sudo certbot certonly -c /etc/letsencrypt/configs/example.com.conf
-</code></pre>
+<pre class="src src-shell">sudo certbot certonly -c /etc/letsencrypt/configs/example.com.conf
+</pre>
 </div>
 <p>
 At the terminal you will see the following:
 </p>
 <div class="org-src-container">
-<pre><code class="src src-shell">IMPORTANT NOTES:
+<pre class="src src-shell">IMPORTANT NOTES:
 - Congratulations! Your certificate and chain have been saved at /etc/letsencrypt/live/example.com/fullchain.pem.
-</code></pre>
+</pre>
 </div>
 </div>
 </div>
@@ -161,7 +159,7 @@ At the terminal you will see the following:
 <h2 id="org8e65cb4">Add certificates to conf of nginx</h2>
 <div class="outline-text-2" id="text-org8e65cb4">
 <div class="org-src-container">
-<pre><code class="src src-shell">server <span style="color: #4f97d7;">{</span>
+<pre class="src src-shell">server <span style="color: #4f97d7;">{</span>
     listen <span style="color: #a45bad;">443</span> ssl;
     server_name example.com;
 
@@ -193,7 +191,7 @@ server <span style="color: #4f97d7;">{</span>
     server_name example.com;
     <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #a45bad;">301</span> https://$<span style="color: #7590db;">server_name</span>$<span style="color: #7590db;">request_uri</span>;
 <span style="color: #4f97d7;">}</span>
-</code></pre>
+</pre>
 </div>
 <p>
 Note: More ssl configuration of nginx, you can see <a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/">Mozilla SSl Configuraion Generator</a>
@@ -205,27 +203,16 @@ Note: More ssl configuration of nginx, you can see <a href="https://mozilla.gith
 <h2 id="org0cccb03">Reload nginx</h2>
 <div class="outline-text-2" id="text-org0cccb03">
 <div class="org-src-container">
-<pre><code class="src src-shell">sudo nginx -s reload
-</code></pre>
+<pre class="src src-shell">sudo nginx -s reload
+</pre>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<div id='disqus_thread'></div>
-                <script type='text/javascript'>
-                    /* * * CONFIGURATION VARIABLES * * */
-                    var disqus_shortname = 'callmesanye';
-                    /* * * DON'T EDIT BELOW THIS LINE * * */
-                    (function() {
-                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href='https://disqus.com/?ref_noscript' rel='nofollow'>comments powered by Disqus.</a></noscript>
-                <p> Created by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 9.1.1) </p>
-                <a href='#' class='back-to-top' id='fixed-back-to-top' style='display: inline;'></a>
+<p class="date">Created: 2017-12-12 二 11:44</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 9.1.3)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

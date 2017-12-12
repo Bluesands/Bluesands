@@ -3,15 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-07-31 一 15:52 -->
+<!-- 2017-12-12 二 11:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SQL 必知必会</title>
 <meta name="generator" content="Org mode" />
 <meta name="keywords" content="SQL Grammar Learn" />
-<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
-<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
-<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" /> <link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" /> <link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -109,9 +107,9 @@
 <li><a href="#org828720f">12.4. 使用联结和联结条件</a></li>
 </ul>
 </li>
-<li><a href="#org7011356">13. 组合查询</a>
+<li><a href="#org495fb9e">13. 组合查询</a>
 <ul>
-<li><a href="#orgc04b9ef">13.1. 组合查询</a></li>
+<li><a href="#org7011356">13.1. 组合查询</a></li>
 <li><a href="#org9f84dc2">13.2. 创建组合查询</a></li>
 </ul>
 </li>
@@ -156,10 +154,10 @@
 <li><a href="#org6e70d4d">19.2. 控制事务处理</a></li>
 </ul>
 </li>
-<li><a href="#org650ac69">20. 使用游标</a>
+<li><a href="#orgfb2e30a">20. 使用游标</a>
 <ul>
 <li><a href="#org79a3350">20.1. 游标</a></li>
-<li><a href="#orgae4a51a">20.2. 使用游标</a></li>
+<li><a href="#org650ac69">20.2. 使用游标</a></li>
 </ul>
 </li>
 <li><a href="#orge5368e6">21. 高级 SQL 特性</a>
@@ -177,7 +175,8 @@
 <div id="outline-container-org41ed15d" class="outline-2">
 <h2 id="org41ed15d"><span class="section-number-2">1</span> 检索数据</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-orgfae77f4" class="outline-3">
+</div>
+<div id="outline-container-orgfae77f4" class="outline-3">
 <h3 id="orgfae77f4"><span class="section-number-3">1.1</span> 检索单个列</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
@@ -366,7 +365,8 @@ FORM Products;
 <div id="outline-container-org55a879d" class="outline-2">
 <h2 id="org55a879d"><span class="section-number-2">2</span> 排序检索数据</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-org7bf7bee" class="outline-3">
+</div>
+<div id="outline-container-org7bf7bee" class="outline-3">
 <h3 id="org7bf7bee"><span class="section-number-3">2.1</span> 排序数据</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
@@ -513,7 +513,8 @@ ORDER BY 还支持按相对列位置进行排序。
 <div id="outline-container-org42b8258" class="outline-2">
 <h2 id="org42b8258"><span class="section-number-2">3</span> 过滤数据</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgbafe0c6" class="outline-3">
+</div>
+<div id="outline-container-orgbafe0c6" class="outline-3">
 <h3 id="orgbafe0c6"><span class="section-number-3">3.1</span> 使用 where 子句</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
@@ -608,25 +609,31 @@ Tips:
 </table>
 </div>
 
-<ol class="org-ol"><li><a id="orgad3bd66"></a>检查单个值<br /><div class="outline-text-4" id="text-3-2-1">
+<ol class="org-ol">
+<li><a id="orgad3bd66"></a>检查单个值<br />
+<div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price &lt; <span style="color: #a45bad;">10</span>;
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgc26a4f8"></a>不匹配查询<br /><div class="outline-text-4" id="text-3-2-2">
+<li><a id="orgc26a4f8"></a>不匹配查询<br />
+<div class="outline-text-4" id="text-3-2-2">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> vend_id, prod_name
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id &lt;&gt; <span style="color: #2d9574;">'DLL01'</span>;
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgc0d5930"></a>范围值检查<br /><div class="outline-text-4" id="text-3-2-3">
+<li><a id="orgc0d5930"></a>范围值检查<br />
+<div class="outline-text-4" id="text-3-2-3">
 <p>
 使用 BETWEEN 操作符检查某个范围值
 </p>
@@ -636,9 +643,11 @@ Tips:
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price <span style="color: #4f97d7; font-weight: bold;">BETWEEN</span> <span style="color: #a45bad;">5</span> <span style="color: #4f97d7; font-weight: bold;">AND</span> <span style="color: #a45bad;">10</span>;
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="org19dae22"></a>空值检查<br /><div class="outline-text-4" id="text-3-2-4">
+<li><a id="org19dae22"></a>空值检查<br />
+<div class="outline-text-4" id="text-3-2-4">
 <p>
 NULL 无值（no value），它与字段包含０、空字符串或仅仅包含空格不同。
 </p>
@@ -648,28 +657,35 @@ NULL 无值（no value），它与字段包含０、空字符串或仅仅包含�
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> cust_email <span style="color: #4f97d7; font-weight: bold;">IS</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>;
 </pre>
 </div>
-</div></li></ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 <div id="outline-container-org66d471e" class="outline-2">
 <h2 id="org66d471e"><span class="section-number-2">4</span> 高级数据过滤</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-org57c6de5" class="outline-3">
+</div>
+<div id="outline-container-org57c6de5" class="outline-3">
 <h3 id="org57c6de5"><span class="section-number-3">4.1</span> 组合 WHERE 子句</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 多个 WHERE 子句进行数据过滤；有 AND 子句或 OR 子句
 </p>
 </div>
-<ol class="org-ol"><li><a id="org53da51e"></a>AND 操作符<br /><div class="outline-text-4" id="text-4-1-1">
+<ol class="org-ol">
+<li><a id="org53da51e"></a>AND 操作符<br />
+<div class="outline-text-4" id="text-4-1-1">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">AND</span> prod_price &lt;=<span style="color: #a45bad;">4</span>;
 </pre>
 </div>
-</div></li>
-<li><a id="orgd986ea9"></a>OR 操作符<br /><div class="outline-text-4" id="text-4-1-2">
+</div>
+</li>
+<li><a id="orgd986ea9"></a>OR 操作符<br />
+<div class="outline-text-4" id="text-4-1-2">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
 <span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
@@ -677,8 +693,10 @@ NULL 无值（no value），它与字段包含０、空字符串或仅仅包含�
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">OR</span> vend_id = <span style="color: #2d9574;">'BRS01'</span>;
 </pre>
 </div>
-</div></li>
-<li><a id="org51b0e61"></a>求值顺序<br /><div class="outline-text-4" id="text-4-1-3">
+</div>
+</li>
+<li><a id="org51b0e61"></a>求值顺序<br />
+<div class="outline-text-4" id="text-4-1-3">
 <p>
 SQL 在处理 OR 操作符，优先处理 AND 操作符。
 </p>
@@ -719,8 +737,10 @@ SQL 在处理 OR 操作符，优先处理 AND 操作符。
 Tips:
     任何时候使用具有 AND 和 OR 操作符的 WHERE 子句，都应该使用圆括号明确地分组操作符。
 </p>
-</div></li>
-<li><a id="orgb291037"></a>IN 操作符<br /><div class="outline-text-4" id="text-4-1-4">
+</div>
+</li>
+<li><a id="orgb291037"></a>IN 操作符<br />
+<div class="outline-text-4" id="text-4-1-4">
 <p>
 IN 操作符用来指定条件范围
 </p>
@@ -741,8 +761,10 @@ Tips:
 <li>IN 操作符一般比一组 OR 操作符执行的更快；</li>
 <li>IN 的最大有点是包含其他 SELECT 语句，能够更动态地建立 WHERE 子句；</li>
 </ul>
-</div></li>
-<li><a id="org6fc0f50"></a>NOT 操作符<br /><div class="outline-text-4" id="text-4-1-5">
+</div>
+</li>
+<li><a id="org6fc0f50"></a>NOT 操作符<br />
+<div class="outline-text-4" id="text-4-1-5">
 <p>
 WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后所跟的任何条件。
 </p>
@@ -753,13 +775,16 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_name;
 </pre>
 </div>
-</div></li></ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 <div id="outline-container-orga3738e9" class="outline-2">
 <h2 id="orga3738e9"><span class="section-number-2">5</span> 用通配符进行过滤</h2>
 <div class="outline-text-2" id="text-5">
-</div><div id="outline-container-org2d11207" class="outline-3">
+</div>
+<div id="outline-container-org2d11207" class="outline-3">
 <h3 id="org2d11207"><span class="section-number-3">5.1</span> LIKE 操作符</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
@@ -769,7 +794,9 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 由字面值、通配符或两者组合构成的搜索条件。
 </p>
 </div>
-<ol class="org-ol"><li><a id="org2419def"></a>百分号（%）通配符<br /><div class="outline-text-4" id="text-5-1-1">
+<ol class="org-ol">
+<li><a id="org2419def"></a>百分号（%）通配符<br />
+<div class="outline-text-4" id="text-5-1-1">
 <p>
 最常使用的通配符是百分号（%）。在搜索串中，%表示任何字符出现任意次数。
 </p>
@@ -819,8 +846,10 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <b>Tips:</b>
     <i>%代表搜索模式中给定位置的０个、１个或多个字符。但不会匹配 NULL</i>
 </p>
-</div></li>
-<li><a id="org52ccbc7"></a>下划线（_）通配符<br /><div class="outline-text-4" id="text-5-1-2">
+</div>
+</li>
+<li><a id="org52ccbc7"></a>下划线（_）通配符<br />
+<div class="outline-text-4" id="text-5-1-2">
 <p>
 下划线只匹配单个字符。
 </p>
@@ -830,8 +859,10 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_name <span style="color: #4f97d7; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'__ inch teddy bear'</span>;
 </pre>
 </div>
-</div></li>
-<li><a id="orgca38cff"></a>方括号（[]）通配符<br /><div class="outline-text-4" id="text-5-1-3">
+</div>
+</li>
+<li><a id="orgca38cff"></a>方括号（[]）通配符<br />
+<div class="outline-text-4" id="text-5-1-3">
 <p>
 方括号（）通配符用来指定一个字符集，它必须匹配指定位置（通配符的位置）的一个字符。
 </p>
@@ -842,11 +873,9 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> cust_contact;
 </pre>
 </div>
-<p>
-<b>Tips:</b>
-      <i>只有微软的 Access 和 SQL Server 支持集合</i>
-</p>
-</div></li></ol>
+</div>
+</li>
+</ol>
 </div>
 <div id="outline-container-orgfc77605" class="outline-3">
 <h3 id="orgfc77605"><span class="section-number-3">5.2</span> 使用通配符的技巧</h3>
@@ -862,7 +891,8 @@ WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后
 <div id="outline-container-org937b2af" class="outline-2">
 <h2 id="org937b2af"><span class="section-number-2">6</span> 创建计算字段</h2>
 <div class="outline-text-2" id="text-6">
-</div><div id="outline-container-org8e2b671" class="outline-3">
+</div>
+<div id="outline-container-org8e2b671" class="outline-3">
 <h3 id="org8e2b671"><span class="section-number-3">6.1</span> 计算字段</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
@@ -923,7 +953,8 @@ Tips:
 <div id="outline-container-org5a93c3a" class="outline-2">
 <h2 id="org5a93c3a"><span class="section-number-2">7</span> 使用数据处理函数</h2>
 <div class="outline-text-2" id="text-7">
-</div><div id="outline-container-org0d995ac" class="outline-3">
+</div>
+<div id="outline-container-org0d995ac" class="outline-3">
 <h3 id="org0d995ac"><span class="section-number-3">7.1</span> 函数</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
@@ -1019,14 +1050,17 @@ Tips:
 <li>返回 DBMS 正使用的特殊信息（如返回用户登录信息）的系统函数；</li>
 </ul>
 </div>
-<ol class="org-ol"><li><a id="orgdb2ba16"></a>文本处理函数<br /></li></ol>
+<ol class="org-ol">
+<li><a id="orgdb2ba16"></a>文本处理函数<br /></li>
+</ol>
 </div>
 </div>
 
 <div id="outline-container-org4721253" class="outline-2">
 <h2 id="org4721253"><span class="section-number-2">8</span> 汇总数据</h2>
 <div class="outline-text-2" id="text-8">
-</div><div id="outline-container-orgeefa544" class="outline-3">
+</div>
+<div id="outline-container-orgeefa544" class="outline-3">
 <h3 id="orgeefa544"><span class="section-number-3">8.1</span> 聚集函数</h3>
 </div>
 <div id="outline-container-orgb90fb61" class="outline-3">
@@ -1039,7 +1073,8 @@ Tips:
 <div id="outline-container-org94df169" class="outline-2">
 <h2 id="org94df169"><span class="section-number-2">9</span> 分组数据</h2>
 <div class="outline-text-2" id="text-9">
-</div><div id="outline-container-orgebcaf5e" class="outline-3">
+</div>
+<div id="outline-container-orgebcaf5e" class="outline-3">
 <h3 id="orgebcaf5e"><span class="section-number-3">9.1</span> 数据分组</h3>
 </div>
 <div id="outline-container-org88351ab" class="outline-3">
@@ -1058,7 +1093,8 @@ Tips:
 <div id="outline-container-orgfe1e11a" class="outline-2">
 <h2 id="orgfe1e11a"><span class="section-number-2">10</span> 使用子查询</h2>
 <div class="outline-text-2" id="text-10">
-</div><div id="outline-container-orgf295c76" class="outline-3">
+</div>
+<div id="outline-container-orgf295c76" class="outline-3">
 <h3 id="orgf295c76"><span class="section-number-3">10.1</span> 子查询</h3>
 </div>
 <div id="outline-container-orgb89c63e" class="outline-3">
@@ -1071,7 +1107,8 @@ Tips:
 <div id="outline-container-org0a21cac" class="outline-2">
 <h2 id="org0a21cac"><span class="section-number-2">11</span> 联结表</h2>
 <div class="outline-text-2" id="text-11">
-</div><div id="outline-container-orgdd10d4a" class="outline-3">
+</div>
+<div id="outline-container-orgdd10d4a" class="outline-3">
 <h3 id="orgdd10d4a"><span class="section-number-3">11.1</span> 联结</h3>
 </div>
 <div id="outline-container-orgcbb3b4a" class="outline-3">
@@ -1081,7 +1118,8 @@ Tips:
 <div id="outline-container-org0d3da79" class="outline-2">
 <h2 id="org0d3da79"><span class="section-number-2">12</span> 创建高级联结</h2>
 <div class="outline-text-2" id="text-12">
-</div><div id="outline-container-org24fc1f9" class="outline-3">
+</div>
+<div id="outline-container-org24fc1f9" class="outline-3">
 <h3 id="org24fc1f9"><span class="section-number-3">12.1</span> 使用表别名</h3>
 </div>
 <div id="outline-container-orgc6cbf41" class="outline-3">
@@ -1094,11 +1132,12 @@ Tips:
 <h3 id="org828720f"><span class="section-number-3">12.4</span> 使用联结和联结条件</h3>
 </div>
 </div>
-<div id="outline-container-org7011356" class="outline-2">
-<h2 id="org7011356"><span class="section-number-2">13</span> 组合查询</h2>
+<div id="outline-container-org495fb9e" class="outline-2">
+<h2 id="org495fb9e"><span class="section-number-2">13</span> 组合查询</h2>
 <div class="outline-text-2" id="text-13">
-</div><div id="outline-container-orgc04b9ef" class="outline-3">
-<h3 id="orgc04b9ef"><span class="section-number-3">13.1</span> 组合查询</h3>
+</div>
+<div id="outline-container-org7011356" class="outline-3">
+<h3 id="org7011356"><span class="section-number-3">13.1</span> 组合查询</h3>
 </div>
 <div id="outline-container-org9f84dc2" class="outline-3">
 <h3 id="org9f84dc2"><span class="section-number-3">13.2</span> 创建组合查询</h3>
@@ -1107,7 +1146,8 @@ Tips:
 <div id="outline-container-orge8c42ca" class="outline-2">
 <h2 id="orge8c42ca"><span class="section-number-2">14</span> 插入数据</h2>
 <div class="outline-text-2" id="text-14">
-</div><div id="outline-container-org12bc3e0" class="outline-3">
+</div>
+<div id="outline-container-org12bc3e0" class="outline-3">
 <h3 id="org12bc3e0"><span class="section-number-3">14.1</span> 数据插入</h3>
 </div>
 <div id="outline-container-orge41783e" class="outline-3">
@@ -1117,7 +1157,8 @@ Tips:
 <div id="outline-container-org2f0745a" class="outline-2">
 <h2 id="org2f0745a"><span class="section-number-2">15</span> 更新和删除数据</h2>
 <div class="outline-text-2" id="text-15">
-</div><div id="outline-container-orgfbce1a2" class="outline-3">
+</div>
+<div id="outline-container-orgfbce1a2" class="outline-3">
 <h3 id="orgfbce1a2"><span class="section-number-3">15.1</span> 更新数据</h3>
 </div>
 <div id="outline-container-orga87719e" class="outline-3">
@@ -1130,7 +1171,8 @@ Tips:
 <div id="outline-container-org24b7884" class="outline-2">
 <h2 id="org24b7884"><span class="section-number-2">16</span> 创建和操纵表</h2>
 <div class="outline-text-2" id="text-16">
-</div><div id="outline-container-orgaa00551" class="outline-3">
+</div>
+<div id="outline-container-orgaa00551" class="outline-3">
 <h3 id="orgaa00551"><span class="section-number-3">16.1</span> 创建表</h3>
 </div>
 <div id="outline-container-org132df8c" class="outline-3">
@@ -1146,7 +1188,8 @@ Tips:
 <div id="outline-container-orgb6707b2" class="outline-2">
 <h2 id="orgb6707b2"><span class="section-number-2">17</span> 使用视图</h2>
 <div class="outline-text-2" id="text-17">
-</div><div id="outline-container-orgbf8c783" class="outline-3">
+</div>
+<div id="outline-container-orgbf8c783" class="outline-3">
 <h3 id="orgbf8c783"><span class="section-number-3">17.1</span> 视图</h3>
 </div>
 <div id="outline-container-org7d70d8b" class="outline-3">
@@ -1156,7 +1199,8 @@ Tips:
 <div id="outline-container-org74bd3b7" class="outline-2">
 <h2 id="org74bd3b7"><span class="section-number-2">18</span> 使用存储过程</h2>
 <div class="outline-text-2" id="text-18">
-</div><div id="outline-container-org6af8565" class="outline-3">
+</div>
+<div id="outline-container-org6af8565" class="outline-3">
 <h3 id="org6af8565"><span class="section-number-3">18.1</span> 存储过程</h3>
 </div>
 <div id="outline-container-org5f11111" class="outline-3">
@@ -1172,27 +1216,30 @@ Tips:
 <div id="outline-container-org31b9c45" class="outline-2">
 <h2 id="org31b9c45"><span class="section-number-2">19</span> 管理事务处理</h2>
 <div class="outline-text-2" id="text-19">
-</div><div id="outline-container-orga3f1a1d" class="outline-3">
+</div>
+<div id="outline-container-orga3f1a1d" class="outline-3">
 <h3 id="orga3f1a1d"><span class="section-number-3">19.1</span> 事务处理</h3>
 </div>
 <div id="outline-container-org6e70d4d" class="outline-3">
 <h3 id="org6e70d4d"><span class="section-number-3">19.2</span> 控制事务处理</h3>
 </div>
 </div>
-<div id="outline-container-org650ac69" class="outline-2">
-<h2 id="org650ac69"><span class="section-number-2">20</span> 使用游标</h2>
+<div id="outline-container-orgfb2e30a" class="outline-2">
+<h2 id="orgfb2e30a"><span class="section-number-2">20</span> 使用游标</h2>
 <div class="outline-text-2" id="text-20">
-</div><div id="outline-container-org79a3350" class="outline-3">
+</div>
+<div id="outline-container-org79a3350" class="outline-3">
 <h3 id="org79a3350"><span class="section-number-3">20.1</span> 游标</h3>
 </div>
-<div id="outline-container-orgae4a51a" class="outline-3">
-<h3 id="orgae4a51a"><span class="section-number-3">20.2</span> 使用游标</h3>
+<div id="outline-container-org650ac69" class="outline-3">
+<h3 id="org650ac69"><span class="section-number-3">20.2</span> 使用游标</h3>
 </div>
 </div>
 <div id="outline-container-orge5368e6" class="outline-2">
 <h2 id="orge5368e6"><span class="section-number-2">21</span> 高级 SQL 特性</h2>
 <div class="outline-text-2" id="text-21">
-</div><div id="outline-container-org641769d" class="outline-3">
+</div>
+<div id="outline-container-org641769d" class="outline-3">
 <h3 id="org641769d"><span class="section-number-3">21.1</span> 约束</h3>
 </div>
 <div id="outline-container-orgb530fe2" class="outline-3">
@@ -1207,20 +1254,9 @@ Tips:
 </div>
 </div>
 <div id="postamble" class="status">
-<div id='disqus_thread'></div>
-                <script type='text/javascript'>
-                    /* * * CONFIGURATION VARIABLES * * */
-                    var disqus_shortname = 'callmesanye';
-                    /* * * DON'T EDIT BELOW THIS LINE * * */
-                    (function() {
-                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href='https://disqus.com/?ref_noscript' rel='nofollow'>comments powered by Disqus.</a></noscript>
-                <p> Created by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 9.0.9) </p>
-                <a href='#' class='back-to-top' id='fixed-back-to-top' style='display: inline;'></a>
+<p class="date">Created: 2017-12-12 二 11:44</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 9.1.3)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
