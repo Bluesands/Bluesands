@@ -260,8 +260,6 @@ The default value for org-html-postamble is auto, which makes the HTML exporter 
 *** 迭代器与生成器
 
 *** 文本与 IO
-    dsdfsdfsf
-
 *** 数据编码和处理
 
 *** 函数
