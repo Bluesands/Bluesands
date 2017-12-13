@@ -3,7 +3,7 @@
 
 **** Python
      + data process
-       - [[./numpy-learn.html][numpy]]
+       - [[./numpy.html][numpy]]
        - [[../pandas_io.html][pandas]]
      + book learn
        - [[./python3_cookbook.html][cookbook]]
