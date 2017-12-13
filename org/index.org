@@ -2,11 +2,27 @@
 #+OPTIONS: toc:nil
 
 **** Python
-     + [[./numpy-learn.html][numpy learn]]
-     + [[../pandas_io.html][pandas io]]
-     + [[./python3_cookbook.html][cookbook]]
+     + data process
+       - [[./numpy-learn.html][numpy]]
+       - [[../pandas_io.html][pandas]]
+     + book learn
+       - [[./python3_cookbook.html][cookbook]]
+     + spider
+       - requests
+       - urllib
+       - scrapy
+       - pyspider
+     + web
+       - flask
+       - django
 **** Linux 
-     + [[./nginx-https-with-let's-Encrypt.html][nginx-https-with-let's-Encrypt]]
+     + nginx
+       - [[./nginx-https-with-let's-Encrypt.html][nginx-https-with-let's-Encrypt]]
+       - nginx config
+     + base command
+       - sed
+       - awk
+       - grep
 **** Emacs
      + [[./hacking-emacs-lisp.html][hacking emacs lisp]]
      + [[../elisp_learn.html][elisp learn]]
