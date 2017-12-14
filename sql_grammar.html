@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-12-14 四 17:28 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SQL Learn</title>
+<meta name="generator" content="Org mode" />
+<meta name="keywords" content="SQL Grammar Learn" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
+<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
+<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<div class='nav'>
+<ul>
+<li><a href='/'>Home</a></li>
+<li><a href='/archive.html'>Archive</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<h1 class="title">SQL Learn</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org41ed15d">1. 检索数据</a>
+<ul>
+<li><a href="#orgfae77f4">1.1. 检索单个列</a></li>
+<li><a href="#org31ef7d5">1.2. 检索多个列</a></li>
+<li><a href="#org594d374">1.3. 检索所有列</a></li>
+<li><a href="#org0e1a7f0">1.4. 检索不同的值</a></li>
+<li><a href="#org8c36d69">1.5. 限制结果</a></li>
+<li><a href="#org2b156a3">1.6. 使用注释</a></li>
+</ul>
+</li>
+<li><a href="#org55a879d">2. 排序检索数据</a>
+<ul>
+<li><a href="#org7bf7bee">2.1. 排序数据</a></li>
+<li><a href="#org5177a92">2.2. 按多个列排序</a></li>
+<li><a href="#orgc250896">2.3. 按列位置排序</a></li>
+<li><a href="#org7a93f22">2.4. 指定排序方向</a></li>
+</ul>
+</li>
+<li><a href="#org42b8258">3. 过滤数据</a>
+<ul>
+<li><a href="#orgbafe0c6">3.1. 使用 where 子句</a></li>
+<li><a href="#orgcf323ce">3.2. WHERE 子句操作符</a></li>
+</ul>
+</li>
+<li><a href="#org66d471e">4. 高级数据过滤</a>
+<ul>
+<li><a href="#org57c6de5">4.1. 组合 WHERE 子句</a></li>
+</ul>
+</li>
+<li><a href="#orga3738e9">5. 用通配符进行过滤</a>
+<ul>
+<li><a href="#org2d11207">5.1. LIKE 操作符</a></li>
+<li><a href="#orgfc77605">5.2. 使用通配符的技巧</a></li>
+</ul>
+</li>
+<li><a href="#org937b2af">6. 创建计算字段</a>
+<ul>
+<li><a href="#org8e2b671">6.1. 计算字段</a></li>
+<li><a href="#org8e5b9e7">6.2. 拼接字段</a></li>
+<li><a href="#orge314205">6.3. 执行算数计算</a></li>
+</ul>
+</li>
+<li><a href="#org5a93c3a">7. 使用数据处理函数</a>
+<ul>
+<li><a href="#org0d995ac">7.1. 函数</a></li>
+<li><a href="#org8b21f89">7.2. 使用函数</a></li>
+</ul>
+</li>
+<li><a href="#org4721253">8. 汇总数据</a>
+<ul>
+<li><a href="#orgeefa544">8.1. 聚集函数</a></li>
+<li><a href="#orgb90fb61">8.2. 聚集不同值</a></li>
+<li><a href="#orgdf65357">8.3. 组合聚集函数</a></li>
+</ul>
+</li>
+<li><a href="#org94df169">9. 分组数据</a>
+<ul>
+<li><a href="#orgebcaf5e">9.1. 数据分组</a></li>
+<li><a href="#org88351ab">9.2. 创建分组</a></li>
+<li><a href="#orgf93eda5">9.3. 过滤分组</a></li>
+<li><a href="#orgaad6d25">9.4. 分组和排序</a></li>
+<li><a href="#org9f1a39c">9.5. SELECT 子句顺序</a></li>
+</ul>
+</li>
+<li><a href="#orgfe1e11a">10. 使用子查询</a>
+<ul>
+<li><a href="#orgf295c76">10.1. 子查询</a></li>
+<li><a href="#orgb89c63e">10.2. 利用子查询进行过滤</a></li>
+<li><a href="#org8396e17">10.3. 作为计算字段使用子查询</a></li>
+</ul>
+</li>
+<li><a href="#org0a21cac">11. 联结表</a>
+<ul>
+<li><a href="#orgdd10d4a">11.1. 联结</a></li>
+<li><a href="#orgcbb3b4a">11.2. 创建联结</a></li>
+</ul>
+</li>
+<li><a href="#org0d3da79">12. 创建高级联结</a>
+<ul>
+<li><a href="#org24fc1f9">12.1. 使用表别名</a></li>
+<li><a href="#orgc6cbf41">12.2. 使用不同类型的联结</a></li>
+<li><a href="#orgd345652">12.3. 使用带聚集函数的联结</a></li>
+<li><a href="#org828720f">12.4. 使用联结和联结条件</a></li>
+</ul>
+</li>
+<li><a href="#orgd1a01fa">13. 组合查询</a>
+<ul>
+<li><a href="#orgd2127fd">13.1. 组合查询</a></li>
+<li><a href="#org9f84dc2">13.2. 创建组合查询</a></li>
+</ul>
+</li>
+<li><a href="#orge8c42ca">14. 插入数据</a>
+<ul>
+<li><a href="#org12bc3e0">14.1. 数据插入</a></li>
+<li><a href="#orge41783e">14.2. 从一个表复制到另一个表</a></li>
+</ul>
+</li>
+<li><a href="#org2f0745a">15. 更新和删除数据</a>
+<ul>
+<li><a href="#orgfbce1a2">15.1. 更新数据</a></li>
+<li><a href="#orga87719e">15.2. 删除数据</a></li>
+<li><a href="#org420e338">15.3. 更新和删除数据的指导原则</a></li>
+</ul>
+</li>
+<li><a href="#org24b7884">16. 创建和操纵表</a>
+<ul>
+<li><a href="#orgaa00551">16.1. 创建表</a></li>
+<li><a href="#org132df8c">16.2. 更新表</a></li>
+<li><a href="#orgb499df9">16.3. 删除表</a></li>
+<li><a href="#orgfbc892f">16.4. 重命名表</a></li>
+</ul>
+</li>
+<li><a href="#orgb6707b2">17. 使用视图</a>
+<ul>
+<li><a href="#orgbf8c783">17.1. 视图</a></li>
+<li><a href="#org7d70d8b">17.2. 创建视图</a></li>
+</ul>
+</li>
+<li><a href="#org74bd3b7">18. 使用存储过程</a>
+<ul>
+<li><a href="#org6af8565">18.1. 存储过程</a></li>
+<li><a href="#org5f11111">18.2. 为什么要使用存储过程</a></li>
+<li><a href="#orgd19458d">18.3. 执行存储过程</a></li>
+<li><a href="#org1dddb65">18.4. 创建存储过程</a></li>
+</ul>
+</li>
+<li><a href="#org31b9c45">19. 管理事务处理</a>
+<ul>
+<li><a href="#orga3f1a1d">19.1. 事务处理</a></li>
+<li><a href="#org6e70d4d">19.2. 控制事务处理</a></li>
+</ul>
+</li>
+<li><a href="#org34fc20d">20. 使用游标</a>
+<ul>
+<li><a href="#org79a3350">20.1. 游标</a></li>
+<li><a href="#org8a2c8b2">20.2. 使用游标</a></li>
+</ul>
+</li>
+<li><a href="#orge5368e6">21. 高级 SQL 特性</a>
+<ul>
+<li><a href="#org641769d">21.1. 约束</a></li>
+<li><a href="#orgb530fe2">21.2. 索引</a></li>
+<li><a href="#org47a1b7e">21.3. 触发器</a></li>
+<li><a href="#orgf6816e9">21.4. 数据库安全</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org41ed15d" class="outline-2">
+<h2 id="org41ed15d"><span class="section-number-2">1</span> 检索数据</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgfae77f4" class="outline-3">
+<h3 id="orgfae77f4"><span class="section-number-3">1.1</span> 检索单个列</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">prod_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Fish bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">Bird bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">Rabbit bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">8 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">12 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">18 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">Raggedy Ann</td>
+</tr>
+
+<tr>
+<td class="org-left">King doll</td>
+</tr>
+
+<tr>
+<td class="org-left">Queen doll</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org31ef7d5" class="outline-3">
+<h3 id="org31ef7d5"><span class="section-number-3">1.2</span> 检索多个列</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div>
+<p>
+  "Put Disqus into Org mode website postamble.  Do not show
+   disqus for the Archive and the Index."
+  (concat
+   (cond ((string= (car (plist-get info :title)) "Archive") "")
+         ((string= (car (plist-get info :title)) "Index") "")
+         ((string= (car (plist-get info :title)) "GitHub -&gt; IO ()") "")
+         (t "&lt;div id='disqus_thread'&gt;&lt;/div&gt;
+&lt;script type='text/javascript'&gt;
+  // required: replace example with your forum shortname
+  var disqus_shortname = 'YOUR DISQUS NAME HERE';
+  (function() {
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || 
+       document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+&lt;/script&gt;
+&lt;noscript&gt;&lt;p&gt;Please enable JavaScript to view the
+  &lt;a href='http://disqus.com/?ref_noscript'&gt;comments powered by Disqus.&lt;/a&gt;&lt;/p&gt;
+&lt;/noscript&gt;"))
+   (format "&lt;div class='footer'&gt;
+Copyright 2014 AUTHOR&lt;br/&gt;
+Last updated %s &lt;br/&gt;
+Built with %s &lt;br/&gt;
+%s HTML
+&lt;/div&gt;
+&lt;script type='text/javascript'&gt;
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+</p>
+
+<p>
+ga('create', 'PUT YOUR TRACKING ID HERE', 'auto');
+ga('send', 'pageview');
+</p>
+
+<p>
+&lt;/script&gt;"
+           (format-time-string "%Y-%m-%d")
+           org-html-creator-string
+           org-html-validation-link))).99 |
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">RYL01</td>
+<td class="org-left">King doll</td>
+<td class="org-right">9.49</td>
+</tr>
+
+<tr>
+<td class="org-left">RYL02</td>
+<td class="org-left">Queen doll</td>
+<td class="org-right">9.49</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org594d374" class="outline-3">
+<h3 id="org594d374"><span class="section-number-3">1.3</span> 检索所有列</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> *
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0e1a7f0" class="outline-3">
+<h3 id="org0e1a7f0"><span class="section-number-3">1.4</span> 检索不同的值</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+DINSTINCT 关键字作用于所有的列
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">DISTINCT</span> vend_id
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8c36d69" class="outline-3">
+<h3 id="org8c36d69"><span class="section-number-3">1.5</span> 限制结果</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+显示指定行数据
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">LIMIT</span> <span style="color: #a45bad;">5</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">LIMIT</span> <span style="color: #a45bad;">5</span> OFFSET <span style="color: #a45bad;">5</span>;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">prod_name</td>
+</tr>
+
+<tr>
+<td class="org-left">18 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">Raggedy Ann</td>
+</tr>
+
+<tr>
+<td class="org-left">King doll</td>
+</tr>
+
+<tr>
+<td class="org-left">Queen doll</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+LIMIT 5 指示 MySQL 返回不超过５行的数据;
+LIMIT 5 OFFSET 5 指示 MySQL 从第５行起的５行数据；
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2b156a3" class="outline-3">
+<h3 id="org2b156a3"><span class="section-number-3">1.6</span> 使用注释</h3>
+<div class="outline-text-3" id="text-1-6">
+<ol class="org-ol">
+<li><p>
+行内注释
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name <span style="color: #2aa1ae; background-color: #292e34;">-- &#36825;&#26159;&#19968;&#26465;&#27880;&#37322;</span>
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div></li>
+<li><p>
+整行注释
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"># &#36825;&#26159;&#19968;&#26465;&#27880;&#37322;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+FORM Products;
+</pre>
+</div></li>
+<li><p>
+多行注释
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #2aa1ae; background-color: #292e34;">/* &#36825;&#26159;&#22810;&#34892;</span>
+<span style="color: #2aa1ae; background-color: #292e34;">&#27880;&#37322;*/</span>
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products;
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org55a879d" class="outline-2">
+<h2 id="org55a879d"><span class="section-number-2">2</span> 排序检索数据</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org7bf7bee" class="outline-3">
+<h3 id="org7bf7bee"><span class="section-number-3">2.1</span> 排序数据</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+ORDER BY 子句取一个或多个列的名字，据此对输出进行排序：
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_name;
+</pre>
+</div>
+<p>
+对 prod_name 列以字母顺序排序数据注意：在指定 ORDER BY 子句时，应该保证它是 SELECT 语句中最后一条子句，如果它不是最后的子句，将会出现错误信息。通常，ORDER BY 子句中使用的列僵尸为显示而选择的列。但是，实际上并不一定要这样，用非检索的列排序数据是完全合法的。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5177a92" class="outline-3">
+<h3 id="org5177a92"><span class="section-number-3">2.2</span> 按多个列排序</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+要按多个列排序，简单指定列名，列名之间用逗号分开即可。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_price, prod_name;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc250896" class="outline-3">
+<h3 id="orgc250896"><span class="section-number-3">2.3</span> 按列位置排序</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+ORDER BY 还支持按相对列位置进行排序。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span>;
+</pre>
+</div>
+<p>
+这里用列的相对位置编号取代列名进行排序。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7a93f22" class="outline-3">
+<h3 id="org7a93f22"><span class="section-number-3">2.4</span> 指定排序方向</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+默认排序是升序。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_price <span style="color: #4f97d7; font-weight: bold;">DESC</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_price <span style="color: #4f97d7; font-weight: bold;">DESC</span>, prod_name;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">prod_id</td>
+<td class="org-right">prod_price</td>
+<td class="org-left">prod_name</td>
+</tr>
+
+<tr>
+<td class="org-left">BR03</td>
+<td class="org-right">11.99</td>
+<td class="org-left">18 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">RYL01</td>
+<td class="org-right">9.49</td>
+<td class="org-left">King doll</td>
+</tr>
+
+<tr>
+<td class="org-left">RYL02</td>
+<td class="org-right">9.49</td>
+<td class="org-left">Queen doll</td>
+</tr>
+
+<tr>
+<td class="org-left">BR02</td>
+<td class="org-right">8.99</td>
+<td class="org-left">12 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">BR01</td>
+<td class="org-right">5.99</td>
+<td class="org-left">8 inch teddy bear</td>
+</tr>
+
+<tr>
+<td class="org-left">RGAN01</td>
+<td class="org-right">4.99</td>
+<td class="org-left">Raggedy Ann</td>
+</tr>
+
+<tr>
+<td class="org-left">BNBG02</td>
+<td class="org-right">3.49</td>
+<td class="org-left">Bird bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">BNBG01</td>
+<td class="org-right">3.49</td>
+<td class="org-left">Fish bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">BNBG03</td>
+<td class="org-right">3.49</td>
+<td class="org-left">Rabbit bean bag toy</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org42b8258" class="outline-2">
+<h2 id="org42b8258"><span class="section-number-2">3</span> 过滤数据</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgbafe0c6" class="outline-3">
+<h3 id="orgbafe0c6"><span class="section-number-3">3.1</span> 使用 where 子句</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+在 SELECT 语句中，数据根据 WHERE 子句中指定的搜索条件进行过滤。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price = <span style="color: #a45bad;">3</span>.<span style="color: #a45bad;">49</span>;
+</pre>
+</div>
+<p>
+Tips:
+      在同时使用 ORDER BY 和 WHERE 子句时，应该让 ORDER BY 位于 WHERE 之后。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcf323ce" class="outline-3">
+<h3 id="orgcf323ce"><span class="section-number-3">3.2</span> WHERE 子句操作符</h3>
+<div class="outline-text-3" id="text-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">操作符</th>
+<th scope="col" class="org-left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">=</td>
+<td class="org-left">等于</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt;&gt;</td>
+<td class="org-left">不等于</td>
+</tr>
+
+<tr>
+<td class="org-left">!=</td>
+<td class="org-left">不等于</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt;</td>
+<td class="org-left">小于</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt;=</td>
+<td class="org-left">小于等于</td>
+</tr>
+
+<tr>
+<td class="org-left">!&lt;</td>
+<td class="org-left">不小于</td>
+</tr>
+
+<tr>
+<td class="org-left">&gt;</td>
+<td class="org-left">大于</td>
+</tr>
+
+<tr>
+<td class="org-left">&gt;=</td>
+<td class="org-left">大于等于</td>
+</tr>
+
+<tr>
+<td class="org-left">!&gt;</td>
+<td class="org-left">不大于</td>
+</tr>
+
+<tr>
+<td class="org-left">BETWEEN</td>
+<td class="org-left">在指定的两个值之间</td>
+</tr>
+
+<tr>
+<td class="org-left">IS NULL</td>
+<td class="org-left">为 NULL 值</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgad3bd66"></a>检查单个值<br />
+<div class="outline-text-4" id="text-3-2-1">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price &lt; <span style="color: #a45bad;">10</span>;
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orgc26a4f8"></a>不匹配查询<br />
+<div class="outline-text-4" id="text-3-2-2">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> vend_id, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id &lt;&gt; <span style="color: #2d9574;">'DLL01'</span>;
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orgc0d5930"></a>范围值检查<br />
+<div class="outline-text-4" id="text-3-2-3">
+<p>
+使用 BETWEEN 操作符检查某个范围值
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_price <span style="color: #4f97d7; font-weight: bold;">BETWEEN</span> <span style="color: #a45bad;">5</span> <span style="color: #4f97d7; font-weight: bold;">AND</span> <span style="color: #a45bad;">10</span>;
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org19dae22"></a>空值检查<br />
+<div class="outline-text-4" id="text-3-2-4">
+<p>
+NULL 无值（no value），它与字段包含０、空字符串或仅仅包含空格不同。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> cust_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Customers
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> cust_email <span style="color: #4f97d7; font-weight: bold;">IS</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>;
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org66d471e" class="outline-2">
+<h2 id="org66d471e"><span class="section-number-2">4</span> 高级数据过滤</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org57c6de5" class="outline-3">
+<h3 id="org57c6de5"><span class="section-number-3">4.1</span> 组合 WHERE 子句</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+多个 WHERE 子句进行数据过滤；有 AND 子句或 OR 子句
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org53da51e"></a>AND 操作符<br />
+<div class="outline-text-4" id="text-4-1-1">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_price, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">AND</span> prod_price &lt;=<span style="color: #a45bad;">4</span>;
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgd986ea9"></a>OR 操作符<br />
+<div class="outline-text-4" id="text-4-1-2">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">OR</span> vend_id = <span style="color: #2d9574;">'BRS01'</span>;
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org51b0e61"></a>求值顺序<br />
+<div class="outline-text-4" id="text-4-1-3">
+<p>
+SQL 在处理 OR 操作符，优先处理 AND 操作符。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">OR</span> vend_id = <span style="color: #2d9574;">'BRS01'</span>
+<span style="color: #4f97d7; font-weight: bold;">AND</span> prod_price &gt;= <span style="color: #a45bad;">10</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> <span style="color: #4f97d7;">(</span>vend_id = <span style="color: #2d9574;">'DLL01'</span> <span style="color: #4f97d7; font-weight: bold;">OR</span> vend_id = <span style="color: #2d9574;">'BRS01'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">AND</span> prod_price &gt;= <span style="color: #a45bad;">10</span>;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">prod_name</td>
+<td class="org-right">prod_price</td>
+</tr>
+
+<tr>
+<td class="org-left">18 inch teddy bear</td>
+<td class="org-right">11.99</td>
+</tr>
+</tbody>
+</table>
+<p>
+Tips:
+    任何时候使用具有 AND 和 OR 操作符的 WHERE 子句，都应该使用圆括号明确地分组操作符。
+</p>
+</div>
+</li>
+<li><a id="orgb291037"></a>IN 操作符<br />
+<div class="outline-text-4" id="text-4-1-4">
+<p>
+IN 操作符用来指定条件范围
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name, prod_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> vend_id <span style="color: #4f97d7; font-weight: bold;">IN</span> <span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'DLL01'</span>, <span style="color: #2d9574;">'BRS01'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_name;
+</pre>
+</div>
+<p>
+Tips:
+    使用 IN 操作符的有点：
+</p>
+<ul class="org-ul">
+<li>在有很多合法的选项时，IN 操作符的语法更清楚，更直观；</li>
+<li>在与其他 AND 和 OR 操作符组合使用 IN 时，求值顺序更容易管理；</li>
+<li>IN 操作符一般比一组 OR 操作符执行的更快；</li>
+<li>IN 的最大有点是包含其他 SELECT 语句，能够更动态地建立 WHERE 子句；</li>
+</ul>
+</div>
+</li>
+<li><a id="org6fc0f50"></a>NOT 操作符<br />
+<div class="outline-text-4" id="text-4-1-5">
+<p>
+WHERE 子句中的 NOT 操作符有且只有一个功能，那就是否定其后所跟的任何条件。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> <span style="color: #4f97d7; font-weight: bold;">NOT</span> vend_id = <span style="color: #2d9574;">'DLL01'</span>
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> prod_name;
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orga3738e9" class="outline-2">
+<h2 id="orga3738e9"><span class="section-number-2">5</span> 用通配符进行过滤</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org2d11207" class="outline-3">
+<h3 id="org2d11207"><span class="section-number-3">5.1</span> LIKE 操作符</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+<b>通配符（wildcard）</b>
+用来匹配值的一部分的特殊字符。
+<b>搜索模式（search pattern）</b>
+由字面值、通配符或两者组合构成的搜索条件。
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org2419def"></a>百分号（%）通配符<br />
+<div class="outline-text-4" id="text-5-1-1">
+<p>
+最常使用的通配符是百分号（%）。在搜索串中，%表示任何字符出现任意次数。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_name <span style="color: #4f97d7; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'Fish%'</span>;
+
+# &#36890;&#37197;&#31526;&#21487;&#22312;&#25628;&#32034;&#27169;&#24335;&#20013;&#30340;&#20219;&#24847;&#20301;&#32622;&#20351;&#29992;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_name <span style="color: #4f97d7; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'%bean bag%'</span>;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">prod_id</td>
+<td class="org-left">prod_name</td>
+</tr>
+
+<tr>
+<td class="org-left">BNBG01</td>
+<td class="org-left">Fish bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">BNBG02</td>
+<td class="org-left">Bird bean bag toy</td>
+</tr>
+
+<tr>
+<td class="org-left">BNBG03</td>
+<td class="org-left">Rabbit bean bag toy</td>
+</tr>
+</tbody>
+</table>
+<p>
+<b>Tips:</b>
+    <i>%代表搜索模式中给定位置的０个、１个或多个字符。但不会匹配 NULL</i>
+</p>
+</div>
+</li>
+<li><a id="org52ccbc7"></a>下划线（_）通配符<br />
+<div class="outline-text-4" id="text-5-1-2">
+<p>
+下划线只匹配单个字符。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, prod_name
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Products
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> prod_name <span style="color: #4f97d7; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'__ inch teddy bear'</span>;
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgca38cff"></a>方括号（[]）通配符<br />
+<div class="outline-text-4" id="text-5-1-3">
+<p>
+方括号（）通配符用来指定一个字符集，它必须匹配指定位置（通配符的位置）的一个字符。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> cust_contact
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Customers
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> cust_contact <span style="color: #4f97d7; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'[JM]%'</span>
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> cust_contact;
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgfc77605" class="outline-3">
+<h3 id="orgfc77605"><span class="section-number-3">5.2</span> 使用通配符的技巧</h3>
+<div class="outline-text-3" id="text-5-2">
+<ul class="org-ul">
+<li>不要过度使用通配符。如果其他操作符能够达到相同的目的，应该使用其他操作符。</li>
+<li>在确定需要使用通配符时，也尽量不要把它们用在搜索模式的开始处。把通配符置于开始处，搜索起来是最慢的。</li>
+<li>仔细注意通配符的位置。如果放错了地方，可能不会返回想要的数据</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org937b2af" class="outline-2">
+<h2 id="org937b2af"><span class="section-number-2">6</span> 创建计算字段</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org8e2b671" class="outline-3">
+<h3 id="org8e2b671"><span class="section-number-3">6.1</span> 计算字段</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+需要特别注意，只有数据库知道 SELECT 语句中哪些列是实际的表列，哪些列是计算字段在 SQL 语句内可完成的许多转换和格式化工作都可以直接在客户端应用程序内完成。但一般来说，在数据库服务器上完成这些操作比在客户端中完成要快得多。
+</p>
+</div>
+</div>
+<div id="outline-container-org8e5b9e7" class="outline-3">
+<h3 id="org8e5b9e7"><span class="section-number-3">6.2</span> 拼接字段</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<b>拼接（concatenate）</b>
+将值联结到一起构成单个值。
+<b>注意</b>
+      Access 和 SQL Server 使用+号。DB@、Oracle、PostgreSQL、SQLite 和 Open Office Base 使用||。MySQL 和 MariaDB 使用 concat。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> CONCAT<span style="color: #4f97d7;">(</span>vend_name, <span style="color: #2d9574;">'('</span>, vend_country, <span style="color: #2d9574;">')'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Vendors
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> vend_name;
+</pre>
+</div>
+
+<p>
+大多数 DBMS 都支持 RTRIM()（去掉字符串右边的空格）、LTRIM()（去掉字符串左边的空格）、以及 TRIM()（去掉字符串左右两边的空格）。
+<b>使用别名</b>
+别名(alias)是一个字段或值的替换名。别名用 AS 关键字赋予。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> CONCAT<span style="color: #4f97d7;">(</span>vend_name, <span style="color: #2d9574;">'('</span>, vend_country, <span style="color: #2d9574;">')'</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">as</span> vend_title
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> Vendors
+<span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> vend_name;
+</pre>
+</div>
+
+<p>
+Tips:
+    在很多 DBMS 中，AS 关键字是可选的，不过最好使用它，这被视为一条最佳实践。
+</p>
+</div>
+</div>
+<div id="outline-container-orge314205" class="outline-3">
+<h3 id="orge314205"><span class="section-number-3">6.3</span> 执行算数计算</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+计算字段的另一个常见用途是对检索出的数据进行算术计算。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> prod_id, quantity, item_price, quantity*item_price <span style="color: #4f97d7; font-weight: bold;">AS</span> expanded_price
+<span style="color: #4f97d7; font-weight: bold;">FROM</span> OrderItems
+<span style="color: #4f97d7; font-weight: bold;">WHERE</span> order_num = <span style="color: #a45bad;">20008</span>;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a93c3a" class="outline-2">
+<h2 id="org5a93c3a"><span class="section-number-2">7</span> 使用数据处理函数</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-org0d995ac" class="outline-3">
+<h3 id="org0d995ac"><span class="section-number-3">7.1</span> 函数</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+<b>DBMS 函数的差异</b>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">函数</th>
+<th scope="col" class="org-left">Access</th>
+<th scope="col" class="org-left">DB2</th>
+<th scope="col" class="org-left">Oracle</th>
+<th scope="col" class="org-left">PostgreSQL</th>
+<th scope="col" class="org-left">SQLite</th>
+<th scope="col" class="org-left">MySQL/MariaDB</th>
+<th scope="col" class="org-left">SQL Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">提取字符串的组成部分</td>
+<td class="org-left">MID()</td>
+<td class="org-left">SUBSTR()</td>
+<td class="org-left">SUBSTR()</td>
+<td class="org-left">SUBSTR()</td>
+<td class="org-left">SUBSTR()</td>
+<td class="org-left">SUBSTRING()</td>
+<td class="org-left">SUBSTRING()</td>
+</tr>
+
+<tr>
+<td class="org-left">数据类型转换</td>
+<td class="org-left">多个函数</td>
+<td class="org-left">CAST()</td>
+<td class="org-left">多个函数</td>
+<td class="org-left">CAST()</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">CONVERT()</td>
+<td class="org-left">CONVERT()</td>
+</tr>
+
+<tr>
+<td class="org-left">取当前日期</td>
+<td class="org-left">NOW()</td>
+<td class="org-left">CURRENT_DATE()</td>
+<td class="org-left">SYSDATE()</td>
+<td class="org-left">CURRENT_DATE()</td>
+<td class="org-left">DATE()</td>
+<td class="org-left">CURDATE()</td>
+<td class="org-left">GETDATE()</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org8b21f89" class="outline-3">
+<h3 id="org8b21f89"><span class="section-number-3">7.2</span> 使用函数</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+大多说 SQL 实现支持一下类型的函数：
+</p>
+<ul class="org-ul">
+<li>用于处理文本字符串（如删除或填充值，转换值为大写或小写）的文本函数；</li>
+<li>用于在数值数据上进行算术操作（如返回绝对值，进行代数运算）的数值函数；</li>
+<li>用于处理日期和时间值并从这些值中提取特定成分（如返回两个日期之差，检查日期有效性）的日期和时间函数；</li>
+<li>返回 DBMS 正使用的特殊信息（如返回用户登录信息）的系统函数；</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgdb2ba16"></a>文本处理函数<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org4721253" class="outline-2">
+<h2 id="org4721253"><span class="section-number-2">8</span> 汇总数据</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-orgeefa544" class="outline-3">
+<h3 id="orgeefa544"><span class="section-number-3">8.1</span> 聚集函数</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+聚集数据
+</p>
+</div>
+</div>
+<div id="outline-container-orgb90fb61" class="outline-3">
+<h3 id="orgb90fb61"><span class="section-number-3">8.2</span> 聚集不同值</h3>
+</div>
+<div id="outline-container-orgdf65357" class="outline-3">
+<h3 id="orgdf65357"><span class="section-number-3">8.3</span> 组合聚集函数</h3>
+</div>
+</div>
+<div id="outline-container-org94df169" class="outline-2">
+<h2 id="org94df169"><span class="section-number-2">9</span> 分组数据</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-orgebcaf5e" class="outline-3">
+<h3 id="orgebcaf5e"><span class="section-number-3">9.1</span> 数据分组</h3>
+</div>
+<div id="outline-container-org88351ab" class="outline-3">
+<h3 id="org88351ab"><span class="section-number-3">9.2</span> 创建分组</h3>
+</div>
+<div id="outline-container-orgf93eda5" class="outline-3">
+<h3 id="orgf93eda5"><span class="section-number-3">9.3</span> 过滤分组</h3>
+</div>
+<div id="outline-container-orgaad6d25" class="outline-3">
+<h3 id="orgaad6d25"><span class="section-number-3">9.4</span> 分组和排序</h3>
+</div>
+<div id="outline-container-org9f1a39c" class="outline-3">
+<h3 id="org9f1a39c"><span class="section-number-3">9.5</span> SELECT 子句顺序</h3>
+</div>
+</div>
+<div id="outline-container-orgfe1e11a" class="outline-2">
+<h2 id="orgfe1e11a"><span class="section-number-2">10</span> 使用子查询</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-orgf295c76" class="outline-3">
+<h3 id="orgf295c76"><span class="section-number-3">10.1</span> 子查询</h3>
+</div>
+<div id="outline-container-orgb89c63e" class="outline-3">
+<h3 id="orgb89c63e"><span class="section-number-3">10.2</span> 利用子查询进行过滤</h3>
+</div>
+<div id="outline-container-org8396e17" class="outline-3">
+<h3 id="org8396e17"><span class="section-number-3">10.3</span> 作为计算字段使用子查询</h3>
+</div>
+</div>
+<div id="outline-container-org0a21cac" class="outline-2">
+<h2 id="org0a21cac"><span class="section-number-2">11</span> 联结表</h2>
+<div class="outline-text-2" id="text-11">
+</div>
+<div id="outline-container-orgdd10d4a" class="outline-3">
+<h3 id="orgdd10d4a"><span class="section-number-3">11.1</span> 联结</h3>
+</div>
+<div id="outline-container-orgcbb3b4a" class="outline-3">
+<h3 id="orgcbb3b4a"><span class="section-number-3">11.2</span> 创建联结</h3>
+</div>
+</div>
+<div id="outline-container-org0d3da79" class="outline-2">
+<h2 id="org0d3da79"><span class="section-number-2">12</span> 创建高级联结</h2>
+<div class="outline-text-2" id="text-12">
+</div>
+<div id="outline-container-org24fc1f9" class="outline-3">
+<h3 id="org24fc1f9"><span class="section-number-3">12.1</span> 使用表别名</h3>
+</div>
+<div id="outline-container-orgc6cbf41" class="outline-3">
+<h3 id="orgc6cbf41"><span class="section-number-3">12.2</span> 使用不同类型的联结</h3>
+</div>
+<div id="outline-container-orgd345652" class="outline-3">
+<h3 id="orgd345652"><span class="section-number-3">12.3</span> 使用带聚集函数的联结</h3>
+</div>
+<div id="outline-container-org828720f" class="outline-3">
+<h3 id="org828720f"><span class="section-number-3">12.4</span> 使用联结和联结条件</h3>
+</div>
+</div>
+<div id="outline-container-orgd1a01fa" class="outline-2">
+<h2 id="orgd1a01fa"><span class="section-number-2">13</span> 组合查询</h2>
+<div class="outline-text-2" id="text-13">
+</div>
+<div id="outline-container-orgd2127fd" class="outline-3">
+<h3 id="orgd2127fd"><span class="section-number-3">13.1</span> 组合查询</h3>
+</div>
+<div id="outline-container-org9f84dc2" class="outline-3">
+<h3 id="org9f84dc2"><span class="section-number-3">13.2</span> 创建组合查询</h3>
+</div>
+</div>
+<div id="outline-container-orge8c42ca" class="outline-2">
+<h2 id="orge8c42ca"><span class="section-number-2">14</span> 插入数据</h2>
+<div class="outline-text-2" id="text-14">
+</div>
+<div id="outline-container-org12bc3e0" class="outline-3">
+<h3 id="org12bc3e0"><span class="section-number-3">14.1</span> 数据插入</h3>
+</div>
+<div id="outline-container-orge41783e" class="outline-3">
+<h3 id="orge41783e"><span class="section-number-3">14.2</span> 从一个表复制到另一个表</h3>
+</div>
+</div>
+<div id="outline-container-org2f0745a" class="outline-2">
+<h2 id="org2f0745a"><span class="section-number-2">15</span> 更新和删除数据</h2>
+<div class="outline-text-2" id="text-15">
+</div>
+<div id="outline-container-orgfbce1a2" class="outline-3">
+<h3 id="orgfbce1a2"><span class="section-number-3">15.1</span> 更新数据</h3>
+</div>
+<div id="outline-container-orga87719e" class="outline-3">
+<h3 id="orga87719e"><span class="section-number-3">15.2</span> 删除数据</h3>
+</div>
+<div id="outline-container-org420e338" class="outline-3">
+<h3 id="org420e338"><span class="section-number-3">15.3</span> 更新和删除数据的指导原则</h3>
+</div>
+</div>
+<div id="outline-container-org24b7884" class="outline-2">
+<h2 id="org24b7884"><span class="section-number-2">16</span> 创建和操纵表</h2>
+<div class="outline-text-2" id="text-16">
+</div>
+<div id="outline-container-orgaa00551" class="outline-3">
+<h3 id="orgaa00551"><span class="section-number-3">16.1</span> 创建表</h3>
+</div>
+<div id="outline-container-org132df8c" class="outline-3">
+<h3 id="org132df8c"><span class="section-number-3">16.2</span> 更新表</h3>
+</div>
+<div id="outline-container-orgb499df9" class="outline-3">
+<h3 id="orgb499df9"><span class="section-number-3">16.3</span> 删除表</h3>
+</div>
+<div id="outline-container-orgfbc892f" class="outline-3">
+<h3 id="orgfbc892f"><span class="section-number-3">16.4</span> 重命名表</h3>
+</div>
+</div>
+<div id="outline-container-orgb6707b2" class="outline-2">
+<h2 id="orgb6707b2"><span class="section-number-2">17</span> 使用视图</h2>
+<div class="outline-text-2" id="text-17">
+</div>
+<div id="outline-container-orgbf8c783" class="outline-3">
+<h3 id="orgbf8c783"><span class="section-number-3">17.1</span> 视图</h3>
+</div>
+<div id="outline-container-org7d70d8b" class="outline-3">
+<h3 id="org7d70d8b"><span class="section-number-3">17.2</span> 创建视图</h3>
+</div>
+</div>
+<div id="outline-container-org74bd3b7" class="outline-2">
+<h2 id="org74bd3b7"><span class="section-number-2">18</span> 使用存储过程</h2>
+<div class="outline-text-2" id="text-18">
+</div>
+<div id="outline-container-org6af8565" class="outline-3">
+<h3 id="org6af8565"><span class="section-number-3">18.1</span> 存储过程</h3>
+</div>
+<div id="outline-container-org5f11111" class="outline-3">
+<h3 id="org5f11111"><span class="section-number-3">18.2</span> 为什么要使用存储过程</h3>
+</div>
+<div id="outline-container-orgd19458d" class="outline-3">
+<h3 id="orgd19458d"><span class="section-number-3">18.3</span> 执行存储过程</h3>
+</div>
+<div id="outline-container-org1dddb65" class="outline-3">
+<h3 id="org1dddb65"><span class="section-number-3">18.4</span> 创建存储过程</h3>
+</div>
+</div>
+<div id="outline-container-org31b9c45" class="outline-2">
+<h2 id="org31b9c45"><span class="section-number-2">19</span> 管理事务处理</h2>
+<div class="outline-text-2" id="text-19">
+</div>
+<div id="outline-container-orga3f1a1d" class="outline-3">
+<h3 id="orga3f1a1d"><span class="section-number-3">19.1</span> 事务处理</h3>
+</div>
+<div id="outline-container-org6e70d4d" class="outline-3">
+<h3 id="org6e70d4d"><span class="section-number-3">19.2</span> 控制事务处理</h3>
+</div>
+</div>
+<div id="outline-container-org34fc20d" class="outline-2">
+<h2 id="org34fc20d"><span class="section-number-2">20</span> 使用游标</h2>
+<div class="outline-text-2" id="text-20">
+</div>
+<div id="outline-container-org79a3350" class="outline-3">
+<h3 id="org79a3350"><span class="section-number-3">20.1</span> 游标</h3>
+</div>
+<div id="outline-container-org8a2c8b2" class="outline-3">
+<h3 id="org8a2c8b2"><span class="section-number-3">20.2</span> 使用游标</h3>
+</div>
+</div>
+<div id="outline-container-orge5368e6" class="outline-2">
+<h2 id="orge5368e6"><span class="section-number-2">21</span> 高级 SQL 特性</h2>
+<div class="outline-text-2" id="text-21">
+</div>
+<div id="outline-container-org641769d" class="outline-3">
+<h3 id="org641769d"><span class="section-number-3">21.1</span> 约束</h3>
+</div>
+<div id="outline-container-orgb530fe2" class="outline-3">
+<h3 id="orgb530fe2"><span class="section-number-3">21.2</span> 索引</h3>
+</div>
+<div id="outline-container-org47a1b7e" class="outline-3">
+<h3 id="org47a1b7e"><span class="section-number-3">21.3</span> 触发器</h3>
+</div>
+<div id="outline-container-orgf6816e9" class="outline-3">
+<h3 id="orgf6816e9"><span class="section-number-3">21.4</span> 数据库安全</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id='disqus_thread'></div>
+<script type='text/javascript'>
+  // required: replace example with your forum shortname
+  var disqus_shortname = 'YOUR DISQUS NAME HERE';
+  (function() {
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || 
+       document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript><p>Please enable JavaScript to view the
+  <a href='http://disqus.com/?ref_noscript'>comments powered by Disqus.</a></p>
+</noscript><div class='footer'>
+Copyright 2014 AUTHOR<br/>
+Last updated 2017-12-14 <br/>
+Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 9.1.3) <br/>
+<a href="http://validator.w3.org/check?uri=referer">Validate</a> HTML
+</div>
+<script type='text/javascript'>
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'PUT YOUR TRACKING ID HERE', 'auto');
+ ga('send', 'pageview');
+
+</script>
+</div>
+</body>
+</html>
