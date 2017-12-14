@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-12-14 四 17:56 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>nginx https with let's Encrypt</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
+<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
+<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">nginx https with let's Encrypt</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org122a80f">nginx install or check</a></li>
+<li><a href="#org8de9546">Install the Cerbot Let's Encrypt Client</a></li>
+<li><a href="#orgf0399f4">Create your configuration</a></li>
+<li><a href="#org7167605">Automatically generate certificates</a></li>
+<li><a href="#org8e65cb4">Add certificates to conf of nginx</a></li>
+<li><a href="#org0cccb03">Reload nginx</a></li>
+</ul>
+</div>
+</div>
+<p>
+Note: this article just test on Centos 7 system.
+</p>
+<div id="outline-container-org122a80f" class="outline-2">
+<h2 id="org122a80f">nginx install or check</h2>
+<div class="outline-text-2" id="text-org122a80f">
+<p>
+if your system has not installed nginx, you should install it first.
+Centos 7 system can install nginx package from Centos repository.
+</p>
+<ol class="org-ol">
+<li><p>
+Install the EPEL repository:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo yum install epel-release
+</pre>
+</div></li>
+<li><p>
+Install nginx
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo yum install nginx
+</pre>
+</div></li>
+<li><p>
+check your nginx
+if your system had installed nginx, you should check whether it supports http_ssl_module.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">nginx -V | grep ssl
+
+--with-http_ssl_module
+</pre>
+</div>
+<p>
+if not has "&#x2013;with-http ssl module", you should install nginx from EPEL.
+</p></li>
+</ol>
+
+<p>
+Note: For more installation information please see <a href="https://www.nginx.com/resources/admin-guide/installing-nginx-open-source">installing-nginx-open-source</a> .
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8de9546" class="outline-2">
+<h2 id="org8de9546">Install the Cerbot Let's Encrypt Client</h2>
+<div class="outline-text-2" id="text-org8de9546">
+<p>
+The second step to using Let's Encrypt to obtain an SSL certificate is to install the cerbot
+software on you server.
+The CentOS 7 system can install cerbot package from EPEL.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo yum install cerbot
+sudo pip install cerbot
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf0399f4" class="outline-2">
+<h2 id="orgf0399f4">Create your configuration</h2>
+<div class="outline-text-2" id="text-orgf0399f4">
+<ol class="org-ol">
+<li><p>
+create a folder to store you configuration
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo mkdir /etc/letsencrypt/configs
+</pre>
+</div></li>
+<li><p>
+edit configurate
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo vim /etc/letsencrypt/configs/example.com.conf
+</pre>
+</div></li>
+<li><p>
+Configuration file contents
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">write your domain an email</span>
+<span style="color: #7590db;">domains</span> = example.com
+rsa-key-size = <span style="color: #a45bad;">2048</span>
+<span style="color: #7590db;">email</span> = your-email@example.com
+<span style="color: #7590db;">text</span> = True
+
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">webroot-path is the root path of example.com</span>
+<span style="color: #7590db;">authenticator</span> = webroot
+webroot-path = /root/path/of/example.com
+</pre>
+</div></li>
+</ol>
+<p>
+Note: The above configuration file uses the webroot validation method, which is applicable to situations
+      where there is already a Web Server running. Certbot will automatically create a hidden file under 
+      <i>root/path/of/example.com .well-known/acme-challenge, by asking this file to verify that example.com dose
+      belong to you. The external network server accesses <a href="http://www.example.com">http://www.example.com</a></i>.well-known/acme-challenge and
+verifies OK if the access is successful.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7167605" class="outline-2">
+<h2 id="org7167605">Automatically generate certificates</h2>
+<div class="outline-text-2" id="text-org7167605">
+<div class="org-src-container">
+<pre class="src src-shell">sudo certbot certonly -c /etc/letsencrypt/configs/example.com.conf
+</pre>
+</div>
+<p>
+At the terminal you will see the following:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">IMPORTANT NOTES:
+- Congratulations! Your certificate and chain have been saved at /etc/letsencrypt/live/example.com/fullchain.pem.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8e65cb4" class="outline-2">
+<h2 id="org8e65cb4">Add certificates to conf of nginx</h2>
+<div class="outline-text-2" id="text-org8e65cb4">
+<div class="org-src-container">
+<pre class="src src-shell">server <span style="color: #4f97d7;">{</span>
+    listen <span style="color: #a45bad;">443</span> ssl;
+    server_name example.com;
+
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers <span style="color: #2d9574;">"EECDH+AESGCM:EDH+AESGCM:ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:DHE-RSA-AES128-GCM-SHA256:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4"</span>;
+
+    ssl_prefer_server_ciphers  on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout <span style="color: #a45bad;">60m</span>;
+
+    <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">HSTS &#31574;&#30053;</span>
+    add_header Strict-Transport-Security <span style="color: #2d9574;">"max-age=31536000; includeSubDomains; preload"</span> always;
+    <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">&#20943;&#23569;&#28857;&#20987;&#21163;&#25345;</span>
+    add_header X-Frame-Options DENY;
+    <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">&#31105;&#27490;&#26381;&#21153;&#22120;&#33258;&#21160;&#35299;&#26512;&#36164;&#28304;&#31867;&#22411;</span>
+    add_header X-Content-Type-Options nosniff;
+    <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">&#38450; XSS &#25915;&#25802;</span>
+    add_header X-Xss-Protection <span style="color: #a45bad;">1</span>;
+
+    root /root/path/to/example.com;
+    index index.html index.htm;
+<span style="color: #4f97d7;">}</span>
+
+server <span style="color: #4f97d7;">{</span>
+    listen <span style="color: #a45bad;">80</span>;
+    server_name example.com;
+    <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #a45bad;">301</span> https://$<span style="color: #7590db;">server_name</span>$<span style="color: #7590db;">request_uri</span>;
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+<p>
+Note: More ssl configuration of nginx, you can see <a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/">Mozilla SSl Configuraion Generator</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0cccb03" class="outline-2">
+<h2 id="org0cccb03">Reload nginx</h2>
+<div class="outline-text-2" id="text-org0cccb03">
+<div class="org-src-container">
+<pre class="src src-shell">sudo nginx -s reload
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author:  (<a href="mailto:qiang@Bluesands">qiang@Bluesands</a>)</p>
+<p class="date">Date: </p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 9.1.3)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
