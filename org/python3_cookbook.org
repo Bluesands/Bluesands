@@ -55,8 +55,7 @@
      : 1 2 [3, 4, 5]
      : 0 1 [2, 3, 4, 5, 6, 7, 8, 9]
      : 0 [1, 2, 3, 4, 5, 6, 7, 8] 9
-     : 
-The default value for org-html-postambasynciole is auto, which makes the HTML exporter build a postamble from looking up author's name, email address, creator's name, and date. Set org-html-postamble to t to insert the postamble in the format specified in the org-html-postamble-format variable. The HTML exporter will not insert a postamble if org-html-postamble is set to nil.[0, 1, 2, 3, 4, 5, 6, 7] 8 9
+     : [0, 1, 2, 3, 4, 5, 6, 7] 8 9
      注意：星号对应的变量永远是列表类型。
      扩展的迭代解压语法是专门为解压不确定个数或任意个数元素的可迭代对象而设计的。通常这些可迭代对象的元素结构有确定的规则，特别是，星号表达式在迭代元素为可变长元组的序列时是很有用的。
      #+BEGIN_SRC python :exports both :results output
