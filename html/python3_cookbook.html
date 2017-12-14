@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-12-14 四 16:14 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python3 CookBook Learning</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
+<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
+<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Python3 CookBook Learning</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgd796a51">数据结构和算法</a>
+<ul>
+<li><a href="#org5bae49a">解压序列赋值给多个变量</a></li>
+<li><a href="#org050c4f4">解压可迭代对象赋值给多个变量</a></li>
+<li><a href="#orgf1492d8">保留组后 N 个元素</a></li>
+<li><a href="#orga3f30cb">查找最大或最小的 N 个元素</a></li>
+<li><a href="#org209ca5a">实现一个优先级队列</a></li>
+</ul>
+</li>
+<li><a href="#org900e24c">字符串和文本</a></li>
+<li><a href="#org984de2b">数字日期和时间</a></li>
+<li><a href="#orgef8a60d">迭代器与生成器</a></li>
+<li><a href="#orge222deb">文本与 IO</a></li>
+<li><a href="#org3dc8150">数据编码和处理</a></li>
+<li><a href="#org0b6d568">函数</a></li>
+<li><a href="#org5377ac1">类与对象</a></li>
+<li><a href="#orgb2c42f9">元编程</a></li>
+<li><a href="#org013f137">模块与包</a></li>
+<li><a href="#org15592bd">网络与 web 编程</a></li>
+<li><a href="#org6f1a438">并发编程</a></li>
+<li><a href="#org7f086ae">脚本编程与系统管理</a></li>
+<li><a href="#org59d38d5">测试、调试和异常</a></li>
+<li><a href="#orgcaff163">C 语言扩展</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd796a51" class="outline-2">
+<h2 id="orgd796a51">数据结构和算法</h2>
+<div class="outline-text-2" id="text-orgd796a51">
+<p>
+Python 提供了大量的内置数据结构，包括列表、集合和字典。这里将讨论使用这些数据结构遇到的查询、排序和过滤等问题，并在集合模块 collections 当中操作菏泽写数据结构的方法。
+</p>
+</div>
+<div id="outline-container-org5bae49a" class="outline-3">
+<h3 id="org5bae49a">解压序列赋值给多个变量</h3>
+<div class="outline-text-3" id="text-org5bae49a">
+<p>
+如何将一个包含 N 个元素的元组或序列解压赋值给 N 个变量？
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">p</span> = <span style="color: #4f97d7;">(</span><span style="color: #a45bad;">4</span>, <span style="color: #a45bad;">5</span><span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">x</span>, <span style="color: #7590db;">y</span> = p
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>x, y<span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">data</span> = <span style="color: #4f97d7;">[</span><span style="color: #2d9574;">'ACEM'</span>, <span style="color: #a45bad;">50</span>, <span style="color: #a45bad;">91</span>.<span style="color: #a45bad;">1</span>, <span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">2012</span>, <span style="color: #a45bad;">12</span>, <span style="color: #a45bad;">21</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">]</span>
+<span style="color: #7590db;">name</span>, <span style="color: #7590db;">shares</span>, <span style="color: #7590db;">price</span>, <span style="color: #7590db;">date</span> = data
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>name, shares, price, date<span style="color: #4f97d7;">)</span>
+
+name, shares, price, <span style="color: #4f97d7;">(</span>year, mon, day<span style="color: #4f97d7;">)</span> = data
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>name, shares, price, year, mon, day<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+4 5
+ACEM 50 91.1 (2012, 12, 21)
+ACEM 50 91.1 2012 12 21
+
+</pre>
+<p>
+这种解压赋值可以用在任何可迭代对象上面，而不仅仅是列表或元组。包括字符串，文件对象，迭代器和生成器。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span>, <span style="color: #7590db;">e</span> = <span style="color: #2d9574;">'Hello'</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>a, b, c, d, e<span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span>, <span style="color: #7590db;">d</span> = <span style="color: #4f97d7;">range</span><span style="color: #4f97d7;">(</span><span style="color: #a45bad;">4</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>a, b, c, d<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+H e l l o
+0 1 2 3
+
+</pre>
+<p>
+如果只需要部分值，可用任意不被用到的变量名去占位。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org050c4f4" class="outline-3">
+<h3 id="org050c4f4">解压可迭代对象赋值给多个变量</h3>
+<div class="outline-text-3" id="text-org050c4f4">
+<p>
+如果一个可迭代对象的元素个数超过变量个数，会抛出一个 ValueError。则如何从这个可迭代对象中解压出 N 个元素呢？
+python 的星号表达式可以解决这个问题。
+</p>
+<div class="org-src-container">
+<pre class="src src-python">a, b, *<span style="color: #7590db;">c</span> = <span style="color: #4f97d7;">[</span><span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span>, <span style="color: #a45bad;">4</span>, <span style="color: #a45bad;">5</span><span style="color: #4f97d7;">]</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>a, b, c<span style="color: #4f97d7;">)</span>
+
+a, b, *<span style="color: #7590db;">c</span> = <span style="color: #4f97d7;">range</span><span style="color: #4f97d7;">(</span><span style="color: #a45bad;">10</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>a, b, c<span style="color: #4f97d7;">)</span>
+
+a, *<span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span> = <span style="color: #4f97d7;">range</span><span style="color: #4f97d7;">(</span><span style="color: #a45bad;">10</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>a, b, c<span style="color: #4f97d7;">)</span>
+
+*<span style="color: #7590db;">a</span>, <span style="color: #7590db;">b</span>, <span style="color: #7590db;">c</span> = <span style="color: #4f97d7;">range</span><span style="color: #4f97d7;">(</span><span style="color: #a45bad;">10</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>a, b, c, end=<span style="color: #2d9574;">''</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+1 2 [3, 4, 5]
+0 1 [2, 3, 4, 5, 6, 7, 8, 9]
+0 [1, 2, 3, 4, 5, 6, 7, 8] 9
+[0, 1, 2, 3, 4, 5, 6, 7] 8 9
+
+</pre>
+<p>
+The default value for org-html-postambasynciole is auto, which makes the HTML exporter build a postamble from looking up author's name, email address, creator's name, and date. Set org-html-postamble to t to insert the postamble in the format specified in the org-html-postamble-format variable. The HTML exporter will not insert a postamble if org-html-postamble is set to nil.[0, 1, 2, 3, 4, 5, 6, 7] 8 9
+     注意：星号对应的变量永远是列表类型。扩展的迭代解压语法是专门为解压不确定个数或任意个数元素的可迭代对象而设计的。通常这些可迭代对象的元素结构有确定的规则，特别是，星号表达式在迭代元素为可变长元组的序列时是很有用的。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">records</span> = <span style="color: #4f97d7;">[</span><span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'foo'</span>, <span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">2</span><span style="color: #bc6ec5;">)</span>, <span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'bar'</span>, <span style="color: #2d9574;">'hello'</span><span style="color: #bc6ec5;">)</span>, <span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'foo'</span>, <span style="color: #a45bad;">3</span>, <span style="color: #a45bad;">4</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">]</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">do_foo</span><span style="color: #4f97d7;">(</span>x, y<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'foo'</span>, x, y<span style="color: #4f97d7;">)</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">do_bar</span><span style="color: #4f97d7;">(</span>s<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'bar'</span>, s<span style="color: #4f97d7;">)</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">for</span> tag, *args <span style="color: #4f97d7; font-weight: bold;">in</span> records:
+    <span style="color: #4f97d7; font-weight: bold;">if</span> tag == <span style="color: #2d9574;">'foo'</span>:
+        do_foo<span style="color: #4f97d7;">(</span>*args<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">elif</span> tag == <span style="color: #2d9574;">'bar'</span>:
+        do_bar<span style="color: #4f97d7;">(</span>*args<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+foo 1 2
+bar hello
+foo 3 4
+
+</pre>
+
+<p>
+星号解压语法在字符串操作的时候也会很有用，比如分割字符串：
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">line</span> = <span style="color: #2d9574;">'nobody:*:-2:-2:Unprivileged User:/var/empty:/usr/bin/false'</span>
+uname, *<span style="color: #7590db;">fields</span>, <span style="color: #7590db;">homedir</span>, <span style="color: #7590db;">sh</span> = line.split<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">':'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>uname, fields, homedir, sh<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+nobody ['*', '-2', '-2', 'Unprivileged User'] /var/empty /usr/bin/false
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf1492d8" class="outline-3">
+<h3 id="orgf1492d8">保留组后 N 个元素</h3>
+<div class="outline-text-3" id="text-orgf1492d8">
+<p>
+在迭代操作或者其他操作时，怎样只保留最后有限几个元素的历史记录？保留有限历史记录正是 collections.deque 大显身手的时候。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> collections <span style="color: #4f97d7; font-weight: bold;">import</span> deque
+
+
+<span style="color: #7590db;">file_lines</span> = <span style="color: #2d9574;">'''Python is powerful... and fast;</span>
+<span style="color: #2d9574;">plays well with others;</span>
+<span style="color: #2d9574;">runs everywhere;</span>
+<span style="color: #2d9574;">is friendly &amp; easy to learn;</span>
+<span style="color: #2d9574;">is Open.</span>
+<span style="color: #2d9574;">These are some of the reasons people who use Python would rather not use anything else.</span>
+
+<span style="color: #2d9574;">Python can be easy to pick up whether you're a first time programmer</span>
+<span style="color: #2d9574;">or you're experienced with other languages.</span>
+<span style="color: #2d9574;">The following pages are a useful first step to get on your way</span>
+<span style="color: #2d9574;">writing programs with Python!</span>
+
+<span style="color: #2d9574;">The community hosts conferences and meetups, collaborates on code,</span>
+<span style="color: #2d9574;">and much more. Python's documentation will help you along the way,</span>
+<span style="color: #2d9574;">and the mailing lists will keep you in touch.</span>
+
+<span style="color: #2d9574;">Conferences and Workshops</span>
+<span style="color: #2d9574;">Python Documentation</span>
+<span style="color: #2d9574;">Mailing Lists and IRC channels'''</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">search</span><span style="color: #4f97d7;">(</span>lines, pattern, history=<span style="color: #a45bad;">5</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #7590db;">previous_lines</span> = deque<span style="color: #4f97d7;">(</span>maxlen=history<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">for</span> line <span style="color: #4f97d7; font-weight: bold;">in</span> lines:
+        <span style="color: #4f97d7; font-weight: bold;">if</span> pattern <span style="color: #4f97d7; font-weight: bold;">in</span> line:
+            <span style="color: #4f97d7; font-weight: bold;">yield</span> line, previous_lines
+        previous_lines.append<span style="color: #4f97d7;">(</span>line<span style="color: #4f97d7;">)</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">for</span> line, prevlines <span style="color: #4f97d7; font-weight: bold;">in</span> search<span style="color: #4f97d7;">(</span>file_lines.split<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'\n'</span><span style="color: #bc6ec5;">)</span>, <span style="color: #2d9574;">'Python'</span>, <span style="color: #a45bad;">5</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">for</span> pline <span style="color: #4f97d7; font-weight: bold;">in</span> prevlines:
+        <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>pline<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>line<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'-'</span> * <span style="color: #a45bad;">15</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+Python is powerful... and fast;
+---------------
+Python is powerful... and fast;
+plays well with others;
+runs everywhere;
+is friendly &amp; easy to learn;
+is Open.
+These are some of the reasons people who use Python would rather not use anything else.
+---------------
+runs everywhere;
+is friendly &amp; easy to learn;
+is Open.
+These are some of the reasons people who use Python would rather not use anything else.
+
+Python can be easy to pick up whether you're a first time programmer
+---------------
+These are some of the reasons people who use Python would rather not use anything else.
+
+Python can be easy to pick up whether you're a first time programmer
+or you're experienced with other languages.
+The following pages are a useful first step to get on your way
+writing programs with Python!
+---------------
+or you're experienced with other languages.
+The following pages are a useful first step to get on your way
+writing programs with Python!
+
+The community hosts conferences and meetups, collaborates on code,
+and much more. Python's documentation will help you along the way,
+---------------
+The community hosts conferences and meetups, collaborates on code,
+and much more. Python's documentation will help you along the way,
+and the mailing lists will keep you in touch.
+
+Conferences and Workshops
+Python Documentation
+---------------
+</pre>
+
+<p>
+其中 collections.deque 是一个双端队列.
+我们在写查询元素的代码时，通常会使用包含 yield 表达式的生成器函数，也就是我们上面代码示例。这样可以将搜索过程和使用搜索代码解耦。使用 deque(maxlen=N)构造函数会新建一个固定大小的队列，当新的元素加入并且这个队列已满的时候，最老的元素会自动被移除。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> collections <span style="color: #4f97d7; font-weight: bold;">import</span> deque
+<span style="color: #7590db;">q</span> = deque<span style="color: #4f97d7;">(</span>maxlen=<span style="color: #a45bad;">3</span><span style="color: #4f97d7;">)</span>
+q.append<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">1</span><span style="color: #4f97d7;">)</span>
+q.append<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">2</span><span style="color: #4f97d7;">)</span>
+q.append<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">3</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q<span style="color: #4f97d7;">)</span>
+q.append<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">4</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q<span style="color: #4f97d7;">)</span>
+q.append<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">5</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q, end=<span style="color: #2d9574;">''</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+deque([1, 2, 3], maxlen=3)
+deque([2, 3, 4], maxlen=3)
+deque([3, 4, 5], maxlen=3)
+
+</pre>
+<p>
+使用 deque 队列方案会更优雅且运行更快。一般 deque 类可以被用在任何你只需要一个简单队列数据结构的场合。如果你不设置最大队列大小，那么就会得到一个无线大小队列，你可以在队列的两端执行添加和弹出元素的操作，其具体包含那么方法如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> collections <span style="color: #4f97d7; font-weight: bold;">import</span> deque
+
+<span style="color: #7590db;">q</span> = deque<span style="color: #4f97d7;">(</span>maxlen=<span style="color: #a45bad;">20</span><span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">&#23614;&#37096;&#28155;&#21152;&#25968;&#25454;</span>
+q.append<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">1</span><span style="color: #4f97d7;">)</span>
+q.append<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">2</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q<span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">&#22836;&#37096;&#28155;&#21152;&#25968;&#25454;</span>
+q.appendleft<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">3</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q<span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">&#23614;&#37096;&#25193;&#23637;&#21487;&#36845;&#20195;&#23545;&#35937;</span>
+q.extend<span style="color: #4f97d7;">(</span><span style="color: #bc6ec5;">[</span><span style="color: #a45bad;">4</span>, <span style="color: #a45bad;">5</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q<span style="color: #4f97d7;">)</span>
+q.extend<span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">range</span><span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">3</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q<span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">&#22836;&#37096;&#25193;&#23637;&#21487;&#36845;&#20195;&#23545;&#35937;</span>
+q.extendleft<span style="color: #4f97d7;">(</span><span style="color: #bc6ec5;">[</span><span style="color: #a45bad;">6</span>, <span style="color: #a45bad;">7</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q<span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">&#23614;&#37096;&#31227;&#38500;</span>
+q.pop<span style="color: #4f97d7;">()</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q<span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">&#22836;&#37096;&#31227;&#38500;</span>
+q.popleft<span style="color: #4f97d7;">()</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q<span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">&#32479;&#35745;&#20803;&#32032;&#20986;&#29616;&#30340;&#20010;&#25968;</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q.count<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">index &#26816;&#32034;</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q.index<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">2</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">&#25351;&#23450;&#20301;&#32622;&#25554;&#20837;</span>
+q.insert<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">13</span>, <span style="color: #a45bad;">56</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q, end=<span style="color: #2d9574;">''</span><span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">clear &#28165;&#31354;&#38431;&#21015;</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">copy &#22797;&#21046;&#38431;&#21015;</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">remove &#31227;&#38500;&#38431;&#21015;&#20013;&#25351;&#23450;&#20540;</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">reverse &#32763;&#36716;&#38431;&#21015;</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">rotate &#26059;&#36716;&#38431;&#21015;</span>
+</pre>
+</div>
+
+<pre class="example">
+deque([1, 2], maxlen=20)
+deque([3, 1, 2], maxlen=20)
+deque([3, 1, 2, 4, 5], maxlen=20)
+deque([3, 1, 2, 4, 5, 0, 1, 2], maxlen=20)
+deque([7, 6, 3, 1, 2, 4, 5, 0, 1, 2], maxlen=20)
+deque([7, 6, 3, 1, 2, 4, 5, 0, 1], maxlen=20)
+deque([6, 3, 1, 2, 4, 5, 0, 1], maxlen=20)
+2
+3
+deque([6, 3, 1, 2, 4, 5, 0, 1, 56], maxlen=20)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orga3f30cb" class="outline-3">
+<h3 id="orga3f30cb">查找最大或最小的 N 个元素</h3>
+<div class="outline-text-3" id="text-orga3f30cb">
+<p>
+如何从一个集合中获得最大或最小 N 个元素列表？
+heapq 模块有两个函数：nlargest()和 nsmallest()可以完美解决这两个问题。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> heapq
+
+<span style="color: #7590db;">nums</span> = <span style="color: #4f97d7;">[</span><span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">8</span>, <span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">23</span>, <span style="color: #a45bad;">7</span>, -<span style="color: #a45bad;">4</span>, <span style="color: #a45bad;">18</span>, <span style="color: #a45bad;">23</span>, <span style="color: #a45bad;">42</span>, <span style="color: #a45bad;">37</span>, <span style="color: #a45bad;">2</span><span style="color: #4f97d7;">]</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>heapq.nlargest<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">3</span>, nums<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>heapq.nsmallest<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">3</span>, nums<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+[42, 37, 23]
+[-4, 1, 2]
+
+</pre>
+<p>
+两个函数都能接受一个关键字参数，用于复杂的数据结构中：
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> heapq
+<span style="color: #4f97d7; font-weight: bold;">from</span> pprint <span style="color: #4f97d7; font-weight: bold;">import</span> pprint
+
+<span style="color: #7590db;">portfolio</span> = <span style="color: #4f97d7;">[</span><span style="color: #bc6ec5;">{</span>
+    <span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'IBM'</span>,
+    <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">100</span>,
+    <span style="color: #2d9574;">'price'</span>: <span style="color: #a45bad;">91</span>.<span style="color: #a45bad;">1</span>
+<span style="color: #bc6ec5;">}</span>, <span style="color: #bc6ec5;">{</span>
+    <span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'AAPL'</span>,
+    <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">50</span>,
+    <span style="color: #2d9574;">'price'</span>: <span style="color: #a45bad;">543</span>.<span style="color: #a45bad;">22</span>
+<span style="color: #bc6ec5;">}</span>, <span style="color: #bc6ec5;">{</span>
+    <span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'FB'</span>,
+    <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">200</span>,
+    <span style="color: #2d9574;">'price'</span>: <span style="color: #a45bad;">21</span>.<span style="color: #a45bad;">09</span>
+<span style="color: #bc6ec5;">}</span>, <span style="color: #bc6ec5;">{</span>
+    <span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'HPQ'</span>,
+    <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">35</span>,
+    <span style="color: #2d9574;">'price'</span>: <span style="color: #a45bad;">31</span>.<span style="color: #a45bad;">75</span>
+<span style="color: #bc6ec5;">}</span>, <span style="color: #bc6ec5;">{</span>
+    <span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'YHOO'</span>,
+    <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">45</span>,
+    <span style="color: #2d9574;">'price'</span>: <span style="color: #a45bad;">16</span>.<span style="color: #a45bad;">35</span>
+<span style="color: #bc6ec5;">}</span>, <span style="color: #bc6ec5;">{</span>
+    <span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'ACME'</span>,
+    <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">75</span>,
+    <span style="color: #2d9574;">'price'</span>: <span style="color: #a45bad;">115</span>.<span style="color: #a45bad;">65</span>
+<span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">]</span>
+
+<span style="color: #7590db;">cheap</span> = heapq.nsmallest<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">3</span>, portfolio, key=<span style="color: #4f97d7; font-weight: bold;">lambda</span> x: x<span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'price'</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">expensive</span> = heapq.nlargest<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">3</span>, portfolio, key=<span style="color: #4f97d7; font-weight: bold;">lambda</span> x: x<span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'price'</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+pprint<span style="color: #4f97d7;">(</span>cheap<span style="color: #4f97d7;">)</span>
+pprint<span style="color: #4f97d7;">(</span>expensive<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+[{'name': 'YHOO', 'price': 16.35, 'shares': 45},
+ {'name': 'FB', 'price': 21.09, 'shares': 200},
+ {'name': 'HPQ', 'price': 31.75, 'shares': 35}]
+[{'name': 'AAPL', 'price': 543.22, 'shares': 50},
+ {'name': 'ACME', 'price': 115.65, 'shares': 75},
+ {'name': 'IBM', 'price': 91.1, 'shares': 100}]
+
+</pre>
+<p>
+key 的排序可以参考 sorted 函数的 key，都是可以采用匿名函数进行复杂排序的。
+</p>
+
+<p>
+如果你想在一个集合中查找最小或最大 N 个元素，并且 N 小于集合元素数量，那么这些函数提供了很好的性能。因为在底层实现里面，首先会先将集合数据进行堆排序后放入一个列表中：
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> heapq
+
+<span style="color: #7590db;">nums</span> = <span style="color: #4f97d7;">[</span><span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">8</span>, <span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">23</span>, <span style="color: #a45bad;">7</span>, -<span style="color: #a45bad;">4</span>, <span style="color: #a45bad;">18</span>, <span style="color: #a45bad;">23</span>, <span style="color: #a45bad;">42</span>, <span style="color: #a45bad;">37</span>, <span style="color: #a45bad;">2</span><span style="color: #4f97d7;">]</span>
+heapq.heapify<span style="color: #4f97d7;">(</span>nums<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>nums<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>heapq.heappop<span style="color: #bc6ec5;">(</span>nums<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>heapq.heappop<span style="color: #bc6ec5;">(</span>nums<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+uprint<span style="color: #4f97d7;">(</span>heapq.heappop<span style="color: #bc6ec5;">(</span>nums<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+堆数据结构最重要的特征是 heap[0]永远是最小的元素。并且剩余的元素都可以很容易通过调用 heapq.heappop()方法得到，该方法会先将地一个元素弹出，然后用下一个最小元素来取代被弹出的元素（这种操作时间复杂度仅仅是 O(logN)，N 是堆大小）。堆数据结构的实现是一个很有趣并且值得深入学习的东西，基本上只要是数据结构和算法书籍里都会提到。heapq 模块官方提供了详细的堆数据结构底层实现细节，可以参考研究一下。对于提高 python 是很有帮助的。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org209ca5a" class="outline-3">
+<h3 id="org209ca5a">实现一个优先级队列</h3>
+<div class="outline-text-3" id="text-org209ca5a">
+<p>
+怎样实现一个按优先级排序的队列？并且在这个队列上每次 pop 操作总是返回优先级最高的那个元素？一下是利用 heapq 模块实现了一个简单的优先级队列：
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> heapq
+
+
+<span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">PriorityQueue</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">object</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">__init__</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7; font-weight: bold;">self</span>._queue = <span style="color: #4f97d7;">[]</span>
+        <span style="color: #4f97d7; font-weight: bold;">self</span>._index = <span style="color: #a45bad;">0</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">push</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, item, priority<span style="color: #4f97d7;">)</span>:
+        heapq.heappush<span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>._queue, <span style="color: #bc6ec5;">(</span>-priority, <span style="color: #4f97d7; font-weight: bold;">self</span>._index, item<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">self</span>._index += <span style="color: #a45bad;">1</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">pop</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> heapq.heappop<span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>._queue<span style="color: #4f97d7;">)[</span>-<span style="color: #a45bad;">1</span><span style="color: #4f97d7;">]</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">class</span> <span style="color: #ce537a; font-weight: bold;">Item</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">object</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">__init__</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>, name<span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7; font-weight: bold;">self</span>.name = name
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">__repr__</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #2d9574;">'Item({!r})'</span>.<span style="color: #4f97d7;">format</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">self</span>.name<span style="color: #4f97d7;">)</span>
+
+
+<span style="color: #7590db;">q</span> = PriorityQueue<span style="color: #4f97d7;">()</span>
+q.push<span style="color: #4f97d7;">(</span>Item<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'foo'</span><span style="color: #bc6ec5;">)</span>, <span style="color: #a45bad;">1</span><span style="color: #4f97d7;">)</span>
+q.push<span style="color: #4f97d7;">(</span>Item<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'bar'</span><span style="color: #bc6ec5;">)</span>, <span style="color: #a45bad;">5</span><span style="color: #4f97d7;">)</span>
+q.push<span style="color: #4f97d7;">(</span>Item<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'spam'</span><span style="color: #bc6ec5;">)</span>, <span style="color: #a45bad;">4</span><span style="color: #4f97d7;">)</span>
+q.push<span style="color: #4f97d7;">(</span>Item<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'grok'</span><span style="color: #bc6ec5;">)</span>, <span style="color: #a45bad;">1</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">for</span> _ <span style="color: #4f97d7; font-weight: bold;">in</span> <span style="color: #4f97d7;">range</span><span style="color: #4f97d7;">(</span><span style="color: #a45bad;">4</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>q.pop<span style="color: #bc6ec5;">()</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+Item('bar')
+Item('spam')
+Item('foo')
+Item('grok')
+
+</pre>
+<p>
+第一个 pop()操作返回优先级最高的元素。另外注意到如果两个有着相同优先级的元素(foo 和 grok），pop 操作按照它们传入到队列的顺序返回。这一节主要关注 heapq 模块。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org900e24c" class="outline-2">
+<h2 id="org900e24c">字符串和文本</h2>
+</div>
+
+<div id="outline-container-org984de2b" class="outline-2">
+<h2 id="org984de2b">数字日期和时间</h2>
+</div>
+
+<div id="outline-container-orgef8a60d" class="outline-2">
+<h2 id="orgef8a60d">迭代器与生成器</h2>
+</div>
+
+<div id="outline-container-orge222deb" class="outline-2">
+<h2 id="orge222deb">文本与 IO</h2>
+</div>
+<div id="outline-container-org3dc8150" class="outline-2">
+<h2 id="org3dc8150">数据编码和处理</h2>
+</div>
+
+<div id="outline-container-org0b6d568" class="outline-2">
+<h2 id="org0b6d568">函数</h2>
+</div>
+
+<div id="outline-container-org5377ac1" class="outline-2">
+<h2 id="org5377ac1">类与对象</h2>
+</div>
+
+<div id="outline-container-orgb2c42f9" class="outline-2">
+<h2 id="orgb2c42f9">元编程</h2>
+</div>
+
+<div id="outline-container-org013f137" class="outline-2">
+<h2 id="org013f137">模块与包</h2>
+</div>
+
+<div id="outline-container-org15592bd" class="outline-2">
+<h2 id="org15592bd">网络与 web 编程</h2>
+</div>
+
+<div id="outline-container-org6f1a438" class="outline-2">
+<h2 id="org6f1a438">并发编程</h2>
+</div>
+
+<div id="outline-container-org7f086ae" class="outline-2">
+<h2 id="org7f086ae">脚本编程与系统管理</h2>
+</div>
+
+<div id="outline-container-org59d38d5" class="outline-2">
+<h2 id="org59d38d5">测试、调试和异常</h2>
+</div>
+
+<div id="outline-container-orgcaff163" class="outline-2">
+<h2 id="orgcaff163">C 语言扩展</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author:  (<a href="mailto:qiang@Bluesands">qiang@Bluesands</a>)</p>
+<p class="date">Date: </p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 9.1.3)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
