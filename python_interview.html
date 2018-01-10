@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-01-10 三 10:42 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python Interview</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
+<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
+<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Python Interview</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org1d933bc">Python 语言特性</a>
+<ul>
+<li><a href="#orgc9d3cd5">Python 的函数参数传递</a></li>
+<li><a href="#orge1a34f2">Python 中的元类(metclass)</a></li>
+<li><a href="#org877e32d">@staticmethod 和@classmethod</a></li>
+<li><a href="#orgbd3c8b3">类变量和实例变量</a></li>
+<li><a href="#orgaecab5d">Python 自省</a></li>
+<li><a href="#org3aa79d0">列表推导式</a></li>
+<li><a href="#orged4ff9e">Python 中下划线</a></li>
+<li><a href="#org57f8c94">字符串格式化</a></li>
+<li><a href="#orgc6ffa89">迭代、可迭代、迭代器与生成器</a></li>
+<li><a href="#org783c89c">*args 和**kwargs</a></li>
+<li><a href="#orgebba612">面向切面编程 AOP 和装饰器</a></li>
+<li><a href="#orgf1eebb4">鸭子类型</a></li>
+<li><a href="#org5c58fa7">Python 重载</a></li>
+<li><a href="#org98d9381">新式类和旧式类</a></li>
+<li><a href="#orge89f5e4">__new__和__init__的区别</a></li>
+<li><a href="#orgc979be9">单例模式</a>
+<ul>
+<li><a href="#org28d1d44">使用__new__方法</a></li>
+<li><a href="#org21157e8">共享属性</a></li>
+<li><a href="#org315538f">装饰器版本</a></li>
+<li><a href="#orgc58b76d">import 方法</a></li>
+</ul>
+</li>
+<li><a href="#org2a649d2">Python 中的作用域</a></li>
+<li><a href="#org048fb41">GIL 线程全局锁</a></li>
+<li><a href="#org8aa2778">协程</a></li>
+<li><a href="#orgb42dc76">闭包</a></li>
+<li><a href="#org827391b">lambda 函数</a></li>
+<li><a href="#orgddb1e27">Python 函数式编程</a></li>
+<li><a href="#orgd824f98">Python 里的拷贝</a></li>
+<li><a href="#org0d02c97">Python 垃圾回收机制</a>
+<ul>
+<li><a href="#orgb215f57">引用计数</a></li>
+<li><a href="#orgbb58101">标记-清除机制</a></li>
+<li><a href="#orgfd40fd8">分代技术</a></li>
+</ul>
+</li>
+<li><a href="#org15779f3">Python 的 List</a></li>
+<li><a href="#org5c8610e">Python 的 is</a></li>
+<li><a href="#org7bffdc7">read,readline 和 readlines</a></li>
+<li><a href="#org6fe4339">Python 2 和 3 的区别</a></li>
+<li><a href="#orgd9725f5">super 和 init 的使用</a></li>
+</ul>
+</li>
+<li><a href="#org89c8343">操作系统</a>
+<ul>
+<li><a href="#orgf7a803d">select、poll 和 epoll</a></li>
+<li><a href="#org865fe9c">调度算法</a></li>
+<li><a href="#orgcf9b8a3">死锁</a></li>
+<li><a href="#orge9b69a0">程序编译与链接</a>
+<ul>
+<li><a href="#org9d7f02c">预处理</a></li>
+<li><a href="#orgecf274e">编译</a></li>
+<li><a href="#orga181340">汇编</a></li>
+<li><a href="#org09580ad">链接</a></li>
+</ul>
+</li>
+<li><a href="#org9586622">静态链接和动态链接</a></li>
+<li><a href="#org6e3b9d9">虚拟内存技术</a></li>
+<li><a href="#orgfc7d266">分页和分段</a></li>
+<li><a href="#org63dc690">页面置换算法</a></li>
+<li><a href="#org17b3908">边沿触发和水平触发</a></li>
+</ul>
+</li>
+<li><a href="#orgc07017d">数据库</a>
+<ul>
+<li><a href="#org967094c">事务</a></li>
+<li><a href="#org8d8c99f">数据库索引</a></li>
+<li><a href="#org7a1f41a">Redis 原理</a>
+<ul>
+<li><a href="#org03cc341">Redis 是什么？</a></li>
+<li><a href="#org089d336">Redis 数据库</a></li>
+<li><a href="#org16446bc">Redis 缺点</a></li>
+</ul>
+</li>
+<li><a href="#orgaf41a8a">乐观锁和悲观锁</a></li>
+<li><a href="#orgf5170c8">MVCC</a></li>
+<li><a href="#org6e25698">MyISAM 和 InnoDB</a></li>
+</ul>
+</li>
+<li><a href="#org6092ad5">网络</a>
+<ul>
+<li><a href="#org37a751f">三次握手</a></li>
+<li><a href="#org1a5b642">四次握手</a></li>
+<li><a href="#org797b3fe">ARP 协议</a></li>
+<li><a href="#orgb331e14">urllib 和 urrllib2 的区别</a></li>
+<li><a href="#org0c772ec">Post 和 Get</a></li>
+<li><a href="#org4f7c818">Cookie 和 Session</a></li>
+<li><a href="#orgbd3242f">网站用户密码保存</a></li>
+<li><a href="#orgaeb8590">HTTP 和 HTTPS</a></li>
+<li><a href="#org53c1ef9">XSRF 和 XSS</a></li>
+<li><a href="#orgd936756">幂等 Idempotence</a></li>
+<li><a href="#org57f9248">RESTful 架构(SOAP,RPC)</a></li>
+<li><a href="#org13ebbce">SOAP</a></li>
+<li><a href="#org27f7b63">RPC</a></li>
+<li><a href="#org0f31ed0">CGI 和 WSGI</a></li>
+<li><a href="#org66aa072">中间人攻击</a></li>
+<li><a href="#orgfa55810">c10k 问题</a></li>
+<li><a href="#org3fea1b3">socket</a></li>
+<li><a href="#orgd53983d">浏览器缓存</a></li>
+<li><a href="#org20ba72d">HTTP1.0 和 HTTP1.1</a></li>
+<li><a href="#org048134c">Ajax</a></li>
+</ul>
+</li>
+<li><a href="#org09fef46">*NIX</a>
+<ul>
+<li><a href="#org9e8c691">unix 进程间通信方式（IPC）</a></li>
+</ul>
+</li>
+<li><a href="#orgede123f">数据结构</a>
+<ul>
+<li><a href="#orgf8c3261">红黑树</a></li>
+</ul>
+</li>
+<li><a href="#org42e3bed">编程题</a>
+<ul>
+<li><a href="#org7499b22">台阶问题/斐波那契</a></li>
+<li><a href="#org3452025">变态台阶问题</a></li>
+<li><a href="#orge2b6c23">矩阵覆盖</a></li>
+<li><a href="#orga76eef6">杨氏矩阵查找</a></li>
+<li><a href="#orgd354f00">去除列表中重复元素</a></li>
+<li><a href="#orged278ff">链表成对调换</a></li>
+<li><a href="#orgc218198">创建字典方法</a>
+<ul>
+<li><a href="#org8d084ef">直接创建</a></li>
+<li><a href="#org0d38325">工厂方式</a></li>
+<li><a href="#org9160986">fromkey()方式</a></li>
+</ul>
+</li>
+<li><a href="#org58b5929">合并两个有序列表</a></li>
+<li><a href="#orgb55ec3d">交叉链表求交叉点</a></li>
+<li><a href="#orgb85ff7d">二分查找</a></li>
+<li><a href="#org77736af">快排</a></li>
+<li><a href="#org9820f08">找零问题</a></li>
+<li><a href="#org5140963">广度遍历和深度遍历二叉树</a></li>
+<li><a href="#org4b49913">前中后序遍历</a></li>
+<li><a href="#org37344be">求最大树深</a></li>
+<li><a href="#org79f0e49">求两颗树是否相同</a></li>
+<li><a href="#org09e5b6d">前序中序求后序</a></li>
+<li><a href="#org813d8ab">单链表逆置</a></li>
+<li><a href="#orgd5ab05b">两个字符串是否是变为词</a></li>
+<li><a href="#org2f8aad6">动态规划问题</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+本文是对<a href="https://github.com/taizilongxu/interview_python#python%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7">iterview_python</a>的学习与扩展。
+</p>
+<div id="outline-container-org1d933bc" class="outline-2">
+<h2 id="org1d933bc">Python 语言特性</h2>
+<div class="outline-text-2" id="text-org1d933bc">
+</div>
+<div id="outline-container-orgc9d3cd5" class="outline-3">
+<h3 id="orgc9d3cd5">Python 的函数参数传递</h3>
+</div>
+<div id="outline-container-orge1a34f2" class="outline-3">
+<h3 id="orge1a34f2">Python 中的元类(metclass)</h3>
+</div>
+<div id="outline-container-org877e32d" class="outline-3">
+<h3 id="org877e32d">@staticmethod 和@classmethod</h3>
+</div>
+<div id="outline-container-orgbd3c8b3" class="outline-3">
+<h3 id="orgbd3c8b3">类变量和实例变量</h3>
+</div>
+<div id="outline-container-orgaecab5d" class="outline-3">
+<h3 id="orgaecab5d">Python 自省</h3>
+</div>
+<div id="outline-container-org3aa79d0" class="outline-3">
+<h3 id="org3aa79d0">列表推导式</h3>
+</div>
+<div id="outline-container-orged4ff9e" class="outline-3">
+<h3 id="orged4ff9e">Python 中下划线</h3>
+</div>
+<div id="outline-container-org57f8c94" class="outline-3">
+<h3 id="org57f8c94">字符串格式化</h3>
+</div>
+<div id="outline-container-orgc6ffa89" class="outline-3">
+<h3 id="orgc6ffa89">迭代、可迭代、迭代器与生成器</h3>
+</div>
+<div id="outline-container-org783c89c" class="outline-3">
+<h3 id="org783c89c">*args 和**kwargs</h3>
+</div>
+<div id="outline-container-orgebba612" class="outline-3">
+<h3 id="orgebba612">面向切面编程 AOP 和装饰器</h3>
+</div>
+<div id="outline-container-orgf1eebb4" class="outline-3">
+<h3 id="orgf1eebb4">鸭子类型</h3>
+</div>
+<div id="outline-container-org5c58fa7" class="outline-3">
+<h3 id="org5c58fa7">Python 重载</h3>
+</div>
+<div id="outline-container-org98d9381" class="outline-3">
+<h3 id="org98d9381">新式类和旧式类</h3>
+</div>
+<div id="outline-container-orge89f5e4" class="outline-3">
+<h3 id="orge89f5e4">__new__和__init__的区别</h3>
+</div>
+<div id="outline-container-orgc979be9" class="outline-3">
+<h3 id="orgc979be9">单例模式</h3>
+<div class="outline-text-3" id="text-orgc979be9">
+</div>
+<div id="outline-container-org28d1d44" class="outline-4">
+<h4 id="org28d1d44">使用__new__方法</h4>
+</div>
+<div id="outline-container-org21157e8" class="outline-4">
+<h4 id="org21157e8">共享属性</h4>
+</div>
+<div id="outline-container-org315538f" class="outline-4">
+<h4 id="org315538f">装饰器版本</h4>
+</div>
+<div id="outline-container-orgc58b76d" class="outline-4">
+<h4 id="orgc58b76d">import 方法</h4>
+</div>
+</div>
+<div id="outline-container-org2a649d2" class="outline-3">
+<h3 id="org2a649d2">Python 中的作用域</h3>
+</div>
+<div id="outline-container-org048fb41" class="outline-3">
+<h3 id="org048fb41">GIL 线程全局锁</h3>
+</div>
+<div id="outline-container-org8aa2778" class="outline-3">
+<h3 id="org8aa2778">协程</h3>
+</div>
+<div id="outline-container-orgb42dc76" class="outline-3">
+<h3 id="orgb42dc76">闭包</h3>
+</div>
+<div id="outline-container-org827391b" class="outline-3">
+<h3 id="org827391b">lambda 函数</h3>
+</div>
+<div id="outline-container-orgddb1e27" class="outline-3">
+<h3 id="orgddb1e27">Python 函数式编程</h3>
+</div>
+<div id="outline-container-orgd824f98" class="outline-3">
+<h3 id="orgd824f98">Python 里的拷贝</h3>
+</div>
+<div id="outline-container-org0d02c97" class="outline-3">
+<h3 id="org0d02c97">Python 垃圾回收机制</h3>
+<div class="outline-text-3" id="text-org0d02c97">
+</div>
+<div id="outline-container-orgb215f57" class="outline-4">
+<h4 id="orgb215f57">引用计数</h4>
+</div>
+<div id="outline-container-orgbb58101" class="outline-4">
+<h4 id="orgbb58101">标记-清除机制</h4>
+</div>
+<div id="outline-container-orgfd40fd8" class="outline-4">
+<h4 id="orgfd40fd8">分代技术</h4>
+</div>
+</div>
+<div id="outline-container-org15779f3" class="outline-3">
+<h3 id="org15779f3">Python 的 List</h3>
+</div>
+<div id="outline-container-org5c8610e" class="outline-3">
+<h3 id="org5c8610e">Python 的 is</h3>
+</div>
+<div id="outline-container-org7bffdc7" class="outline-3">
+<h3 id="org7bffdc7">read,readline 和 readlines</h3>
+</div>
+<div id="outline-container-org6fe4339" class="outline-3">
+<h3 id="org6fe4339">Python 2 和 3 的区别</h3>
+</div>
+<div id="outline-container-orgd9725f5" class="outline-3">
+<h3 id="orgd9725f5">super 和 init 的使用</h3>
+</div>
+</div>
+<div id="outline-container-org89c8343" class="outline-2">
+<h2 id="org89c8343">操作系统</h2>
+<div class="outline-text-2" id="text-org89c8343">
+</div>
+<div id="outline-container-orgf7a803d" class="outline-3">
+<h3 id="orgf7a803d">select、poll 和 epoll</h3>
+</div>
+<div id="outline-container-org865fe9c" class="outline-3">
+<h3 id="org865fe9c">调度算法</h3>
+</div>
+<div id="outline-container-orgcf9b8a3" class="outline-3">
+<h3 id="orgcf9b8a3">死锁</h3>
+</div>
+<div id="outline-container-orge9b69a0" class="outline-3">
+<h3 id="orge9b69a0">程序编译与链接</h3>
+<div class="outline-text-3" id="text-orge9b69a0">
+</div>
+<div id="outline-container-org9d7f02c" class="outline-4">
+<h4 id="org9d7f02c">预处理</h4>
+</div>
+<div id="outline-container-orgecf274e" class="outline-4">
+<h4 id="orgecf274e">编译</h4>
+</div>
+<div id="outline-container-orga181340" class="outline-4">
+<h4 id="orga181340">汇编</h4>
+</div>
+<div id="outline-container-org09580ad" class="outline-4">
+<h4 id="org09580ad">链接</h4>
+</div>
+</div>
+<div id="outline-container-org9586622" class="outline-3">
+<h3 id="org9586622">静态链接和动态链接</h3>
+</div>
+<div id="outline-container-org6e3b9d9" class="outline-3">
+<h3 id="org6e3b9d9">虚拟内存技术</h3>
+</div>
+<div id="outline-container-orgfc7d266" class="outline-3">
+<h3 id="orgfc7d266">分页和分段</h3>
+</div>
+<div id="outline-container-org63dc690" class="outline-3">
+<h3 id="org63dc690">页面置换算法</h3>
+</div>
+<div id="outline-container-org17b3908" class="outline-3">
+<h3 id="org17b3908">边沿触发和水平触发</h3>
+</div>
+</div>
+<div id="outline-container-orgc07017d" class="outline-2">
+<h2 id="orgc07017d">数据库</h2>
+<div class="outline-text-2" id="text-orgc07017d">
+</div>
+<div id="outline-container-org967094c" class="outline-3">
+<h3 id="org967094c">事务</h3>
+</div>
+<div id="outline-container-org8d8c99f" class="outline-3">
+<h3 id="org8d8c99f">数据库索引</h3>
+</div>
+<div id="outline-container-org7a1f41a" class="outline-3">
+<h3 id="org7a1f41a">Redis 原理</h3>
+<div class="outline-text-3" id="text-org7a1f41a">
+</div>
+<div id="outline-container-org03cc341" class="outline-4">
+<h4 id="org03cc341">Redis 是什么？</h4>
+</div>
+<div id="outline-container-org089d336" class="outline-4">
+<h4 id="org089d336">Redis 数据库</h4>
+</div>
+<div id="outline-container-org16446bc" class="outline-4">
+<h4 id="org16446bc">Redis 缺点</h4>
+</div>
+</div>
+<div id="outline-container-orgaf41a8a" class="outline-3">
+<h3 id="orgaf41a8a">乐观锁和悲观锁</h3>
+</div>
+<div id="outline-container-orgf5170c8" class="outline-3">
+<h3 id="orgf5170c8">MVCC</h3>
+</div>
+<div id="outline-container-org6e25698" class="outline-3">
+<h3 id="org6e25698">MyISAM 和 InnoDB</h3>
+</div>
+</div>
+<div id="outline-container-org6092ad5" class="outline-2">
+<h2 id="org6092ad5">网络</h2>
+<div class="outline-text-2" id="text-org6092ad5">
+</div>
+<div id="outline-container-org37a751f" class="outline-3">
+<h3 id="org37a751f">三次握手</h3>
+</div>
+<div id="outline-container-org1a5b642" class="outline-3">
+<h3 id="org1a5b642">四次握手</h3>
+</div>
+<div id="outline-container-org797b3fe" class="outline-3">
+<h3 id="org797b3fe">ARP 协议</h3>
+</div>
+<div id="outline-container-orgb331e14" class="outline-3">
+<h3 id="orgb331e14">urllib 和 urrllib2 的区别</h3>
+</div>
+<div id="outline-container-org0c772ec" class="outline-3">
+<h3 id="org0c772ec">Post 和 Get</h3>
+</div>
+<div id="outline-container-org4f7c818" class="outline-3">
+<h3 id="org4f7c818">Cookie 和 Session</h3>
+</div>
+<div id="outline-container-orgbd3242f" class="outline-3">
+<h3 id="orgbd3242f">网站用户密码保存</h3>
+</div>
+<div id="outline-container-orgaeb8590" class="outline-3">
+<h3 id="orgaeb8590">HTTP 和 HTTPS</h3>
+</div>
+<div id="outline-container-org53c1ef9" class="outline-3">
+<h3 id="org53c1ef9">XSRF 和 XSS</h3>
+</div>
+<div id="outline-container-orgd936756" class="outline-3">
+<h3 id="orgd936756">幂等 Idempotence</h3>
+</div>
+<div id="outline-container-org57f9248" class="outline-3">
+<h3 id="org57f9248">RESTful 架构(SOAP,RPC)</h3>
+</div>
+<div id="outline-container-org13ebbce" class="outline-3">
+<h3 id="org13ebbce">SOAP</h3>
+</div>
+<div id="outline-container-org27f7b63" class="outline-3">
+<h3 id="org27f7b63">RPC</h3>
+</div>
+<div id="outline-container-org0f31ed0" class="outline-3">
+<h3 id="org0f31ed0">CGI 和 WSGI</h3>
+</div>
+<div id="outline-container-org66aa072" class="outline-3">
+<h3 id="org66aa072">中间人攻击</h3>
+</div>
+<div id="outline-container-orgfa55810" class="outline-3">
+<h3 id="orgfa55810">c10k 问题</h3>
+</div>
+<div id="outline-container-org3fea1b3" class="outline-3">
+<h3 id="org3fea1b3">socket</h3>
+</div>
+<div id="outline-container-orgd53983d" class="outline-3">
+<h3 id="orgd53983d">浏览器缓存</h3>
+</div>
+<div id="outline-container-org20ba72d" class="outline-3">
+<h3 id="org20ba72d">HTTP1.0 和 HTTP1.1</h3>
+</div>
+<div id="outline-container-org048134c" class="outline-3">
+<h3 id="org048134c">Ajax</h3>
+</div>
+</div>
+<div id="outline-container-org09fef46" class="outline-2">
+<h2 id="org09fef46">*NIX</h2>
+<div class="outline-text-2" id="text-org09fef46">
+</div>
+<div id="outline-container-org9e8c691" class="outline-3">
+<h3 id="org9e8c691">unix 进程间通信方式（IPC）</h3>
+</div>
+</div>
+<div id="outline-container-orgede123f" class="outline-2">
+<h2 id="orgede123f">数据结构</h2>
+<div class="outline-text-2" id="text-orgede123f">
+</div>
+<div id="outline-container-orgf8c3261" class="outline-3">
+<h3 id="orgf8c3261">红黑树</h3>
+</div>
+</div>
+<div id="outline-container-org42e3bed" class="outline-2">
+<h2 id="org42e3bed">编程题</h2>
+<div class="outline-text-2" id="text-org42e3bed">
+</div>
+<div id="outline-container-org7499b22" class="outline-3">
+<h3 id="org7499b22">台阶问题/斐波那契</h3>
+</div>
+<div id="outline-container-org3452025" class="outline-3">
+<h3 id="org3452025">变态台阶问题</h3>
+</div>
+<div id="outline-container-orge2b6c23" class="outline-3">
+<h3 id="orge2b6c23">矩阵覆盖</h3>
+</div>
+<div id="outline-container-orga76eef6" class="outline-3">
+<h3 id="orga76eef6">杨氏矩阵查找</h3>
+</div>
+<div id="outline-container-orgd354f00" class="outline-3">
+<h3 id="orgd354f00">去除列表中重复元素</h3>
+</div>
+<div id="outline-container-orged278ff" class="outline-3">
+<h3 id="orged278ff">链表成对调换</h3>
+</div>
+<div id="outline-container-orgc218198" class="outline-3">
+<h3 id="orgc218198">创建字典方法</h3>
+<div class="outline-text-3" id="text-orgc218198">
+</div>
+<div id="outline-container-org8d084ef" class="outline-4">
+<h4 id="org8d084ef">直接创建</h4>
+</div>
+<div id="outline-container-org0d38325" class="outline-4">
+<h4 id="org0d38325">工厂方式</h4>
+</div>
+<div id="outline-container-org9160986" class="outline-4">
+<h4 id="org9160986">fromkey()方式</h4>
+</div>
+</div>
+<div id="outline-container-org58b5929" class="outline-3">
+<h3 id="org58b5929">合并两个有序列表</h3>
+</div>
+<div id="outline-container-orgb55ec3d" class="outline-3">
+<h3 id="orgb55ec3d">交叉链表求交叉点</h3>
+</div>
+<div id="outline-container-orgb85ff7d" class="outline-3">
+<h3 id="orgb85ff7d">二分查找</h3>
+</div>
+<div id="outline-container-org77736af" class="outline-3">
+<h3 id="org77736af">快排</h3>
+</div>
+<div id="outline-container-org9820f08" class="outline-3">
+<h3 id="org9820f08">找零问题</h3>
+</div>
+<div id="outline-container-org5140963" class="outline-3">
+<h3 id="org5140963">广度遍历和深度遍历二叉树</h3>
+</div>
+<div id="outline-container-org4b49913" class="outline-3">
+<h3 id="org4b49913">前中后序遍历</h3>
+</div>
+<div id="outline-container-org37344be" class="outline-3">
+<h3 id="org37344be">求最大树深</h3>
+</div>
+<div id="outline-container-org79f0e49" class="outline-3">
+<h3 id="org79f0e49">求两颗树是否相同</h3>
+</div>
+<div id="outline-container-org09e5b6d" class="outline-3">
+<h3 id="org09e5b6d">前序中序求后序</h3>
+</div>
+<div id="outline-container-org813d8ab" class="outline-3">
+<h3 id="org813d8ab">单链表逆置</h3>
+</div>
+<div id="outline-container-orgd5ab05b" class="outline-3">
+<h3 id="orgd5ab05b">两个字符串是否是变为词</h3>
+</div>
+<div id="outline-container-org2f8aad6" class="outline-3">
+<h3 id="org2f8aad6">动态规划问题</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2018-01-10 三 10:42</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
