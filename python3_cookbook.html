@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-01-10 三 10:42 -->
+<!-- 2018-01-15 一 16:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python3 CookBook</title>
@@ -39,16 +39,23 @@
 <li><a href="#org424e6b0">序列中出现次数最多的元素</a></li>
 <li><a href="#org4b327cd">通过某个关键字排序一个字典列表</a></li>
 <li><a href="#org9b198b9">排序不支持原生比较的对象</a></li>
+<li><a href="#org2ac48bb">通过某个字段将记录分组</a></li>
+<li><a href="#org355068e">过滤序列元素</a></li>
 </ul>
 </li>
-<li><a href="#org900e24c">字符串和文本</a></li>
-<li><a href="#org984de2b">数字日期和时间</a></li>
-<li><a href="#orgef8a60d">迭代器与生成器</a></li>
 <li><a href="#orge222deb">文本与 IO</a></li>
 <li><a href="#org3dc8150">数据编码和处理</a></li>
 <li><a href="#org0b6d568">函数</a></li>
 <li><a href="#org5377ac1">类与对象</a></li>
-<li><a href="#orgb2c42f9">元编程</a></li>
+<li><a href="#orgb2c42f9">元编程</a>
+<ul>
+<li><a href="#org1ae4532">在函数上添加包装器</a></li>
+<li><a href="#orgb1cc8ee">创建装饰器时保留函数元信息</a></li>
+<li><a href="#org54ab9b6">解除一个装饰器</a></li>
+<li><a href="#org3c50dea">定义一个带参数的装饰器</a></li>
+<li><a href="#org963262d">可自定义属性的装饰器</a></li>
+</ul>
+</li>
 <li><a href="#org013f137">模块与包</a></li>
 <li><a href="#org15592bd">网络与 web 编程</a></li>
 <li><a href="#org6f1a438">并发编程</a></li>
@@ -947,16 +954,162 @@ operator.itemgetter 函数有一个被 rows 中的记录用来查找值的索引
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-org900e24c" class="outline-2">
-<h2 id="org900e24c">字符串和文本</h2>
-</div>
-<div id="outline-container-org984de2b" class="outline-2">
-<h2 id="org984de2b">数字日期和时间</h2>
+
+<div id="outline-container-org2ac48bb" class="outline-3">
+<h3 id="org2ac48bb">通过某个字段将记录分组</h3>
+<div class="outline-text-3" id="text-org2ac48bb">
+<p>
+你有一个字典或实例的序列，然后想根据某个特定的字段比如 date 来分组迭代访问。
+itertools.groupby()函数对于这样的数据分组操作非常实用。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> itertools <span style="color: #4f97d7; font-weight: bold;">import</span> groupby
+<span style="color: #4f97d7; font-weight: bold;">from</span> operator <span style="color: #4f97d7; font-weight: bold;">import</span> itemgetter
+
+<span style="color: #7590db;">rows</span> = <span style="color: #4f97d7;">[</span>
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'5412 N CLARK'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/01/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'5148 N CLARK'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/04/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'5800 E 58TH'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/02/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'2122 N CLARK'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/03/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'5645 N RAVENSWOOD'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/02/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'1060 W ADDISON'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/02/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'4801 N BROADWAY'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/01/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'1039 W GRANVILLE'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/04/2012'</span><span style="color: #bc6ec5;">}</span>,
+<span style="color: #4f97d7;">]</span>
+
+rows.sort<span style="color: #4f97d7;">(</span>key=itemgetter<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'date'</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">for</span> date, items <span style="color: #4f97d7; font-weight: bold;">in</span> groupby<span style="color: #4f97d7;">(</span>rows, key=itemgetter<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'date'</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>date<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">for</span> i <span style="color: #4f97d7; font-weight: bold;">in</span> items:
+        <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">' '</span>, i<span style="color: #4f97d7;">)</span>
+</pre>
 </div>
 
-<div id="outline-container-orgef8a60d" class="outline-2">
-<h2 id="orgef8a60d">迭代器与生成器</h2>
+<pre class="example">
+07/01/2012
+  {'address': '5412 N CLARK', 'date': '07/01/2012'}
+  {'address': '4801 N BROADWAY', 'date': '07/01/2012'}
+07/02/2012
+  {'address': '5800 E 58TH', 'date': '07/02/2012'}
+  {'address': '5645 N RAVENSWOOD', 'date': '07/02/2012'}
+  {'address': '1060 W ADDISON', 'date': '07/02/2012'}
+07/03/2012
+  {'address': '2122 N CLARK', 'date': '07/03/2012'}
+07/04/2012
+  {'address': '5148 N CLARK', 'date': '07/04/2012'}
+  {'address': '1039 W GRANVILLE', 'date': '07/04/2012'}
+</pre>
+<p>
+groupby()函数扫描整个序列并且连续相同值（或者根据指定 key 函数返回值相同）的元素序列。在每次迭代的时候，它会返回一个值和一个迭代对象，这个迭代对象可以生成元素值全部等于上面那个值中所有对象。一个非常重要的步骤是要根据指定的字段将数据排序。因为 groupby()仅仅检查连续的元素，如果事先并没有排序完成的话，分组函数将得不到想要的数据。如果仅仅只想根据 date 字段将数据分组到一个大的数据结构中，并且允许随机访问，最好用 collections.defaultdict()
+来构建一个多值字典。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> collections <span style="color: #4f97d7; font-weight: bold;">import</span> defaultdict
+<span style="color: #4f97d7; font-weight: bold;">from</span> pprint <span style="color: #4f97d7; font-weight: bold;">import</span> pprint
+
+<span style="color: #7590db;">rows</span> = <span style="color: #4f97d7;">[</span>
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'5412 N CLARK'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/01/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'5148 N CLARK'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/04/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'5800 E 58TH'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/02/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'2122 N CLARK'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/03/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'5645 N RAVENSWOOD'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/02/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'1060 W ADDISON'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/02/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'4801 N BROADWAY'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/01/2012'</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'address'</span>: <span style="color: #2d9574;">'1039 W GRANVILLE'</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'07/04/2012'</span><span style="color: #bc6ec5;">}</span>,
+<span style="color: #4f97d7;">]</span>
+
+<span style="color: #7590db;">rows_by_date</span> = defaultdict<span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">list</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">for</span> row <span style="color: #4f97d7; font-weight: bold;">in</span> rows:
+    rows_by_date<span style="color: #4f97d7;">[</span>row<span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'date'</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">]</span>.append<span style="color: #4f97d7;">(</span>row<span style="color: #4f97d7;">)</span>
+
+pprint<span style="color: #4f97d7;">(</span>rows_by_date<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+defaultdict(&lt;class 'list'&gt;,
+            {'07/01/2012': [{'address': '5412 N CLARK', 'date': '07/01/2012'},
+                            {'address': '4801 N BROADWAY',
+                             'date': '07/01/2012'}],
+             '07/02/2012': [{'address': '5800 E 58TH', 'date': '07/02/2012'},
+                            {'address': '5645 N RAVENSWOOD',
+                             'date': '07/02/2012'},
+                            {'address': '1060 W ADDISON',
+                             'date': '07/02/2012'}],
+             '07/03/2012': [{'address': '2122 N CLARK', 'date': '07/03/2012'}],
+             '07/04/2012': [{'address': '5148 N CLARK', 'date': '07/04/2012'},
+                            {'address': '1039 W GRANVILLE',
+                             'date': '07/04/2012'}]})
+</pre>
+<p>
+如果不考虑内存占用情况，这用方法比 groupby()函数迭代运行更快。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org355068e" class="outline-3">
+<h3 id="org355068e">过滤序列元素</h3>
+<div class="outline-text-3" id="text-org355068e">
+<p>
+有一个数据序列，想利用一些规则从中提取出需要的值或者是缩短序列？最简单的过滤列表元素的方法就是适用列表推导式。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">mylist</span> = <span style="color: #4f97d7;">[</span><span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">4</span>, -<span style="color: #a45bad;">5</span>, <span style="color: #a45bad;">10</span>, -<span style="color: #a45bad;">7</span>, <span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span>, -<span style="color: #a45bad;">1</span><span style="color: #4f97d7;">]</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #bc6ec5;">[</span>n <span style="color: #4f97d7; font-weight: bold;">for</span> n <span style="color: #4f97d7; font-weight: bold;">in</span> mylist <span style="color: #4f97d7; font-weight: bold;">if</span> n &gt; <span style="color: #a45bad;">0</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">pos</span> = <span style="color: #4f97d7;">(</span>n <span style="color: #4f97d7; font-weight: bold;">for</span> n <span style="color: #4f97d7; font-weight: bold;">in</span> mylist <span style="color: #4f97d7; font-weight: bold;">if</span> n &gt; <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>pos<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+[1, 4, 10, 2, 3]
+&lt;generator object &lt;genexpr&gt; at 0x7f4910bf9c50&gt;
+
+</pre>
+<p>
+适用列表推导式的一个潜在缺陷是如果输入非常大的时候会产生一个非常大的结果集，占用大量内存。如果对内存有要求，可以适用生成器表达式来过滤元素。就如上例中第二中方法。有时候过滤规则比较复杂，不能简单的在列表推导或者生成器表达式中表达出来。比如，在过滤时需要处理一些异常或者其复杂情况，这时需要将过滤代码放入一个函数，然后调用内置函数 filter()。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">values</span> = <span style="color: #4f97d7;">[</span><span style="color: #2d9574;">'1'</span>, <span style="color: #2d9574;">'2'</span>, <span style="color: #2d9574;">'-3'</span>, <span style="color: #2d9574;">'-'</span>, <span style="color: #2d9574;">'4'</span>, <span style="color: #2d9574;">'N/A'</span>, <span style="color: #2d9574;">'5'</span><span style="color: #4f97d7;">]</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">is_int</span><span style="color: #4f97d7;">(</span>val<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">try</span>:
+        <span style="color: #4f97d7;">int</span><span style="color: #4f97d7;">(</span>val<span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #a45bad;">True</span>
+    <span style="color: #4f97d7; font-weight: bold;">except</span> <span style="color: #ce537a; font-weight: bold;">ValueError</span>:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #a45bad;">False</span>
+
+
+<span style="color: #7590db;">ivals</span> = <span style="color: #4f97d7;">list</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">filter</span><span style="color: #bc6ec5;">(</span>is_int, values<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>ivals<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+['1', '2', '-3', '4', '5']
+
+</pre>
+<p>
+列表推导和生成器表达式通常情况下是过滤数据最简单的方式，当然在过滤数据时也可以转换数据。过滤操作的一个变种就是将不符合条件的值用新的值来代替，而不是丢弃它们。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">mylist</span> = <span style="color: #4f97d7;">[</span><span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">4</span>, -<span style="color: #a45bad;">5</span>, <span style="color: #a45bad;">10</span>, -<span style="color: #a45bad;">7</span>, <span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span>, -<span style="color: #a45bad;">1</span><span style="color: #4f97d7;">]</span>
+<span style="color: #7590db;">clip_neg</span> = <span style="color: #4f97d7;">[</span>n <span style="color: #4f97d7; font-weight: bold;">if</span> n &gt; <span style="color: #a45bad;">0</span> <span style="color: #4f97d7; font-weight: bold;">else</span> <span style="color: #a45bad;">0</span> <span style="color: #4f97d7; font-weight: bold;">for</span> n <span style="color: #4f97d7; font-weight: bold;">in</span> mylist<span style="color: #4f97d7;">]</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>clip_neg<span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">clip_pos</span> = <span style="color: #4f97d7;">[</span>n <span style="color: #4f97d7; font-weight: bold;">if</span> n &lt; <span style="color: #a45bad;">0</span> <span style="color: #4f97d7; font-weight: bold;">else</span> <span style="color: #a45bad;">0</span> <span style="color: #4f97d7; font-weight: bold;">for</span> n <span style="color: #4f97d7; font-weight: bold;">in</span> mylist<span style="color: #4f97d7;">]</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>clip_pos<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+[1, 4, 0, 10, 0, 2, 3, 0]
+[0, 0, -5, 0, -7, 0, 0, -1]
+
+</pre>
+</div>
+</div>
 </div>
 
 <div id="outline-container-orge222deb" class="outline-2">
@@ -973,9 +1126,318 @@ operator.itemgetter 函数有一个被 rows 中的记录用来查找值的索引
 <div id="outline-container-org5377ac1" class="outline-2">
 <h2 id="org5377ac1">类与对象</h2>
 </div>
-
 <div id="outline-container-orgb2c42f9" class="outline-2">
 <h2 id="orgb2c42f9">元编程</h2>
+<div class="outline-text-2" id="text-orgb2c42f9">
+</div>
+<div id="outline-container-org1ae4532" class="outline-3">
+<h3 id="org1ae4532">在函数上添加包装器</h3>
+<div class="outline-text-3" id="text-org1ae4532">
+<p>
+如何在函数上添加一个包装器，增加额外的操作处理，比如日志，计时等？适用装饰器即可完成
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> time
+<span style="color: #4f97d7; font-weight: bold;">from</span> functools <span style="color: #4f97d7; font-weight: bold;">import</span> wraps
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">timethis</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>:
+    <span style="color: #2aa1ae;">"""</span>
+<span style="color: #2aa1ae;">    Decorator that reports the execution time.</span>
+<span style="color: #2aa1ae;">    """</span>
+
+    <span style="color: #ce537a; font-weight: bold;">@wraps</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">wrapper</span><span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>:
+        <span style="color: #7590db;">start</span> = time.time<span style="color: #4f97d7;">()</span>
+        <span style="color: #7590db;">result</span> = func<span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>
+        <span style="color: #7590db;">end</span> = time.time<span style="color: #4f97d7;">()</span>
+        <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>func.<span style="color: #4f97d7;">__name__</span>, end - start<span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">return</span> result
+
+    <span style="color: #4f97d7; font-weight: bold;">return</span> wrapper
+
+
+<span style="color: #ce537a; font-weight: bold;">@timethis</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">countdown</span><span style="color: #4f97d7;">(</span>n<span style="color: #4f97d7;">)</span>:
+    <span style="color: #2aa1ae;">'''</span>
+<span style="color: #2aa1ae;">    Counts down</span>
+<span style="color: #2aa1ae;">    '''</span>
+    <span style="color: #4f97d7; font-weight: bold;">while</span> n &gt; <span style="color: #a45bad;">0</span>:
+        <span style="color: #7590db;">n</span> -= <span style="color: #a45bad;">1</span>
+
+
+countdown<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">100000</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+countdown 0.0041043758392333984
+
+</pre>
+<p>
+一个装饰器就是一个函数，它接受一个函数作为参数并返回一个新的函数。内置装饰器@staticmethod,@classmethod,@property,@wraps
+原理都是一样。在上面 wrapper()函数中，装饰器内部定义了一个使用*args 和**kwargs 来接受任意参数的函数。在这个函数里调用原始函数并将其结果返回，不过还可以添加其他额外的代码，这个新的函数包装器被作为结果返回来替代原始函数。需要强调的是装饰器并不会修改原始函数的参数签名以及返回值。使用*args 和**kwargs 目的就是确保任何参数都能适用，而返回结果值节本都是调用原始函数 func(*args, **kwargs)的返回结果，其中 func 就是原始函数。
+@wraps(func)注释很重要，它能保留原始函数的元数据。
+</p>
+</div>
+</div>
+<div id="outline-container-orgb1cc8ee" class="outline-3">
+<h3 id="orgb1cc8ee">创建装饰器时保留函数元信息</h3>
+<div class="outline-text-3" id="text-orgb1cc8ee">
+<p>
+写一个装饰器作用在函数上，但是这个函数的重要的元信息比如名字，文档字符串，注释和参数签名都丢失了。任何时候定义装饰器时都应该使用 functools 中的@wraps 装饰器来注解底层包装函数。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> time
+<span style="color: #4f97d7; font-weight: bold;">from</span> functools <span style="color: #4f97d7; font-weight: bold;">import</span> wraps
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">timethis</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>:
+    <span style="color: #2aa1ae;">'''</span>
+<span style="color: #2aa1ae;">    Decorator that reports the execution time.</span>
+<span style="color: #2aa1ae;">    '''</span>
+
+    <span style="color: #ce537a; font-weight: bold;">@wraps</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">wrapper</span><span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>:
+        <span style="color: #7590db;">start</span> = time.time<span style="color: #4f97d7;">()</span>
+        <span style="color: #7590db;">result</span> = func<span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>
+        <span style="color: #7590db;">end</span> = time.time<span style="color: #4f97d7;">()</span>
+        <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>func.<span style="color: #4f97d7;">__name__</span>, end - start<span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">return</span> result
+
+    <span style="color: #4f97d7; font-weight: bold;">return</span> wrapper
+
+
+<span style="color: #ce537a; font-weight: bold;">@timethis</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">countdown</span><span style="color: #4f97d7;">(</span>n:<span style="color: #4f97d7;">int</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #2aa1ae;">'''</span>
+<span style="color: #2aa1ae;">    Counts down</span>
+<span style="color: #2aa1ae;">    '''</span>
+    <span style="color: #4f97d7; font-weight: bold;">while</span> n &gt; <span style="color: #a45bad;">0</span>:
+        <span style="color: #7590db;">n</span> -= <span style="color: #a45bad;">1</span>
+
+
+countdown<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">100000</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>countdown.<span style="color: #4f97d7;">__name__</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>countdown.<span style="color: #4f97d7;">__doc__</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>countdown.__annotations__<span style="color: #4f97d7;">)</span>
+
+
+countdown.__wrapped__<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">100000</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #4f97d7; font-weight: bold;">from</span> inspect <span style="color: #4f97d7; font-weight: bold;">import</span> signature
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>signature<span style="color: #bc6ec5;">(</span>countdown<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+countdown 0.004173994064331055
+countdown
+
+    Counts down
+    
+{'n': &lt;class 'int'&gt;}
+(n:int)
+
+</pre>
+<p>
+在编写装饰器的时候复制元信息时一个非常重要的部分。@wraps 的一个重要特征时通过属性__wrapped__直接访问被包装函数。
+__wrapped__属性还能让被装饰函数正确暴露底层的参数签名信息。一个很普通的问题是怎样让装饰器去直接复制函数的参数签名信息，如果想自己手动实现需要大量工作，直接适用@wraps，通过底层的__wrapped__属性访问到函数签名信息。
+</p>
+</div>
+</div>
+<div id="outline-container-org54ab9b6" class="outline-3">
+<h3 id="org54ab9b6">解除一个装饰器</h3>
+<div class="outline-text-3" id="text-org54ab9b6">
+<p>
+一个装饰器已经作用在一个函数上，如何撤销它，直接访问原始的未包装的那个函数。假设装饰器时通过@wraps 来实现的，那么可以通过访问__wrapped__属性来访问原始函数直接访问未包装的原始函数在调试、内省和其他函数操作时时很有用的。但是这里的方案仅仅适用与在包装器中正确适用了@wrapper 或者直接设置了__wrapped__属性的情况。如果有多个包装器，那么访问__wrapped__属性的行为时不可预知的，应该避免这样做。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> functools <span style="color: #4f97d7; font-weight: bold;">import</span> wraps
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">decorator1</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>:
+    <span style="color: #ce537a; font-weight: bold;">@wraps</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">wrapper</span><span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Decorator 1'</span><span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">return</span> func<span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">return</span> wrapper
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">decorator2</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>:
+    <span style="color: #ce537a; font-weight: bold;">@wraps</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">wrapper</span><span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Decorator 2'</span><span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">return</span> func<span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">return</span> wrapper
+
+
+<span style="color: #ce537a; font-weight: bold;">@decorator1</span>
+<span style="color: #ce537a; font-weight: bold;">@decorator2</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">add</span><span style="color: #4f97d7;">(</span>x, y<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">return</span> x + y
+
+
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>add<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>add.__wrapped__<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+Decorator 1
+Decorator 2
+5
+Decorator 2
+5
+
+</pre>
+<p>
+可以看出在 python3.4 以上，适用__wrapped__直接调用函数时无效的，而且并不是所有的装饰器都适用了@wraps，特别的，内置的装饰器@staticmethod 和@classmethod 就没有遵循这个约定（它们把原始函数存储在属性__func__中）。
+</p>
+</div>
+</div>
+<div id="outline-container-org3c50dea" class="outline-3">
+<h3 id="org3c50dea">定义一个带参数的装饰器</h3>
+<div class="outline-text-3" id="text-org3c50dea">
+<p>
+如何定一个带参数的装饰器?
+用一个例子来详细阐述接受参数的处理过程。假设想写一个装饰器给函数添加日志功能，同时允许用户指定日志级别和其他的选项。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> logging
+<span style="color: #4f97d7; font-weight: bold;">from</span> functools <span style="color: #4f97d7; font-weight: bold;">import</span> wraps
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">logged</span><span style="color: #4f97d7;">(</span>level, name=<span style="color: #a45bad;">None</span>, message=<span style="color: #a45bad;">None</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #2aa1ae;">"""</span>
+<span style="color: #2aa1ae;">    Add logging to a function, level is the logging</span>
+<span style="color: #2aa1ae;">    level, name is the logger name, and message is the log</span>
+<span style="color: #2aa1ae;">    message. If name and message aren't specified they default</span>
+<span style="color: #2aa1ae;">    to the function's module and name.</span>
+<span style="color: #2aa1ae;">    """</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">decorate</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>:
+        <span style="color: #7590db;">logname</span> = name <span style="color: #4f97d7; font-weight: bold;">if</span> name <span style="color: #4f97d7; font-weight: bold;">else</span> func.__module__
+        <span style="color: #7590db;">log</span> = logging.getLogger<span style="color: #4f97d7;">(</span>logname<span style="color: #4f97d7;">)</span>
+        <span style="color: #7590db;">logmsg</span> = message <span style="color: #4f97d7; font-weight: bold;">if</span> message <span style="color: #4f97d7; font-weight: bold;">else</span> func.<span style="color: #4f97d7;">__name__</span>
+
+        <span style="color: #ce537a; font-weight: bold;">@wraps</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">wrapper</span><span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>:
+            <span style="color: #4f97d7; font-weight: bold;">try</span>:
+                <span style="color: #4f97d7; font-weight: bold;">return</span> func<span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>
+            <span style="color: #4f97d7; font-weight: bold;">except</span> <span style="color: #ce537a; font-weight: bold;">TypeError</span>:
+                log.log<span style="color: #4f97d7;">(</span>level, logmsg<span style="color: #4f97d7;">)</span>
+
+        <span style="color: #4f97d7; font-weight: bold;">return</span> wrapper
+
+    <span style="color: #4f97d7; font-weight: bold;">return</span> decorate
+
+
+<span style="color: #ce537a; font-weight: bold;">@logged</span><span style="color: #4f97d7;">(</span>logging.DEBUG<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">add</span><span style="color: #4f97d7;">(</span>x, y<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">return</span> x + y
+
+
+<span style="color: #ce537a; font-weight: bold;">@logged</span><span style="color: #4f97d7;">(</span>logging.CRITICAL, <span style="color: #2d9574;">'example'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">spam</span><span style="color: #4f97d7;">()</span>:
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Spam!'</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org963262d" class="outline-3">
+<h3 id="org963262d">可自定义属性的装饰器</h3>
+<div class="outline-text-3" id="text-org963262d">
+<p>
+写一个装饰器来包装一个函数，并且允许用户提供参数在运行时控制装饰器行为？引入一个访问函数，适用 nonlocal 来修改内部变量，然后这个访问函数被作为一个属性赋值给包装函数。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> logging
+
+<span style="color: #4f97d7; font-weight: bold;">from</span> functools <span style="color: #4f97d7; font-weight: bold;">import</span> partial, wraps
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">attach_wrapper</span><span style="color: #4f97d7;">(</span>obj, func=<span style="color: #a45bad;">None</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">if</span> func <span style="color: #4f97d7; font-weight: bold;">is</span> <span style="color: #a45bad;">None</span>:
+        <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'---------'</span><span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">return</span> partial<span style="color: #4f97d7;">(</span>attach_wrapper, obj<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7;">setattr</span><span style="color: #4f97d7;">(</span>obj, func.<span style="color: #4f97d7;">__name__</span>, func<span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">"+++++++++++"</span><span style="color: #4f97d7;">)</span>
+    <span style="color: #4f97d7; font-weight: bold;">return</span> func
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">logged</span><span style="color: #4f97d7;">(</span>level, name=<span style="color: #a45bad;">None</span>, message=<span style="color: #a45bad;">None</span><span style="color: #4f97d7;">)</span>:
+    <span style="color: #2aa1ae;">'''</span>
+<span style="color: #2aa1ae;">    Add logging to a function. level is the logging</span>
+<span style="color: #2aa1ae;">    level, name is the logger name, and message is the</span>
+<span style="color: #2aa1ae;">    log messagel If name and message aren't specified,</span>
+<span style="color: #2aa1ae;">    they default to the function's module and name.</span>
+<span style="color: #2aa1ae;">    '''</span>
+
+    <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">decorate</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>:
+        <span style="color: #7590db;">logname</span> = name <span style="color: #4f97d7; font-weight: bold;">if</span> name <span style="color: #4f97d7; font-weight: bold;">else</span> func.__module__
+        <span style="color: #7590db;">log</span> = logging.getLogger<span style="color: #4f97d7;">(</span>logname<span style="color: #4f97d7;">)</span>
+        <span style="color: #7590db;">logmsg</span> = message <span style="color: #4f97d7; font-weight: bold;">if</span> message <span style="color: #4f97d7; font-weight: bold;">else</span> func.<span style="color: #4f97d7;">__name__</span>
+
+        <span style="color: #ce537a; font-weight: bold;">@wraps</span><span style="color: #4f97d7;">(</span>func<span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">wrapper</span><span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>:
+            log.log<span style="color: #4f97d7;">(</span>level, logmsg<span style="color: #4f97d7;">)</span>
+            <span style="color: #4f97d7; font-weight: bold;">return</span> func<span style="color: #4f97d7;">(</span>*args, **kwargs<span style="color: #4f97d7;">)</span>
+
+        <span style="color: #ce537a; font-weight: bold;">@attach_wrapper</span><span style="color: #4f97d7;">(</span>wrapper<span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">set_level</span><span style="color: #4f97d7;">(</span>newlevel<span style="color: #4f97d7;">)</span>:
+            <span style="color: #4f97d7; font-weight: bold;">nonlocal</span> level
+            <span style="color: #7590db;">level</span> = newlevel
+
+        <span style="color: #ce537a; font-weight: bold;">@attach_wrapper</span><span style="color: #4f97d7;">(</span>wrapper<span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">set_message</span><span style="color: #4f97d7;">(</span>newmsg<span style="color: #4f97d7;">)</span>:
+            <span style="color: #4f97d7; font-weight: bold;">nonlocal</span> logmsg
+            <span style="color: #7590db;">logmsg</span> = newmsg
+
+        <span style="color: #4f97d7; font-weight: bold;">return</span> wrapper
+
+    <span style="color: #4f97d7; font-weight: bold;">return</span> decorate
+
+
+<span style="color: #ce537a; font-weight: bold;">@logged</span><span style="color: #4f97d7;">(</span>logging.DEBUG<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">add</span><span style="color: #4f97d7;">(</span>x, y<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">return</span> x + y
+
+
+<span style="color: #ce537a; font-weight: bold;">@logged</span><span style="color: #4f97d7;">(</span>logging.CRITICAL, <span style="color: #2d9574;">'example'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">spam</span><span style="color: #4f97d7;">()</span>:
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Spam'</span><span style="color: #4f97d7;">)</span>
+
+
+logging.basicConfig<span style="color: #4f97d7;">(</span>level=logging.DEBUG<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>add<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+
+add.set_message<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Add called'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>add<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+
+add.set_level<span style="color: #4f97d7;">(</span>logging.WARNING<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>add<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">3</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+---------
++++++++++++
+---------
++++++++++++
+---------
++++++++++++
+---------
++++++++++++
+5
+5
+5
+</pre>
+</div>
+</div>
 </div>
 
 <div id="outline-container-org013f137" class="outline-2">
@@ -1003,7 +1465,7 @@ operator.itemgetter 函数有一个被 rows 中的记录用来查找值的索引
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2018-01-10 三 10:42</p>
+<p class="date">Created: 2018-01-15 一 16:28</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

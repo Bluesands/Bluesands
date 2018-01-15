@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-01-15 一 16:27 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Git Commands</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
+<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
+<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Git Commands</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org27e7c47">创建</a></li>
+<li><a href="#org4b28611">配置</a></li>
+<li><a href="#org374e3f3">增加/删除文件</a></li>
+<li><a href="#orga8968da">代码提交</a></li>
+<li><a href="#orgdefb848">提交历史</a></li>
+<li><a href="#org6792f16">分支</a></li>
+<li><a href="#org7b64d8e">标签</a></li>
+<li><a href="#org3516754">更新与发布</a></li>
+<li><a href="#org15d92f4">合并与重置</a></li>
+<li><a href="#org7fbf373">撤销</a></li>
+</ul>
+</div>
+</div>
+<p>
+在Linux环境下，可以通过git &#x2013;help、git reset &#x2013;help来查询git命令的具体参数和说明，更详细的还可以适用man git、man git reset
+来查询。切忌，在Linux下一定要多适用&#x2013;help和man命令。
+</p>
+
+<div id="outline-container-org27e7c47" class="outline-2">
+<h2 id="org27e7c47">创建</h2>
+<div class="outline-text-2" id="text-org27e7c47">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git init</td>
+<td class="org-left">将当前目录构建未一个git代码库</td>
+</tr>
+
+<tr>
+<td class="org-left">git init &lt;projectname&gt;</td>
+<td class="org-left">新建一个目录，并将其初始化为git代码库</td>
+</tr>
+
+<tr>
+<td class="org-left">git clone &lt;url&gt;</td>
+<td class="org-left">下载一个项目以及真个代码历史记录</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org4b28611" class="outline-2">
+<h2 id="org4b28611">配置</h2>
+<div class="outline-text-2" id="text-org4b28611">
+<p>
+git的设置文件为.gitconfig，它既可以在用户主目录下(作为该用户的全局配置)，也可以在项目目录下作为项目配置。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git config &#x2013;list</td>
+<td class="org-left">显示当前git的配置</td>
+</tr>
+
+<tr>
+<td class="org-left">git config -e [&#x2013;global]</td>
+<td class="org-left">编辑git配置文件(默认是使用$EDITOR)</td>
+</tr>
+
+<tr>
+<td class="org-left">git config [&#x2013;global] user.name "[name]"</td>
+<td class="org-left">设置提交代码时用户名</td>
+</tr>
+
+<tr>
+<td class="org-left">git config [&#x2013;global] user.name "[email address]"</td>
+<td class="org-left">设置提交代码时用户邮箱</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org374e3f3" class="outline-2">
+<h2 id="org374e3f3">增加/删除文件</h2>
+<div class="outline-text-2" id="text-org374e3f3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git status</td>
+<td class="org-left">显示工作路径下全部已修改的文件</td>
+</tr>
+
+<tr>
+<td class="org-left">git diff</td>
+<td class="org-left">显示与上次提交版本文件的不同</td>
+</tr>
+
+<tr>
+<td class="org-left">git add .</td>
+<td class="org-left">把当前所有修改添加到下次提交中</td>
+</tr>
+
+<tr>
+<td class="org-left">git add -p &lt;file&gt;</td>
+<td class="org-left">添加每个变化前都需要确定，对于同一个文件的所处变化，可以实现分次提交</td>
+</tr>
+
+<tr>
+<td class="org-left">git add &lt;file1&gt; &lt;file2&gt;</td>
+<td class="org-left">指定多个文件的修改添加到暂存区</td>
+</tr>
+
+<tr>
+<td class="org-left">git add &lt;dirname&gt;</td>
+<td class="org-left">指定目录添加到暂存区，包括子目录</td>
+</tr>
+
+<tr>
+<td class="org-left">git rm &lt;file1&gt; &lt;file2&gt;</td>
+<td class="org-left">删除工作区文件，并将这次删除放入暂存区</td>
+</tr>
+
+<tr>
+<td class="org-left">git rm &#x2013;cached &lt;file&gt;</td>
+<td class="org-left">停止追踪指定文件，但该文件会保留在工作区</td>
+</tr>
+
+<tr>
+<td class="org-left">git mv &lt;file-origional&gt; &lt;file-renameed&gt;</td>
+<td class="org-left">改名文件，并将这个改名放入暂存区</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orga8968da" class="outline-2">
+<h2 id="orga8968da">代码提交</h2>
+<div class="outline-text-2" id="text-orga8968da">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git commit -m &lt;message&gt;</td>
+<td class="org-left">提交暂存区到仓库区</td>
+</tr>
+
+<tr>
+<td class="org-left">git commit &lt;file1&gt; &lt;file2&gt; &#x2026; -m &lt;message&gt;</td>
+<td class="org-left">提交暂存区的指定文件到仓库区</td>
+</tr>
+
+<tr>
+<td class="org-left">git commit -a</td>
+<td class="org-left">提交工作区自上次commit之后的所有变化，直接到仓库区</td>
+</tr>
+
+<tr>
+<td class="org-left">git commit -v</td>
+<td class="org-left">提交时显示所有的diff信息</td>
+</tr>
+
+<tr>
+<td class="org-left">git commit &#x2013;amend -m &lt;message&gt;</td>
+<td class="org-left">适用一次新的commit，替代上次提交，如果代码没有任何变化，则用来改写上次提交的message</td>
+</tr>
+
+<tr>
+<td class="org-left">git commit &#x2013;amend &lt;file1&gt; &lt;file2&gt; &#x2026;</td>
+<td class="org-left">重做上次提交，并包括指定文件的新变化</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgdefb848" class="outline-2">
+<h2 id="orgdefb848">提交历史</h2>
+<div class="outline-text-2" id="text-orgdefb848">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git log</td>
+<td class="org-left">从最新提交开始显示所有的提交记录</td>
+</tr>
+
+<tr>
+<td class="org-left">git log &#x2013;stat</td>
+<td class="org-left">显示所有提交历史，以及每次提交发生变更的文件</td>
+</tr>
+
+<tr>
+<td class="org-left">git log -S &lt;keyword&gt;</td>
+<td class="org-left">搜索提交历史，根据关键词</td>
+</tr>
+
+<tr>
+<td class="org-left">git log &lt;tag&gt; HEAD &#x2013;pretty=format:%s</td>
+<td class="org-left">显示某个提交之后的所有变动，每个提交占据一行</td>
+</tr>
+
+<tr>
+<td class="org-left">git log &lt;tag&gt; HEAD &#x2013;grep feature</td>
+<td class="org-left">显示某个提交之后的所有变动，其”提交说明“必须符合搜索提交</td>
+</tr>
+
+<tr>
+<td class="org-left">git log &#x2013;follow &lt;file&gt;</td>
+<td class="org-left">显示某个文件的版本历史，包括文件改名</td>
+</tr>
+
+<tr>
+<td class="org-left">git whatchanged &lt;file&gt;</td>
+<td class="org-left">同上</td>
+</tr>
+
+<tr>
+<td class="org-left">git log -p &lt;file&gt;</td>
+<td class="org-left">显示指定文件相关的每一次提交</td>
+</tr>
+
+<tr>
+<td class="org-left">git log -5 &#x2013;pretty &#x2013;oneline</td>
+<td class="org-left">显示过去5次提交</td>
+</tr>
+
+<tr>
+<td class="org-left">git shortlog -sn</td>
+<td class="org-left">系那是所有提交过的用户，按提交次数排序</td>
+</tr>
+
+<tr>
+<td class="org-left">git blame &lt;file&gt;</td>
+<td class="org-left">谁，在什么时间，修改了什么</td>
+</tr>
+
+<tr>
+<td class="org-left">git diff</td>
+<td class="org-left">显示暂存区和工作区的差异</td>
+</tr>
+
+<tr>
+<td class="org-left">git diff &#x2013;cached &lt;file&gt;</td>
+<td class="org-left">显示暂存区和上一次提交的差异</td>
+</tr>
+
+<tr>
+<td class="org-left">git diff HEAD</td>
+<td class="org-left">显示工作区与当前分支最新提交之间的差异</td>
+</tr>
+
+<tr>
+<td class="org-left">git diff &lt;first-commmit&gt; &lt;second-commit&gt;</td>
+<td class="org-left">显示两次提交之间的差异</td>
+</tr>
+
+<tr>
+<td class="org-left">git dff  &#x2013;shortstat "@{0 day ago}"</td>
+<td class="org-left">显示今天你写了多少代码</td>
+</tr>
+
+<tr>
+<td class="org-left">git show commit</td>
+<td class="org-left">显示某次提交的元数据和内容变化</td>
+</tr>
+
+<tr>
+<td class="org-left">git show &#x2013;name-only &lt;commit&gt;</td>
+<td class="org-left">显示某次提交发生变化的文件</td>
+</tr>
+
+<tr>
+<td class="org-left">git show &lt;commmit&gt;:&lt;filename&gt;</td>
+<td class="org-left">显示某次提交时，某个文件的内容</td>
+</tr>
+
+<tr>
+<td class="org-left">git reflog</td>
+<td class="org-left">显示当前分支的最近几次提交</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org6792f16" class="outline-2">
+<h2 id="org6792f16">分支</h2>
+<div class="outline-text-2" id="text-org6792f16">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git branch</td>
+<td class="org-left">列出本地所有的分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git branch -r</td>
+<td class="org-left">列出远程所有分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git branch -a</td>
+<td class="org-left">列出本地与远程的所有分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git branch &lt;branch-name&gt;</td>
+<td class="org-left">新建一个分支，但依旧停留在当前分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git checkout -b &lt;branch-name&gt;</td>
+<td class="org-left">新建一个分支并切换到该分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git branch &lt;branch&gt; &lt;commit&gt;</td>
+<td class="org-left">新建一个分支，指向指定commit</td>
+</tr>
+
+<tr>
+<td class="org-left">git branch &#x2013;track &lt;branch&gt; &lt;remote-branch&gt;</td>
+<td class="org-left">新建一个分支，与指定的远程分支建立追踪关系</td>
+</tr>
+
+<tr>
+<td class="org-left">git checkout &lt;branch-name&gt;</td>
+<td class="org-left">切换到指定分支，并更新工作区</td>
+</tr>
+
+<tr>
+<td class="org-left">git checkout -</td>
+<td class="org-left">切换到上一个分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git branch &#x2013;set-upstream &lt;branch&gt; &lt;remote-branch&gt;</td>
+<td class="org-left">建立追踪关系，在现有分支与指定的远程分支之间</td>
+</tr>
+
+<tr>
+<td class="org-left">git merge &lt;branch&gt;</td>
+<td class="org-left">合并指定分支当前分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git branch -d &lt;branch-name&gt;</td>
+<td class="org-left">删除分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git cherry-pick &lt;commit&gt;</td>
+<td class="org-left">选择一个commit，合并进当前分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git push origin &#x2013;delect &lt;branch-name&gt;</td>
+<td class="org-left">删除远程分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git branch -dr &lt;remote/branch&gt;</td>
+<td class="org-left">删除远程分支</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org7b64d8e" class="outline-2">
+<h2 id="org7b64d8e">标签</h2>
+<div class="outline-text-2" id="text-org7b64d8e">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git tag</td>
+<td class="org-left">列出所有标签</td>
+</tr>
+
+<tr>
+<td class="org-left">git tag &lt;tag&gt;</td>
+<td class="org-left">新建一个tag在当前commit</td>
+</tr>
+
+<tr>
+<td class="org-left">git tag &lt;tag&gt; &lt;commit&gt;</td>
+<td class="org-left">在指定的commit上创建新标签</td>
+</tr>
+
+<tr>
+<td class="org-left">git tag -d &lt;tag&gt;</td>
+<td class="org-left">删除本地tag</td>
+</tr>
+
+<tr>
+<td class="org-left">git push origin :refs/tags/&lt;tagname&gt;</td>
+<td class="org-left">删除远程tag</td>
+</tr>
+
+<tr>
+<td class="org-left">git show &lt;tag&gt;</td>
+<td class="org-left">查看tag信息</td>
+</tr>
+
+<tr>
+<td class="org-left">git push &lt;remote&gt; &lt;tag&gt;</td>
+<td class="org-left">提交指定标签</td>
+</tr>
+
+<tr>
+<td class="org-left">git push &lt;remote&gt; &#x2013;tags</td>
+<td class="org-left">提交所有tag</td>
+</tr>
+
+<tr>
+<td class="org-left">git checkout -b &lt;branch&gt; &lt;tag&gt;</td>
+<td class="org-left">新建一个分支，指定某个tag</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org3516754" class="outline-2">
+<h2 id="org3516754">更新与发布</h2>
+<div class="outline-text-2" id="text-org3516754">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git remote -v</td>
+<td class="org-left">列出当前配置的远程端</td>
+</tr>
+
+<tr>
+<td class="org-left">git remote show &lt;remote&gt;</td>
+<td class="org-left">显示远程端信息</td>
+</tr>
+
+<tr>
+<td class="org-left">git remote add &lt;shortname&gt; &lt;ur&gt;</td>
+<td class="org-left">添加新的远程端</td>
+</tr>
+
+<tr>
+<td class="org-left">git fetch &lt;remote&gt;</td>
+<td class="org-left">下载远程端的所有改动到本地(不会自动合并到当前)</td>
+</tr>
+
+<tr>
+<td class="org-left">git pull &lt;remote&gt; &lt;branch&gt;</td>
+<td class="org-left">下载远程端的所有改动到本地(自动合并到当前)</td>
+</tr>
+
+<tr>
+<td class="org-left">git push &lt;remote&gt; &lt;branch&gt;</td>
+<td class="org-left">将本地版本发布到远程端</td>
+</tr>
+
+<tr>
+<td class="org-left">git branch -dr &lt;remote/branch&gt;</td>
+<td class="org-left">删除远程端分支</td>
+</tr>
+
+<tr>
+<td class="org-left">git push &#x2013;tags</td>
+<td class="org-left">发布标签</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org15d92f4" class="outline-2">
+<h2 id="org15d92f4">合并与重置</h2>
+<div class="outline-text-2" id="text-org15d92f4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git merge &lt;branch&gt;</td>
+<td class="org-left">将分支合并到当前</td>
+</tr>
+
+<tr>
+<td class="org-left">git rebase &lt;branch&gt;</td>
+<td class="org-left">将当前版本重置到分支中(请勿重置已发布的提交)</td>
+</tr>
+
+<tr>
+<td class="org-left">git rebase &#x2013;abort</td>
+<td class="org-left">推出重置</td>
+</tr>
+
+<tr>
+<td class="org-left">git rebase &#x2013;continue</td>
+<td class="org-left">解决冲突后继续重置</td>
+</tr>
+
+<tr>
+<td class="org-left">git mergetool</td>
+<td class="org-left">适用配置好的合并工具去解决冲突</td>
+</tr>
+
+<tr>
+<td class="org-left">git add &lt;resolved-file&gt;</td>
+<td class="org-left">在编辑器中手动解决冲突后标记文件为已解决冲突</td>
+</tr>
+
+<tr>
+<td class="org-left">git rm &lt;resolved-file&gt;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org7fbf373" class="outline-2">
+<h2 id="org7fbf373">撤销</h2>
+<div class="outline-text-2" id="text-org7fbf373">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">git checkout &lt;file&gt;</td>
+<td class="org-left">恢复暂存区的指定文件到工作区</td>
+</tr>
+
+<tr>
+<td class="org-left">git checkout &lt;commit&gt; &lt;file&gt;</td>
+<td class="org-left">恢复某个提交的指定文件到暂存区和工作区</td>
+</tr>
+
+<tr>
+<td class="org-left">git chekcout .</td>
+<td class="org-left">恢复暂存区的所有文件到工作区</td>
+</tr>
+
+<tr>
+<td class="org-left">git reset &lt;file&gt;</td>
+<td class="org-left">重置暂存区的指定文件，与上一次提交保持一致，但工作区不变</td>
+</tr>
+
+<tr>
+<td class="org-left">git reset &#x2013;hard</td>
+<td class="org-left">重置暂存区与工作区与上次提交保持一致</td>
+</tr>
+
+<tr>
+<td class="org-left">git reset &lt;commit&gt;</td>
+<td class="org-left">重置当前分支的指针为指定提交，同时重置暂存区，但工作区不变</td>
+</tr>
+
+<tr>
+<td class="org-left">git reset &#x2013;hard &lt;commit&gt;</td>
+<td class="org-left">重置当前分支的HEAD为指定提交，同时重置暂存区和工作区，与指定提交保存一致</td>
+</tr>
+
+<tr>
+<td class="org-left">git reset &#x2013;keep &lt;commit&gt;</td>
+<td class="org-left">将HEAD重置到上一次提交的版本并保留未提交的本地修改</td>
+</tr>
+
+<tr>
+<td class="org-left">git revert &lt;commit&gt;</td>
+<td class="org-left">重置一个提交(通过创建一个截然不同的新提交)</td>
+</tr>
+
+<tr>
+<td class="org-left">git stash</td>
+<td class="org-left">暂时将未提交的变化移除，稍后移入</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2018-01-15 一 16:27</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
