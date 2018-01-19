@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-01-15 一 16:28 -->
+<!-- 2018-01-19 五 14:03 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python3 CookBook</title>
@@ -41,9 +41,18 @@
 <li><a href="#org9b198b9">排序不支持原生比较的对象</a></li>
 <li><a href="#org2ac48bb">通过某个字段将记录分组</a></li>
 <li><a href="#org355068e">过滤序列元素</a></li>
+<li><a href="#org3a747c0">从字典中提取子集</a></li>
+<li><a href="#orgd067cc3">映射名称到序列元素</a></li>
+<li><a href="#orgaaacc09">转换并同时计算数据</a></li>
+<li><a href="#org1ad20ad">合并多个字典或映射</a></li>
 </ul>
 </li>
-<li><a href="#orge222deb">文本与 IO</a></li>
+<li><a href="#orge222deb">文本与 IO</a>
+<ul>
+<li><a href="#org3c087ca">使用多个界定符号分割字符</a></li>
+<li><a href="#org1c39ed9">字符串开头或结尾匹配</a></li>
+</ul>
+</li>
 <li><a href="#org3dc8150">数据编码和处理</a></li>
 <li><a href="#org0b6d568">函数</a></li>
 <li><a href="#org5377ac1">类与对象</a></li>
@@ -1064,7 +1073,7 @@ defaultdict(&lt;class 'list'&gt;,
 
 <pre class="example">
 [1, 4, 10, 2, 3]
-&lt;generator object &lt;genexpr&gt; at 0x7f4910bf9c50&gt;
+&lt;generator object &lt;genexpr&gt; at 0x7fd8fcbcfc50&gt;
 
 </pre>
 <p>
@@ -1110,11 +1119,292 @@ defaultdict(&lt;class 'list'&gt;,
 </pre>
 </div>
 </div>
+
+<div id="outline-container-org3a747c0" class="outline-3">
+<h3 id="org3a747c0">从字典中提取子集</h3>
+<div class="outline-text-3" id="text-org3a747c0">
+<p>
+你想构造一个字典，它是另外一个字典的子集？最简单的方式是适用字典推导式。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7590db;">prices</span> = <span style="color: #4f97d7;">{</span>
+    <span style="color: #2d9574;">'ACME'</span>: <span style="color: #a45bad;">45</span>.<span style="color: #a45bad;">23</span>,
+    <span style="color: #2d9574;">'AAPL'</span>: <span style="color: #a45bad;">612</span>.<span style="color: #a45bad;">78</span>,
+    <span style="color: #2d9574;">'IBM'</span>: <span style="color: #a45bad;">205</span>.<span style="color: #a45bad;">55</span>,
+    <span style="color: #2d9574;">'HPQ'</span>: <span style="color: #a45bad;">37</span>.<span style="color: #a45bad;">20</span>,
+    <span style="color: #2d9574;">'FB'</span>: <span style="color: #a45bad;">10</span>.<span style="color: #a45bad;">75</span>
+<span style="color: #4f97d7;">}</span>
+<span style="color: #7590db;">p1</span> = <span style="color: #4f97d7;">{</span>key: value <span style="color: #4f97d7; font-weight: bold;">for</span> key, value <span style="color: #4f97d7; font-weight: bold;">in</span> prices.items<span style="color: #bc6ec5;">()</span> <span style="color: #4f97d7; font-weight: bold;">if</span> value &gt; <span style="color: #a45bad;">200</span><span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>p1<span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">tech_names</span> = <span style="color: #4f97d7;">{</span><span style="color: #2d9574;">'AAPL'</span>, <span style="color: #2d9574;">'IBM'</span>, <span style="color: #2d9574;">'HPQ'</span>, <span style="color: #2d9574;">'MSFT'</span><span style="color: #4f97d7;">}</span>
+<span style="color: #7590db;">p2</span> = <span style="color: #4f97d7;">{</span>key: value <span style="color: #4f97d7; font-weight: bold;">for</span> key, value <span style="color: #4f97d7; font-weight: bold;">in</span> prices.items<span style="color: #bc6ec5;">()</span> <span style="color: #4f97d7; font-weight: bold;">if</span> key <span style="color: #4f97d7; font-weight: bold;">in</span> tech_names<span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>p2<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+{'AAPL': 612.78, 'IBM': 205.55}
+{'AAPL': 612.78, 'IBM': 205.55, 'HPQ': 37.2}
+
+</pre>
+<p>
+大多数情况下字典推导式能做到的，通过创建一个元组序列然后把它传给 dict()函数也能实现，但是，字典推导式更加清晰，且实际运行数度更快。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd067cc3" class="outline-3">
+<h3 id="orgd067cc3">映射名称到序列元素</h3>
+<div class="outline-text-3" id="text-orgd067cc3">
+<p>
+你有一段通过下表访问列表或者元组中元素代码，但是这样有时候会使得代码难以阅读，于是想通过名称来访问元素。
+collections.namedtuple()函数通过使用一个普通的元组对象来帮你解决这个问题。这个函数实际上是一个返回 python
+中标准元组类型子类的一个工厂方法。你需要传递一个类型名称和你需要的字段给它，然后它就会返回一个类，你可以初始化这个类，为你定义的字段传递值等。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> collections <span style="color: #4f97d7; font-weight: bold;">import</span> namedtuple
+
+<span style="color: #7590db;">subscriber</span> = namedtuple<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Subscriber'</span>, <span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'addr'</span>, <span style="color: #2d9574;">'joined'</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">sub</span> = subscriber<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'joesy@example.com'</span>, <span style="color: #2d9574;">'2012-10-19'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>sub<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>sub.addr<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>sub.joined<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+Subscriber(addr='joesy@example.com', joined='2012-10-19')
+joesy@example.com
+2012-10-19
+
+</pre>
+<p>
+尽管 namedtuple 的实例看起来像一个普通的类实例，但是它跟元素类型是可交换的，支持所有的普通元组操作，比如索引和解压。命名元组的一个主要用途是将你的代码从下标操作中解脱出来。因此，如果你从数据库调用中返回了一个很大的元组列表，通过下表区操作其中的元素，当你添加了新的列的时候你的代码可能就会出错，但是如果你使用了命名元组，那么就不会有这样的顾虑。下标操作通常会让代码不清晰，并且非常依赖记录的结构。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> collections <span style="color: #4f97d7; font-weight: bold;">import</span> namedtuple
+
+<span style="color: #7590db;">data</span> = <span style="color: #4f97d7;">[</span><span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'apple'</span>, <span style="color: #a45bad;">12</span>, <span style="color: #a45bad;">3</span><span style="color: #bc6ec5;">)</span>, <span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'iphone'</span>, <span style="color: #a45bad;">10</span>, <span style="color: #a45bad;">4</span><span style="color: #bc6ec5;">)</span>, <span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'mac'</span>, <span style="color: #a45bad;">11</span>, <span style="color: #a45bad;">2</span><span style="color: #bc6ec5;">)</span>, <span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'imac'</span>, <span style="color: #a45bad;">9</span>, <span style="color: #a45bad;">3</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">]</span>
+<span style="color: #7590db;">Stock</span> = namedtuple<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Stock'</span>, <span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'name'</span>, <span style="color: #2d9574;">'shares'</span>, <span style="color: #2d9574;">'price'</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">compute_cost</span><span style="color: #4f97d7;">(</span>records<span style="color: #4f97d7;">)</span>:
+    <span style="color: #7590db;">total</span> = <span style="color: #a45bad;">0</span>.<span style="color: #a45bad;">0</span>
+    <span style="color: #4f97d7; font-weight: bold;">for</span> rec <span style="color: #4f97d7; font-weight: bold;">in</span> records:
+        <span style="color: #7590db;">s</span> = Stock<span style="color: #4f97d7;">(</span>*rec<span style="color: #4f97d7;">)</span>
+        <span style="color: #7590db;">total</span> += s.shares * s.price
+    <span style="color: #4f97d7; font-weight: bold;">return</span> total
+
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>compute_cost<span style="color: #bc6ec5;">(</span>data<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+125.0
+
+</pre>
+<p>
+命名元组的另一个用途是作为字典的替代，因为字典存储需要更多的内容空间。如果你需要构建一个非常大的包含字典的数据结构，那么使用命名元组会更加高效。但需要注意，不像字典那样，一个命名元组是不可更改的。如果需要改变属性的值，那么可以使用命名元组实例的_replace()方法，它会创建一个全新的命名元组并将对应的字段用新的值取代。
+_replace()方法还有一个很有用的特性就是当你的命名元组拥有可选或者缺失字段时候，它是一个非常方便的填充数据的方法。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> collections <span style="color: #4f97d7; font-weight: bold;">import</span> namedtuple
+
+<span style="color: #7590db;">Stock</span> = namedtuple<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Stock'</span>, <span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'name'</span>, <span style="color: #2d9574;">'shares'</span>, <span style="color: #2d9574;">'price'</span>, <span style="color: #2d9574;">'date'</span>, <span style="color: #2d9574;">'time'</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">stock_prototype</span> = Stock<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">''</span>, <span style="color: #a45bad;">0</span>, <span style="color: #a45bad;">0</span>.<span style="color: #a45bad;">0</span>, <span style="color: #a45bad;">None</span>, <span style="color: #a45bad;">None</span><span style="color: #4f97d7;">)</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">dict_to_stock</span><span style="color: #4f97d7;">(</span>s<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">return</span> stock_prototype._replace<span style="color: #4f97d7;">(</span>**s<span style="color: #4f97d7;">)</span>
+
+
+<span style="color: #7590db;">a</span> = <span style="color: #4f97d7;">{</span><span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'ACME'</span>, <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">100</span>, <span style="color: #2d9574;">'price'</span>: <span style="color: #a45bad;">123</span>.<span style="color: #a45bad;">45</span><span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>dict_to_stock<span style="color: #bc6ec5;">(</span>a<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">b</span> = <span style="color: #4f97d7;">{</span><span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'ACME'</span>, <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">100</span>, <span style="color: #2d9574;">'price'</span>: <span style="color: #a45bad;">123</span>.<span style="color: #a45bad;">45</span>, <span style="color: #2d9574;">'date'</span>: <span style="color: #2d9574;">'12/17/2012'</span><span style="color: #4f97d7;">}</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>dict_to_stock<span style="color: #bc6ec5;">(</span>b<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+Stock(name='ACME', shares=100, price=123.45, date=None, time=None)
+Stock(name='ACME', shares=100, price=123.45, date='12/17/2012', time=None)
+
+</pre>
+<p>
+如果你的目标是定义一个需要更多实例属性的高效数据结构，那么命名元组并不是你的最佳选择，这时候你应该考虑定一个包含__slots__方法的类。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaaacc09" class="outline-3">
+<h3 id="orgaaacc09">转换并同时计算数据</h3>
+<div class="outline-text-3" id="text-orgaaacc09">
+<p>
+你需要在数据序列上执行聚集函数（比如 sum()，min()，max()），但是首先你需要先转换或者过滤数据。一个非常优雅的方式去结合数据计算与转换就是使用一个生成器表达式。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> os
+
+<span style="color: #7590db;">nums</span> = <span style="color: #4f97d7;">range</span><span style="color: #4f97d7;">(</span><span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">6</span><span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">s</span> = <span style="color: #4f97d7;">sum</span><span style="color: #4f97d7;">(</span>x * x <span style="color: #4f97d7; font-weight: bold;">for</span> x <span style="color: #4f97d7; font-weight: bold;">in</span> nums<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>s<span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">files</span> = os.listdir<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'..'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">if</span> <span style="color: #4f97d7;">any</span><span style="color: #4f97d7;">(</span>name.endswith<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'.org'</span><span style="color: #bc6ec5;">)</span> <span style="color: #4f97d7; font-weight: bold;">for</span> name <span style="color: #4f97d7; font-weight: bold;">in</span> files<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'There be org file!'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">else</span>:
+    <span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Sorry, no org.'</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">s</span> = <span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'ACME'</span>, <span style="color: #a45bad;">50</span>, <span style="color: #a45bad;">123</span>.<span style="color: #a45bad;">45</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">','</span>.join<span style="color: #bc6ec5;">(</span><span style="color: #4f97d7;">str</span><span style="color: #2d9574;">(</span>x<span style="color: #2d9574;">)</span> <span style="color: #4f97d7; font-weight: bold;">for</span> x <span style="color: #4f97d7; font-weight: bold;">in</span> s<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">portfolio</span> = <span style="color: #4f97d7;">[</span>
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'GOOG'</span>, <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">50</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'YHOO'</span>, <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">75</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'AOL'</span>, <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">20</span><span style="color: #bc6ec5;">}</span>,
+    <span style="color: #bc6ec5;">{</span><span style="color: #2d9574;">'name'</span>: <span style="color: #2d9574;">'SCOX'</span>, <span style="color: #2d9574;">'shares'</span>: <span style="color: #a45bad;">65</span><span style="color: #bc6ec5;">}</span>
+<span style="color: #4f97d7;">]</span>
+<span style="color: #7590db;">min_shares</span> = <span style="color: #4f97d7;">min</span><span style="color: #4f97d7;">(</span>s<span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'shares'</span><span style="color: #bc6ec5;">]</span> <span style="color: #4f97d7; font-weight: bold;">for</span> s <span style="color: #4f97d7; font-weight: bold;">in</span> portfolio<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>min_shares<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+55
+Sorry, no org.
+ACME,50,123.45
+20
+
+</pre>
+<p>
+上面的示例演示了当生成器表达式作为一个单独的参数传递给函数时的巧妙语法。使用一个生成器表达式作为参数会比先创建一个零时列表更加高效和优雅。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1ad20ad" class="outline-3">
+<h3 id="org1ad20ad">合并多个字典或映射</h3>
+<div class="outline-text-3" id="text-org1ad20ad">
+<p>
+现在有多个字典或者映射，你想将它们从逻辑上合并为一个单一的映射后执行某些操作，比如查找值或者检查键是否存在。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> collections <span style="color: #4f97d7; font-weight: bold;">import</span> ChainMap
+
+<span style="color: #7590db;">a</span> = <span style="color: #4f97d7;">{</span><span style="color: #2d9574;">'x'</span>: <span style="color: #a45bad;">1</span>, <span style="color: #2d9574;">'z'</span>: <span style="color: #a45bad;">3</span><span style="color: #4f97d7;">}</span>
+<span style="color: #7590db;">b</span> = <span style="color: #4f97d7;">{</span><span style="color: #2d9574;">'y'</span>: <span style="color: #a45bad;">2</span>, <span style="color: #2d9574;">'z'</span>: <span style="color: #a45bad;">4</span><span style="color: #4f97d7;">}</span>
+
+<span style="color: #7590db;">c</span> = ChainMap<span style="color: #4f97d7;">(</span>a, b<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">list</span><span style="color: #bc6ec5;">(</span>c.items<span style="color: #2d9574;">()</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+[('z', 3), ('y', 2), ('x', 1)]
+
+</pre>
+<p>
+一个 ChainMap 接受多个字典并将它们在逻辑上变为一个字典。然后，这些字典并不是真的合并在一起，ChainMap 类只是在内部创建了一个容纳这些字典的列表并重新定义了一些常见的字典操作类遍历这个列表。如果出现重复出现的键，那么第一次出现的映射值会被返回。因此，例子程序中的 c['z']总是会返回字典 a 中的值。对于字典的更新或者删除操作总是影响列表中第一个字典。
+ChainMap 对于编程语言中的作用范围变量（比如 globals，locals 等）是非常有用的。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">from</span> collections <span style="color: #4f97d7; font-weight: bold;">import</span> ChainMap
+<span style="color: #7590db;">values</span> = ChainMap<span style="color: #4f97d7;">()</span>
+<span style="color: #7590db;">values</span><span style="color: #4f97d7;">[</span><span style="color: #2d9574;">'x'</span><span style="color: #4f97d7;">]</span> = <span style="color: #a45bad;">1</span>
+
+<span style="color: #7590db;">values</span> = values.new_child<span style="color: #4f97d7;">()</span>
+<span style="color: #7590db;">values</span><span style="color: #4f97d7;">[</span><span style="color: #2d9574;">'x'</span><span style="color: #4f97d7;">]</span> = <span style="color: #a45bad;">2</span>
+
+<span style="color: #7590db;">values</span> = values.new_child<span style="color: #4f97d7;">()</span>
+<span style="color: #7590db;">values</span><span style="color: #4f97d7;">[</span><span style="color: #2d9574;">'x'</span><span style="color: #4f97d7;">]</span> = <span style="color: #a45bad;">3</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>values<span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'x'</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>values<span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">values</span> = values.parents
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>values<span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'x'</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>values<span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">values</span> = values.parents
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>values<span style="color: #bc6ec5;">[</span><span style="color: #2d9574;">'x'</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>values<span style="color: #4f97d7;">)</span>
+
+</pre>
+</div>
+
+<pre class="example">
+3
+ChainMap({'x': 3}, {'x': 2}, {'x': 1})
+2
+ChainMap({'x': 2}, {'x': 1})
+1
+ChainMap({'x': 1})
+
+</pre>
+</div>
+</div>
 </div>
 
 <div id="outline-container-orge222deb" class="outline-2">
 <h2 id="orge222deb">文本与 IO</h2>
+<div class="outline-text-2" id="text-orge222deb">
 </div>
+<div id="outline-container-org3c087ca" class="outline-3">
+<h3 id="org3c087ca">使用多个界定符号分割字符</h3>
+<div class="outline-text-3" id="text-org3c087ca">
+<p>
+需要将一个字符串分割为多个字段，但是分隔符还有周围的空格并不是固定的。
+string 对象的 split()方法只适应非常简单的分割情形，它并不允许有多个分割符号或者是分隔符周围不确定的空格。当你需要更加灵活的切割字符串的时候，最好使用 re.split()方法。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> re
+<span style="color: #7590db;">line</span> = <span style="color: #2d9574;">'asdf fjdk; afed, fjek,asdf, foo'</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>re.split<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'[;,\s]\s*'</span>, line<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">fields</span> = re.split<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'(;|,|\s)\s*'</span>, line<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>fields<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+['asdf', 'fjdk', 'afed', 'fjek', 'asdf', 'foo']
+['asdf', ' ', 'fjdk', ';', 'afed', ',', 'fjek', ',', 'asdf', ',', 'foo']
+
+</pre>
+</div>
+</div>
+<div id="outline-container-org1c39ed9" class="outline-3">
+<h3 id="org1c39ed9">字符串开头或结尾匹配</h3>
+<div class="outline-text-3" id="text-org1c39ed9">
+<p>
+你需要通过指定的文本模式去检查字符串的开头或者结尾，比如文件名后缀，URL Scheme 等。检查字符串开头或结尾的一个简单方式是使用 str.startswith()或者 str.endswith()方法。如果检查多个匹配可能，可以使用列表推导式传入 any。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> os
+<span style="color: #4f97d7; font-weight: bold;">from</span> urllib.request <span style="color: #4f97d7; font-weight: bold;">import</span> urlopen
+
+<span style="color: #7590db;">filenames</span> = os.listdir<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'.'</span><span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">t</span> = <span style="color: #4f97d7;">any</span><span style="color: #4f97d7;">(</span>name.endswith<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'.org'</span><span style="color: #bc6ec5;">)</span> <span style="color: #4f97d7; font-weight: bold;">for</span> name <span style="color: #4f97d7; font-weight: bold;">in</span> filenames<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">print</span><span style="color: #4f97d7;">(</span>t<span style="color: #4f97d7;">)</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">read_data</span><span style="color: #4f97d7;">(</span>name<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">if</span> name.startswith<span style="color: #4f97d7;">(</span><span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'http:'</span>, <span style="color: #2d9574;">'https:'</span>, <span style="color: #2d9574;">'ftp:'</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> urlopen<span style="color: #4f97d7;">(</span>name<span style="color: #4f97d7;">)</span>.read<span style="color: #4f97d7;">()</span>
+    <span style="color: #4f97d7; font-weight: bold;">else</span>:
+        <span style="color: #4f97d7; font-weight: bold;">with</span> <span style="color: #4f97d7;">open</span><span style="color: #4f97d7;">(</span>name<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">as</span> f:
+            <span style="color: #4f97d7; font-weight: bold;">return</span> f.read<span style="color: #4f97d7;">()</span>
+</pre>
+</div>
+
+<pre class="example">
+True
+
+</pre>
+</div>
+</div>
+</div>
+
 <div id="outline-container-org3dc8150" class="outline-2">
 <h2 id="org3dc8150">数据编码和处理</h2>
 </div>
@@ -1171,7 +1461,7 @@ countdown<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">100
 </div>
 
 <pre class="example">
-countdown 0.0041043758392333984
+countdown 0.00429224967956543
 
 </pre>
 <p>
@@ -1231,7 +1521,7 @@ countdown.__wrapped__<span style="color: #4f97d7;">(</span><span style="color: #
 </div>
 
 <pre class="example">
-countdown 0.004173994064331055
+countdown 0.004256486892700195
 countdown
 
     Counts down
@@ -1465,7 +1755,7 @@ add.set_level<span style="color: #4f97d7;">(</span>logging.WARNING<span style="c
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2018-01-15 一 16:28</p>
+<p class="date">Created: 2018-01-19 五 14:03</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
