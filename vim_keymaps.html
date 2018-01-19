@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-01-19 五 14:03 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vim Keymaps</title>
+<meta name="generator" content="Org mode" />
+<meta name="keywords" content="vim keymaps" />
+<link rel="stylesheet" title="Standard" href="/worg/style/worg.css" type="text/css" />
+<link rel="alternate stylesheet" title="Zenburn" href="/worg/style/worg-zenburn.css" type="text/css" />
+<link rel="alternate stylesheet" title="Classic" href="/worg/style/worg-classic.css" type="text/css" />
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Vim Keymaps</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf8ffb17">移动</a></li>
+<li><a href="#org302d88b">跳转</a></li>
+<li><a href="#org725a476">编辑</a>
+<ul>
+<li><a href="#org76436e9">新增</a></li>
+<li><a href="#org4251120">修改</a></li>
+<li><a href="#org2fe9e94">删除</a></li>
+<li><a href="#org39fa74e">复制/剪切/粘贴</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf8ffb17" class="outline-2">
+<h2 id="orgf8ffb17">移动</h2>
+<div class="outline-text-2" id="text-orgf8ffb17">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keymap</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">h j k l</td>
+<td class="org-left">左 下 上 右</td>
+</tr>
+
+<tr>
+<td class="org-left">w</td>
+<td class="org-left">下个单词的词首</td>
+</tr>
+
+<tr>
+<td class="org-left">W</td>
+<td class="org-left">下一个单词的词首(以空格区分单词)</td>
+</tr>
+
+<tr>
+<td class="org-left">e</td>
+<td class="org-left">下一个单词的词尾</td>
+</tr>
+
+<tr>
+<td class="org-left">E</td>
+<td class="org-left">下一个单词的词尾(以空格区分单词)</td>
+</tr>
+
+<tr>
+<td class="org-left">b</td>
+<td class="org-left">上一个单词的词首</td>
+</tr>
+
+<tr>
+<td class="org-left">B</td>
+<td class="org-left">上一个单词的词首(以空格区分单词)</td>
+</tr>
+
+<tr>
+<td class="org-left">n-w/W/e/E/b/B</td>
+<td class="org-left">n 为移动的单词个数</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt;&gt;</td>
+<td class="org-left">v 模式选中后进行缩进</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org302d88b" class="outline-2">
+<h2 id="org302d88b">跳转</h2>
+<div class="outline-text-2" id="text-org302d88b">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keymap</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">%</td>
+<td class="org-left">可以匹配{},"",(),[]之间的跳转</td>
+</tr>
+
+<tr>
+<td class="org-left">H M L</td>
+<td class="org-left">直接跳转到当前屏幕的顶部、中部、底部</td>
+</tr>
+
+<tr>
+<td class="org-left">#H</td>
+<td class="org-left">跳转到当前屏幕的第#行(切记是当前屏幕)</td>
+</tr>
+
+<tr>
+<td class="org-left">#L</td>
+<td class="org-left">跳转到当前屏幕的第#行(切记是当前屏幕)</td>
+</tr>
+
+<tr>
+<td class="org-left">()</td>
+<td class="org-left">移动到上/下一个句首</td>
+</tr>
+
+<tr>
+<td class="org-left">{}</td>
+<td class="org-left">移动到上/下一个段首</td>
+</tr>
+
+<tr>
+<td class="org-left">zt</td>
+<td class="org-left">当前编辑行为屏顶</td>
+</tr>
+
+<tr>
+<td class="org-left">zz</td>
+<td class="org-left">当前编辑行为屏中</td>
+</tr>
+
+<tr>
+<td class="org-left">zb</td>
+<td class="org-left">当前编辑行为屏尾</td>
+</tr>
+
+<tr>
+<td class="org-left">G</td>
+<td class="org-left">直接跳转到文件尾部</td>
+</tr>
+
+<tr>
+<td class="org-left">gg</td>
+<td class="org-left">直接跳转到文件顶部</td>
+</tr>
+
+<tr>
+<td class="org-left">0</td>
+<td class="org-left">跳转到行首</td>
+</tr>
+
+<tr>
+<td class="org-left">\$</td>
+<td class="org-left">跳转到行尾部</td>
+</tr>
+
+<tr>
+<td class="org-left">2$</td>
+<td class="org-left">跳转到向下两行的尾部</td>
+</tr>
+
+<tr>
+<td class="org-left">#</td>
+<td class="org-left">向右跳转#个字符(#跟空格)</td>
+</tr>
+
+<tr>
+<td class="org-left">#G</td>
+<td class="org-left">跳转第#行</td>
+</tr>
+
+<tr>
+<td class="org-left">:#</td>
+<td class="org-left">跳转第#行(#跟空格)</td>
+</tr>
+
+<tr>
+<td class="org-left">fs</td>
+<td class="org-left">跳转到下一个字母 s 之后</td>
+</tr>
+
+<tr>
+<td class="org-left">2fs</td>
+<td class="org-left">跳转到往下第二个 s 字母之后</td>
+</tr>
+
+<tr>
+<td class="org-left">Fs</td>
+<td class="org-left">跳转到上一个字母 s 之后</td>
+</tr>
+
+<tr>
+<td class="org-left">2Fs</td>
+<td class="org-left">跳转到往上第二个 s 字母之后</td>
+</tr>
+
+<tr>
+<td class="org-left">[[]]</td>
+<td class="org-left">光标向上/下跳转到代码块开头</td>
+</tr>
+
+<tr>
+<td class="org-left">gD</td>
+<td class="org-left">光标跳转到局部变量定义处</td>
+</tr>
+
+<tr>
+<td class="org-left">''</td>
+<td class="org-left">光标跳转到上次停靠处</td>
+</tr>
+
+<tr>
+<td class="org-left">C-e</td>
+<td class="org-left">向下滚动一行</td>
+</tr>
+
+<tr>
+<td class="org-left">C-y</td>
+<td class="org-left">向上滚动一行</td>
+</tr>
+
+<tr>
+<td class="org-left">C-d</td>
+<td class="org-left">向下滚动半屏</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u</td>
+<td class="org-left">向上滚动半屏</td>
+</tr>
+
+<tr>
+<td class="org-left">C-f</td>
+<td class="org-left">向下滚动一屏</td>
+</tr>
+
+<tr>
+<td class="org-left">C-b</td>
+<td class="org-left">向下滚动一屏</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org725a476" class="outline-2">
+<h2 id="org725a476">编辑</h2>
+<div class="outline-text-2" id="text-org725a476">
+</div>
+<div id="outline-container-org76436e9" class="outline-3">
+<h3 id="org76436e9">新增</h3>
+<div class="outline-text-3" id="text-org76436e9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keymap</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">i</td>
+<td class="org-left">进入插入模式</td>
+</tr>
+
+<tr>
+<td class="org-left">I</td>
+<td class="org-left">在当前行的行首插入</td>
+</tr>
+
+<tr>
+<td class="org-left">a</td>
+<td class="org-left">在光标后插入</td>
+</tr>
+
+<tr>
+<td class="org-left">A</td>
+<td class="org-left">在当前行的行尾插入</td>
+</tr>
+
+<tr>
+<td class="org-left">o</td>
+<td class="org-left">在当前行之后插入新行</td>
+</tr>
+
+<tr>
+<td class="org-left">O</td>
+<td class="org-left">在当前行之前插入新行</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4251120" class="outline-3">
+<h3 id="org4251120">修改</h3>
+<div class="outline-text-3" id="text-org4251120">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keymap</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">r</td>
+<td class="org-left">替换光标所在的字符</td>
+</tr>
+
+<tr>
+<td class="org-left">R</td>
+<td class="org-left">替换光标所到的字符</td>
+</tr>
+
+<tr>
+<td class="org-left">cc</td>
+<td class="org-left">取代光标所在整行</td>
+</tr>
+
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">取代到行尾部，包括光标处字符</td>
+</tr>
+
+<tr>
+<td class="org-left">c0</td>
+<td class="org-left">取代到行首，不包括光标处字符</td>
+</tr>
+
+<tr>
+<td class="org-left">cw</td>
+<td class="org-left">修改光标所在的字符到该单纯结尾</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">以插入的形式替换光标所在的一个字符</td>
+</tr>
+
+<tr>
+<td class="org-left">S</td>
+<td class="org-left">以插入的模式替换整行</td>
+</tr>
+
+<tr>
+<td class="org-left">ci(</td>
+<td class="org-left">修改配对标点符号中的文本内容(这里以小括号为例子)</td>
+</tr>
+
+<tr>
+<td class="org-left">di(</td>
+<td class="org-left">删除配对标点符号中的文本</td>
+</tr>
+
+<tr>
+<td class="org-left">yi(</td>
+<td class="org-left">复制配对标点符号中的文本</td>
+</tr>
+
+<tr>
+<td class="org-left">vi(</td>
+<td class="org-left">v 模式下选中配对符号中的内容</td>
+</tr>
+
+<tr>
+<td class="org-left">c/d/y/va(</td>
+<td class="org-left">剪切/删除/复制/选中成对符号及其中的内容</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org2fe9e94" class="outline-3">
+<h3 id="org2fe9e94">删除</h3>
+<div class="outline-text-3" id="text-org2fe9e94">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keymap</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">x</td>
+<td class="org-left">删除光标右边的字符</td>
+</tr>
+
+<tr>
+<td class="org-left">nx</td>
+<td class="org-left">删除光标右边 n 个字符</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">删除光标左边的字符</td>
+</tr>
+
+<tr>
+<td class="org-left">nX</td>
+<td class="org-left">删除光标左边 n 个字符</td>
+</tr>
+
+<tr>
+<td class="org-left">dl</td>
+<td class="org-left">删除当前字符，相当与 x</td>
+</tr>
+
+<tr>
+<td class="org-left">dh</td>
+<td class="org-left">删除前一个字符</td>
+</tr>
+
+<tr>
+<td class="org-left">dw</td>
+<td class="org-left">向右删除一个单词(光标之单纯的剩余部分)</td>
+</tr>
+
+<tr>
+<td class="org-left">dnw</td>
+<td class="org-left">删除 n 个单词</td>
+</tr>
+
+<tr>
+<td class="org-left">db</td>
+<td class="org-left">删除到上个单词的开始位置</td>
+</tr>
+
+<tr>
+<td class="org-left">de</td>
+<td class="org-left">删除一个单词的结尾位置</td>
+</tr>
+
+<tr>
+<td class="org-left">dne</td>
+<td class="org-left">删除光标后 n 个单词</td>
+</tr>
+
+<tr>
+<td class="org-left">dd</td>
+<td class="org-left">删除光标所在行</td>
+</tr>
+
+<tr>
+<td class="org-left">ndd</td>
+<td class="org-left">向下删除 n 行(包光标所在行)</td>
+</tr>
+
+<tr>
+<td class="org-left">dj</td>
+<td class="org-left">删除当前行及其下一行</td>
+</tr>
+
+<tr>
+<td class="org-left">dk</td>
+<td class="org-left">删除当前行及其上一行</td>
+</tr>
+
+<tr>
+<td class="org-left">dG</td>
+<td class="org-left">删除光标所在行到文本末尾</td>
+</tr>
+
+<tr>
+<td class="org-left">d1G</td>
+<td class="org-left">删除光标所在行到第一行</td>
+</tr>
+
+<tr>
+<td class="org-left">dgg</td>
+<td class="org-left">删除当前行到文本首部所在行</td>
+</tr>
+
+<tr>
+<td class="org-left">D</td>
+<td class="org-left">从光标所在位置删除到行尾</td>
+</tr>
+
+<tr>
+<td class="org-left">d0</td>
+<td class="org-left">删除到行首，不包括光标所在字符</td>
+</tr>
+
+<tr>
+<td class="org-left">:n,$d</td>
+<td class="org-left">删除 n 行及其后所有行</td>
+</tr>
+
+<tr>
+<td class="org-left">:1,$d</td>
+<td class="org-left">删除所有行</td>
+</tr>
+
+<tr>
+<td class="org-left">:n1,n2d</td>
+<td class="org-left">删除 n1 到 n2 之间的行</td>
+</tr>
+
+<tr>
+<td class="org-left">diw</td>
+<td class="org-left">删除单词(光标在单词开头中间都一样),空格也是一个单词</td>
+</tr>
+
+<tr>
+<td class="org-left">daw</td>
+<td class="org-left">删除一个单词和一个空格</td>
+</tr>
+
+<tr>
+<td class="org-left">dis</td>
+<td class="org-left">删除一个句子</td>
+</tr>
+
+<tr>
+<td class="org-left">das</td>
+<td class="org-left">删除一个句子</td>
+</tr>
+
+<tr>
+<td class="org-left">dip</td>
+<td class="org-left">删除一个段落，光标移至该段落下一行行首</td>
+</tr>
+
+<tr>
+<td class="org-left">dap</td>
+<td class="org-left">删除一个 ie 段落，光标移至下段最后行行首</td>
+</tr>
+
+<tr>
+<td class="org-left">daB</td>
+<td class="org-left">删除{}及其内容</td>
+</tr>
+
+<tr>
+<td class="org-left">diB</td>
+<td class="org-left">删除{}中的内容</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org39fa74e" class="outline-3">
+<h3 id="org39fa74e">复制/剪切/粘贴</h3>
+<div class="outline-text-3" id="text-org39fa74e">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keymap</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">yy/Y</td>
+<td class="org-left">复制当前行</td>
+</tr>
+
+<tr>
+<td class="org-left">nyy/nY</td>
+<td class="org-left">复制当前行以下 n 行(包括当前行)</td>
+</tr>
+
+<tr>
+<td class="org-left">p/P</td>
+<td class="org-left">粘贴在当前光标所在的行下/行上</td>
+</tr>
+
+<tr>
+<td class="org-left">ddp</td>
+<td class="org-left">交换当前行和其下一行</td>
+</tr>
+
+<tr>
+<td class="org-left">xp</td>
+<td class="org-left">交换两个字符的顺序(光标之后两个字符)</td>
+</tr>
+
+<tr>
+<td class="org-left">Xp</td>
+<td class="org-left">交换两个字符的顺序(光标之前两个字符)</td>
+</tr>
+
+<tr>
+<td class="org-left">deep</td>
+<td class="org-left">交换两个单词的顺序</td>
+</tr>
+
+<tr>
+<td class="org-left">ndd</td>
+<td class="org-left">剪切当前行以下 n 行(包括当前行)</td>
+</tr>
+
+<tr>
+<td class="org-left">:n1,n2d</td>
+<td class="org-left">剪切 n2,n2 行之间的内容</td>
+</tr>
+
+<tr>
+<td class="org-left">:n2,n2 m n3</td>
+<td class="org-left">将 n1,n2 行之间内容移动至 n3 行之后</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2018-01-19 五 14:03</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
